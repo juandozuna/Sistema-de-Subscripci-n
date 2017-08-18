@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="344def21d0c64deeb81ddccb7465ab6c" Name="Diagram1">
-        <EntityTypeShape EntityType="DatabaseManager.Cliente" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseManager.Cliente" Width="1.5" PointX="6.5" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseManager.Plane" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseManager.Servicio" Width="1.5" PointX="1.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseManager.ServPlan" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseManager.Servicio" Width="1.5" PointX="3.375" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseManager.ServPlan" Width="1.5" PointX="3.125" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="DatabaseManager.FK_Clientes_Planes" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseManager.FK_ServPlan_ServPlan" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseManager.FK_ServPlan_Servicios" ManuallyRouted="false" />
