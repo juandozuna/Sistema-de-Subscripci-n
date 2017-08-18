@@ -32,7 +32,7 @@ namespace SubscriptionSystem
                 foreach (int a in ServiceIDs)
                 {
                     var serviceResult = db.Servicios.SingleOrDefault(b => b.ServicioID == a);
-                    Console.WriteLine("      -->Item: {0}  | Servicio: {1} ", serviceResult.ServicioID, serviceResult.Nombres);
+                    if(serviceResult != null)Console.WriteLine("      -->Item: {0}  | Servicio: {1} ", serviceResult.ServicioID, serviceResult.Nombres);
                 }
                 Console.Write("Elija el nombre del plan: "); name = Console.ReadLine();
                 Console.Write("Cual sera el precio del plan(UTILIZE ESTE FORMATO 0.00)? -->"); Double.TryParse(Console.ReadLine(), out double precio);
@@ -136,9 +136,9 @@ namespace SubscriptionSystem
                 Console.WriteLine("El Plan que intenta editar no existe");
                 Console.WriteLine("Desea volver a intentar? 1-SI / 2-NO");
                 if (Int32.Parse(Console.ReadLine()) == 1) Editar();
-                else Console.WriteLine("Presione cualquier tecla para continuar");
+                else Console.WriteLine("Presione cualquier tecla para continuar"); Console.ReadKey();
             }
-            Console.ReadKey();
+            
 
         }
         private void AgregarServicio(Plane pl)
@@ -225,7 +225,12 @@ namespace SubscriptionSystem
             {
                 
                 var group = db.ServPlans.Where(x => db.ServPlans.Any(y => y.PlanID == result.PlanID));
-                foreach (ServPlan a in group) db.ServPlans.Remove(a);
+                if (group.Any())
+                {
+                    foreach (ServPlan a in group) db.ServPlans.Remove(a);
+                }
+                var cgroup = db.Clientes.Where(x => x.PlanID == result.PlanID);
+                foreach (Cliente a in cgroup) a.PlanID = null;
                 db.Planes.Remove(result); db.SaveChanges();
                 Console.WriteLine("El plan con ID:{0} ha sido borrado exitosamente\nPresione cualquier tecla para continuar", result.PlanID); Console.ReadKey();
 

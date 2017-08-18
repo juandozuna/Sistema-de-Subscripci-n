@@ -75,7 +75,7 @@ namespace SubscriptionSystem
                 do
                 {
                     string planText;
-                    if (result.Plane != null) planText = cliente.Plane.Nombre; else planText = "No plan selected";
+                    if (result.Plane != null) planText = result.Plane.Nombre; else planText = "No plan selected";
                     Console.WriteLine("Datos del Cliente ID: {4} \n" +
                         "1.Nombre: {0} \n" +
                         "2.Apellido: {1} \n" +

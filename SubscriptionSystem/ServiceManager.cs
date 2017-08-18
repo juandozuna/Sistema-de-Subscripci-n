@@ -26,7 +26,7 @@ namespace SubscriptionSystem
                 PrecioUnidad = precio_unidad
             };
 
-            db.Servicios.Add(servicio); db.SaveChanges();
+            db.Servicios.Add(servicio); db.SaveChanges(); Console.Beep();
 
             Console.WriteLine("Desea agregar otro servicio? 1-SI / 2-NO");
             if (Int32.Parse(Console.ReadLine()) == 1) { Console.Clear(); Agregar(); }
@@ -56,11 +56,12 @@ namespace SubscriptionSystem
                     switch (UI)
                     {
                         case 1:
-                            Console.WriteLine("Ingrese el nuevo nombre del servicio: ");
+                            Console.Write("Ingrese el nuevo nombre del servicio: "); nombre = Console.ReadLine();
+                            result.Nombres = nombre; db.SaveChanges();
                             break;
                         case 2:
-                            Console.WriteLine("Ingrese el nuevo precio del servicio: "); Double.TryParse(Console.ReadLine(), out precio_unidad);
-                            result.PrecioUnidad = precio_unidad;
+                            Console.Write("Ingrese el nuevo precio del servicio: "); Double.TryParse(Console.ReadLine(), out precio_unidad);
+                            result.PrecioUnidad = precio_unidad; db.SaveChanges();
                             break;
                         default:
                             Console.WriteLine("Ha ingresado un valor invalido");
@@ -69,7 +70,7 @@ namespace SubscriptionSystem
 
                     Console.WriteLine("Desea continuar editando? 1-SI / 2-NO");
                     if (Int32.Parse(Console.ReadLine()) == 1) val = true; else val = false;
-
+                    Console.Clear(); Console.Beep();
                 } while (val);
 
             }
@@ -109,8 +110,8 @@ namespace SubscriptionSystem
         {
             Console.Clear();
             Console.WriteLine("######## BORRAR SERVICIO ########");
-            Console.Write("Escriba el ID del servicio que desea borrar"); string UI = Console.ReadLine();
-            var result = db.Servicios.SingleOrDefault(b => b.ServicioID == Int32.Parse(UI));
+            Console.Write("Escriba el ID del servicio que desea borrar: "); string UI = Console.ReadLine(); Int32.TryParse(UI, out int iUI);
+            var result = db.Servicios.SingleOrDefault(b => b.ServicioID == iUI);
             if(result != null)
             { 
                 var group = db.ServPlans.Where(x => db.ServPlans.Any(y => y.ServicioID == result.ServicioID));
@@ -121,7 +122,7 @@ namespace SubscriptionSystem
             }
             else
             {
-                Console.WriteLine("El Servicio con ID {0} que intenta buscar no existe", UI);
+                Console.WriteLine("El Servicio con ID "+ iUI + " que intenta buscar no existe");
                 Console.WriteLine("Presione cualquier tecla para continuar"); Console.ReadKey();
             }
         }

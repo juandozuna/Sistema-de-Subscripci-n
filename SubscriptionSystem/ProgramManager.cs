@@ -47,6 +47,11 @@ namespace SubscriptionSystem
         {
             Console.Clear();
             Console.WriteLine("Gracias por haber utilizado nuestro sistema de Subscripcion\n\nPresione Cualquier tecla para continuar");
+            Console.WriteLine("Este programa fue hecho por las siguientes personas\n" +
+                "JUAN DANIEL OZUNA\n" +
+                "DAVID DE LOS SANTOS\n" +
+                "RICARDO VASQUEZ\n" +
+                "ADRIAN SILVESTRE\n");
             Console.ReadKey();
         }
 
