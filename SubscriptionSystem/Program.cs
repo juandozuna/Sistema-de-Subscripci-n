@@ -21,8 +21,9 @@ namespace SubscriptionSystem
                     "2. Editar {0} \n" +
                     "3. Buscar {0} \n" +
                     "4. Borrar {0} \n" +
-                    "5. Cambiar de Control \n" +
-                    "6. Salir del Programa", AControl.WControlledS);
+                    "5. Ver Lista de {1}\n" +
+                    "6. Cambiar de Control \n" +
+                    "7. Salir del Programa", AControl.WControlledS, AControl.WControlledP);
                 Console.Write("Seleccion: "); Int32.TryParse(Console.ReadLine(), out selection);
 
                 switch (selection)
@@ -34,16 +35,18 @@ namespace SubscriptionSystem
                     case 3:
                         manager.Buscar(); break;
                     case 4:
-                        manager.Buscar(); break;
+                        manager.Borrar(); break;
                     case 5:
-                        manager.CambiarControl(); break;
+                        manager.ListarDatos(); break;
                     case 6:
+                        manager.CambiarControl(); break;
+                    case 7:
                         manager.SalidaPrograma(); break;
                     default:
                         manager.MetodoInvalido(); break;
                 }
 
-            } while (selection != 6);
+            } while (selection != 7);
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseManager.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DatabaseManager.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -25,21 +25,21 @@
         </EntityType>
         <EntityType Name="Servicios">
           <Key>
-            <PropertyRef Name="ServciosID" />
+            <PropertyRef Name="ServicioID" />
           </Key>
-          <Property Name="ServciosID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombres" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ServicioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="PrecioUnidad" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="ServPlan">
           <Key>
             <PropertyRef Name="ServPlanID" />
           </Key>
-          <Property Name="ServPlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ServicioID" Type="int" Nullable="false" />
+          <Property Name="ServPlanID" Type="int" Nullable="false" />
           <Property Name="PlanID" Type="int" Nullable="false" />
+          <Property Name="ServicioID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Clientes_PlanID">
+        <Association Name="FK_Clientes_Planes">
           <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -51,7 +51,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ServPlan_Plan">
+        <Association Name="FK_ServPlan_Servicios">
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
+          <End Role="ServPlan" Type="Self.ServPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="ServicioID" />
+            </Principal>
+            <Dependent Role="ServPlan">
+              <PropertyRef Name="ServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServPlan_ServPlan">
           <End Role="Planes" Type="Self.Planes" Multiplicity="1" />
           <End Role="ServPlan" Type="Self.ServPlan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -63,33 +75,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ServPlan_Sevicio">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="ServPlan" Type="Self.ServPlan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="ServciosID" />
-            </Principal>
-            <Dependent Role="ServPlan">
-              <PropertyRef Name="ServicioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DatabaseManagerStoreContainer">
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServPlan" EntityType="Self.ServPlan" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Clientes_PlanID" Association="Self.FK_Clientes_PlanID">
+          <AssociationSet Name="FK_Clientes_Planes" Association="Self.FK_Clientes_Planes">
             <End Role="Planes" EntitySet="Planes" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK_ServPlan_Plan" Association="Self.FK_ServPlan_Plan">
-            <End Role="Planes" EntitySet="Planes" />
+          <AssociationSet Name="FK_ServPlan_Servicios" Association="Self.FK_ServPlan_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
             <End Role="ServPlan" EntitySet="ServPlan" />
           </AssociationSet>
-          <AssociationSet Name="FK_ServPlan_Sevicio" Association="Self.FK_ServPlan_Sevicio">
-            <End Role="Servicios" EntitySet="Servicios" />
+          <AssociationSet Name="FK_ServPlan_ServPlan" Association="Self.FK_ServPlan_ServPlan">
+            <End Role="Planes" EntitySet="Planes" />
             <End Role="ServPlan" EntitySet="ServPlan" />
           </AssociationSet>
         </EntityContainer>
@@ -107,7 +107,7 @@
           <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PlanID" Type="Int32" />
           <Property Name="MetodoDePago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Plane" Relationship="Self.FK_Clientes_PlanID" FromRole="Clientes" ToRole="Planes" />
+          <NavigationProperty Name="Plane" Relationship="Self.FK_Clientes_Planes" FromRole="Clientes" ToRole="Planes" />
         </EntityType>
         <EntityType Name="Plane">
           <Key>
@@ -116,29 +116,29 @@
           <Property Name="PlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Precio" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_PlanID" FromRole="Planes" ToRole="Clientes" />
-          <NavigationProperty Name="ServPlans" Relationship="Self.FK_ServPlan_Plan" FromRole="Planes" ToRole="ServPlan" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_Planes" FromRole="Planes" ToRole="Clientes" />
+          <NavigationProperty Name="ServPlans" Relationship="Self.FK_ServPlan_ServPlan" FromRole="Planes" ToRole="ServPlan" />
         </EntityType>
         <EntityType Name="Servicio">
           <Key>
-            <PropertyRef Name="ServciosID" />
+            <PropertyRef Name="ServicioID" />
           </Key>
-          <Property Name="ServciosID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServicioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PrecioUnidad" Type="Double" Nullable="false" />
-          <NavigationProperty Name="ServPlans" Relationship="Self.FK_ServPlan_Sevicio" FromRole="Servicios" ToRole="ServPlan" />
+          <NavigationProperty Name="ServPlans" Relationship="Self.FK_ServPlan_Servicios" FromRole="Servicios" ToRole="ServPlan" />
         </EntityType>
         <EntityType Name="ServPlan">
           <Key>
             <PropertyRef Name="ServPlanID" />
           </Key>
-          <Property Name="ServPlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ServicioID" Type="Int32" Nullable="false" />
+          <Property Name="ServPlanID" Type="Int32" Nullable="false" />
           <Property Name="PlanID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Plane" Relationship="Self.FK_ServPlan_Plan" FromRole="ServPlan" ToRole="Planes" />
-          <NavigationProperty Name="Servicio" Relationship="Self.FK_ServPlan_Sevicio" FromRole="ServPlan" ToRole="Servicios" />
+          <Property Name="ServicioID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plane" Relationship="Self.FK_ServPlan_ServPlan" FromRole="ServPlan" ToRole="Planes" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_ServPlan_Servicios" FromRole="ServPlan" ToRole="Servicios" />
         </EntityType>
-        <Association Name="FK_Clientes_PlanID">
+        <Association Name="FK_Clientes_Planes">
           <End Role="Planes" Type="Self.Plane" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ServPlan_Plan">
+        <Association Name="FK_ServPlan_ServPlan">
           <End Role="Planes" Type="Self.Plane" Multiplicity="1" />
           <End Role="ServPlan" Type="Self.ServPlan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -162,32 +162,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ServPlan_Sevicio">
+        <Association Name="FK_ServPlan_Servicios">
           <End Role="Servicios" Type="Self.Servicio" Multiplicity="1" />
           <End Role="ServPlan" Type="Self.ServPlan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Servicios">
-              <PropertyRef Name="ServciosID" />
+              <PropertyRef Name="ServicioID" />
             </Principal>
             <Dependent Role="ServPlan">
               <PropertyRef Name="ServicioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DatabaseConnection" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProyectProgramacionIIIEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clientes" EntityType="Self.Cliente" />
           <EntitySet Name="Planes" EntityType="Self.Plane" />
           <EntitySet Name="Servicios" EntityType="Self.Servicio" />
           <EntitySet Name="ServPlans" EntityType="Self.ServPlan" />
-          <AssociationSet Name="FK_Clientes_PlanID" Association="Self.FK_Clientes_PlanID">
+          <AssociationSet Name="FK_Clientes_Planes" Association="Self.FK_Clientes_Planes">
             <End Role="Planes" EntitySet="Planes" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK_ServPlan_Plan" Association="Self.FK_ServPlan_Plan">
+          <AssociationSet Name="FK_ServPlan_ServPlan" Association="Self.FK_ServPlan_ServPlan">
             <End Role="Planes" EntitySet="Planes" />
             <End Role="ServPlan" EntitySet="ServPlans" />
           </AssociationSet>
-          <AssociationSet Name="FK_ServPlan_Sevicio" Association="Self.FK_ServPlan_Sevicio">
+          <AssociationSet Name="FK_ServPlan_Servicios" Association="Self.FK_ServPlan_Servicios">
             <End Role="Servicios" EntitySet="Servicios" />
             <End Role="ServPlan" EntitySet="ServPlans" />
           </AssociationSet>
@@ -197,7 +197,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DatabaseManagerStoreContainer" CdmEntityContainer="DatabaseConnection">
+        <EntityContainerMapping StorageEntityContainer="DatabaseManagerStoreContainer" CdmEntityContainer="ProyectProgramacionIIIEntities">
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="DatabaseManager.Cliente">
               <MappingFragment StoreEntitySet="Clientes">
@@ -221,7 +221,7 @@
           <EntitySetMapping Name="Servicios">
             <EntityTypeMapping TypeName="DatabaseManager.Servicio">
               <MappingFragment StoreEntitySet="Servicios">
-                <ScalarProperty Name="ServciosID" ColumnName="ServciosID" />
+                <ScalarProperty Name="ServicioID" ColumnName="ServicioID" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
                 <ScalarProperty Name="PrecioUnidad" ColumnName="PrecioUnidad" />
               </MappingFragment>
@@ -231,8 +231,8 @@
             <EntityTypeMapping TypeName="DatabaseManager.ServPlan">
               <MappingFragment StoreEntitySet="ServPlan">
                 <ScalarProperty Name="ServPlanID" ColumnName="ServPlanID" />
-                <ScalarProperty Name="ServicioID" ColumnName="ServicioID" />
                 <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="ServicioID" ColumnName="ServicioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

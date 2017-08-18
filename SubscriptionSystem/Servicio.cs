@@ -20,7 +20,7 @@ namespace SubscriptionSystem
             this.ServPlans = new HashSet<ServPlan>();
         }
     
-        public int ServciosID { get; set; }
+        public int ServicioID { get; set; }
         public string Nombres { get; set; }
         public double PrecioUnidad { get; set; }
     

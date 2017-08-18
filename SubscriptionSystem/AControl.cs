@@ -8,7 +8,8 @@ namespace SubscriptionSystem
 {
     public abstract class AControl
     {
-        protected DatabaseConnection db = new DatabaseConnection();
+
+        protected ProyectProgramacionIIIEntities db = new ProyectProgramacionIIIEntities(); //Tomar en cuenta declaracion de variable al eliminar y recrear la instalacion de EntityFramework
         public static string WControlledP; //Contiene una descripcion de lo que esta siendo controlado (1. CLientes, 2. Servicios, 3. Planes)
         public static string WControlledS;
 

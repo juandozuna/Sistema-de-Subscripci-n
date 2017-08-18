@@ -14,31 +14,11 @@ namespace SubscriptionSystem
     
     public partial class Cliente
     {
-        
         public int ClienteID { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public Nullable<int> PlanID { get; set; }
         public string MetodoDePago { get; set; }
-
-        public void SetMetodoPago(int opcion)
-        {
-            
-            switch (opcion)
-            {
-                case 1:
-                    MetodoDePago = "Tarjeta de Credito";
-                    break;
-                case 2:
-                    MetodoDePago = "Tarjeta de Debito";
-                    break;
-                case 3:
-                    MetodoDePago = "PayPal";
-                    break;
-            }
-        }
-
-        public string GetMetodoPago() { return MetodoDePago; }
     
         public virtual Plane Plane { get; set; }
     }

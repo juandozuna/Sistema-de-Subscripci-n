@@ -31,15 +31,16 @@ namespace SubscriptionSystem
 
         public void CambiarControl()
         {
+            
             Console.Clear(); 
-            Console.WriteLine("Cambiar Control" +
+            Console.WriteLine("Cambiar Control\n" +
                 "____________________________________________________\n" +
                "Elija con que desea trabajar:\n" +
                "1. Clientes\n" +
                "2. Servicios\n" +
                "3. Planes");
-            Console.Write("Seleccion: ");
-            control = ControlFactory.ControlObject(Console.ReadLine());
+            Console.Write("Seleccion: "); string UI = Console.ReadLine();
+            control = ControlFactory.ControlObject(UI);
         }
 
         public void SalidaPrograma()
