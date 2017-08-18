@@ -13,5 +13,6 @@ namespace SubscriptionSystem
         public override void Editar() { }
         public override void Buscar() { }
         public override void Borrar() { }
+        public override void ListarDatos() { }
     }
 }

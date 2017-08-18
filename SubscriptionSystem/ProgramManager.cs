@@ -55,6 +55,11 @@ namespace SubscriptionSystem
             Console.WriteLine("Ha ingresado una opcion invalida, por favor vuelva a intentarlo\nPresione cualquier tecla para continuar"); Console.ReadKey();
         }
 
+        public void ListarDatos()
+        {
+            control.ListarDatos();
+        }
+
       
        
 

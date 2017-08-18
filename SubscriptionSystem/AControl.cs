@@ -16,5 +16,6 @@ namespace SubscriptionSystem
         public abstract void Editar();
         public abstract void Buscar();
         public abstract void Borrar();
+        public abstract void ListarDatos();
     }
 }
