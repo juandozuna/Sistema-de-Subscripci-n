@@ -65,17 +65,7 @@ namespace SubscriptionSystem
             Console.WriteLine("Desea agregar otro cliente? 1-SI / 2-NO");
             if (Int32.Parse(Console.ReadLine()) == 1) this.Agregar();
             else Console.WriteLine("Presione cualquier tecla para continuar");
-            Console.ReadKey();
-
-            
-
-
-            
-           
-
-            
-                
-            
+            Console.ReadKey(); 
         }
         public override void Editar() { }
         public override void Buscar() { }
