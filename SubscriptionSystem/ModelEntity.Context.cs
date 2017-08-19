@@ -13,10 +13,10 @@ namespace SubscriptionSystem
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProyectProgramacionIIIEntities : DbContext
+    public partial class ProyectoProgramacionIIIEntities : DbContext
     {
-        public ProyectProgramacionIIIEntities()
-            : base("name=ProyectProgramacionIIIEntities")
+        public ProyectoProgramacionIIIEntities()
+            : base("name=ProyectoProgramacionIIIEntities")
         {
         }
     

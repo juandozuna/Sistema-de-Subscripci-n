@@ -15,10 +15,11 @@ namespace SubscriptionSystem
     public partial class ServPlan
     {
         public int ServPlanID { get; set; }
-        public int PlanID { get; set; }
         public int ServicioID { get; set; }
+        public int PlanID { get; set; }
     
         public virtual Plane Plane { get; set; }
+        public virtual Plane Plane1 { get; set; }
         public virtual Servicio Servicio { get; set; }
     }
 }

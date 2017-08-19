@@ -21,5 +21,6 @@ namespace SubscriptionSystem
         public string MetodoDePago { get; set; }
     
         public virtual Plane Plane { get; set; }
+        public virtual Plane Plane1 { get; set; }
     }
 }

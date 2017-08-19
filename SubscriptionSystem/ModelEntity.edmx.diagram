@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a422d324c4cb421c9aa87a572df68db9" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseManager.Cliente" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseManager.Plane" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseManager.Servicio" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseManager.ServPlan" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseManager.FK_Clientes_Planes" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseManager.FK_Clientes_PlanID" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseManager.FK_ServPlan_Plan" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseManager.FK_ServPlan_ServPlan" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseManager.FK_ServPlan_Sevicio" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

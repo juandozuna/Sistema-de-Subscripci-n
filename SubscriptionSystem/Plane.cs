@@ -18,7 +18,9 @@ namespace SubscriptionSystem
         public Plane()
         {
             this.Clientes = new HashSet<Cliente>();
+            this.Clientes1 = new HashSet<Cliente>();
             this.ServPlans = new HashSet<ServPlan>();
+            this.ServPlans1 = new HashSet<ServPlan>();
         }
     
         public int PlanID { get; set; }
@@ -28,6 +30,10 @@ namespace SubscriptionSystem
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Clientes1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServPlan> ServPlans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServPlan> ServPlans1 { get; set; }
     }
 }
