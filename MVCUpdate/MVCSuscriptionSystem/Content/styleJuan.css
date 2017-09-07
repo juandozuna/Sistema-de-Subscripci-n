@@ -1,1 +1,7 @@
-﻿
+﻿.nombre-app {
+    color: #ff836b;
+}
+
+#logoutBtn {
+    border: 1px solid white;
+}

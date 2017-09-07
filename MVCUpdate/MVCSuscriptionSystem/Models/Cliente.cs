@@ -6,7 +6,7 @@ namespace MVCSuscriptionSystem.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Cliente
+    public partial class Cliente : IModel
     {
         [Key]
         public int ClientID { get; set; }
