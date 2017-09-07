@@ -55,12 +55,12 @@ namespace MVCSuscriptionSystem.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Tu constrasena ha cambiado"
+                : message == ManageMessageId.SetPasswordSuccess ? "Tu contrasena ha sido establecida"
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Tu proveedor de autenticacion de factor doble ha sido configurado"
+                : message == ManageMessageId.Error ? "Ha ocurrido un error."
+                : message == ManageMessageId.AddPhoneSuccess ? "Tu numero de telefono fue anadido."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Tu numero de telefono fue removido."
                 : "";
 
             var userId = User.Identity.GetUserId();
