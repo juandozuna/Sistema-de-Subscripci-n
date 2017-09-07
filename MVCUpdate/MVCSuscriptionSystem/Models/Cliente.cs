@@ -61,7 +61,6 @@ namespace MVCSuscriptionSystem.Models
 
         [Display(Name = "Codigo CVC")]
         [DataType(DataType.Text)]
-        [StringLength(5)]
         public int? CVC_o_CVV { get; set; }
 
         [Column(TypeName = "date")]
