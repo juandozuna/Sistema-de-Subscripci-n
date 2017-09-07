@@ -43,7 +43,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public override ActionResult Modificar(FormCollection collection)
+        public ActionResult Modificar(FormCollection collection)
         {
             return RedirectToAction("Index");
         }

@@ -1,3 +1,5 @@
+using System.Web.UI.WebControls;
+
 namespace MVCSuscriptionSystem.Models
 {
     using System;
@@ -19,7 +21,7 @@ namespace MVCSuscriptionSystem.Models
 
         [Column("Segundo Nombre")]
         [StringLength(50)]
-        [Display(Name = "Segundo Nombre")]
+        [Display(Name = "2do Nombre")]
         public string Segundo_Nombre { get; set; }
 
         [Required]
@@ -30,6 +32,7 @@ namespace MVCSuscriptionSystem.Models
         [Column(TypeName = "date")]
         [Display(Name="Fecha de Nacimiento")]
         [DataType(DataType.Date)]
+        [Required]
         public DateTime Fecha_de_nacimiento { get; set; }
 
         [Column("Numero Telefonico")]

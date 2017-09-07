@@ -20,7 +20,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public override ActionResult Crear(FormCollection collection)
+        public ActionResult Crear(FormCollection collection)
         {
 
             return RedirectToAction("Index");
@@ -40,7 +40,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public override ActionResult Modificar(FormCollection collection)
+        public  ActionResult Modificar(FormCollection collection)
         {
             return RedirectToAction("Index");
         }

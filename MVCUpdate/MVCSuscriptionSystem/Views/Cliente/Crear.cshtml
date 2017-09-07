@@ -1,7 +1,7 @@
 ﻿@model MVCSuscriptionSystem.Models.Cliente
 
 @{
-    ViewBag.Title = "Crear";
+    ViewBag.Title = "Crear ";
 }
 
 <h2>Crear</h2>
@@ -9,98 +9,103 @@
 
 @using (Html.BeginForm()) 
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+    <div>
+        @Html.AntiForgeryToken()
+   
         <h4>Cliente</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Primer_Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Primer_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Primer_Nombre, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Primer_Nombre, htmlAttributes: new { @class = "col-form-label" })
+                @Html.EditorFor(model => model.Primer_Nombre, new { htmlAttributes = new { @class = "form-control editorJ" } })
+                @Html.ValidationMessageFor(model => model.Primer_Nombre, "", new { @class = "text-danger" })              
+            </div>
+            <div class="form-group col-md-2 ">
+                @Html.LabelFor(model => model.Segundo_Nombre, htmlAttributes: new { @class = "col-form-label" })
+                @Html.EditorFor(model => model.Segundo_Nombre, new { htmlAttributes = new { @class = "form-control editorJ" } })
+                @Html.ValidationMessageFor(model => model.Segundo_Nombre, "", new { @class = "text-danger" })               
+            </div>
+            <div class="form-group col-md-5">
+                @Html.LabelFor(model => model.Primer_Apellido, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                @Html.EditorFor(model => model.Primer_Apellido, new { htmlAttributes = new { @class = "form-control editorJ" } })
+                @Html.ValidationMessageFor(model => model.Primer_Apellido, "", new { @class = "text-danger" })             
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Segundo_Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Segundo_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Segundo_Nombre, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Fecha_de_nacimiento, htmlAttributes: new { @class = "col-form-label" })
+            
+                @Html.EditorFor(model => model.Fecha_de_nacimiento, new { htmlAttributes = new { @class = "form-control editorJ" } })
+                @Html.ValidationMessageFor(model => model.Fecha_de_nacimiento, "", new { @class = "text-danger"})
+       
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Numero_Telefonico, htmlAttributes: new { @class = "col-form-label" })
+               
+                    @Html.EditorFor(model => model.Numero_Telefonico, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Numero_Telefonico, "", new { @class = "text-danger" })
+                
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.e_mail, htmlAttributes: new { @class = "col-form-label " })
+                
+                    @Html.EditorFor(model => model.e_mail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.e_mail, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Primer_Apellido, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Metodo_de_Pago, htmlAttributes: new { @class = "col-form-label " })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Primer_Apellido, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Primer_Apellido, "", new { @class = "text-danger" })
+                <select class="form-control" id="Metodo_de_Pago">
+                    <option>-</option>
+                    <option>Tarjeta de Credito</option>
+                    <option>Tarjeta de Debito</option>
+                    <option>Transferencia Directa</option>
+                    <option>Ninguno por el momento</option>
+                </select>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fecha_de_nacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fecha_de_nacimiento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fecha_de_nacimiento, "", new { @class = "text-danger" })
+        
+        <div class="form-row" id="tarjeta-form" style="display: none">
+            <div class="form-group col">
+                @Html.LabelFor(model => model.NumeroTarjeta, htmlAttributes: new { @class = "col-form-label " })
+               
+                    @Html.EditorFor(model => model.NumeroTarjeta, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumeroTarjeta, "", new { @class = "text-danger" })
+              
             </div>
+
+            <div class="form-group col">
+                @Html.LabelFor(model => model.CVC_o_CVV, htmlAttributes: new { @class = "col-form-label " })
+               
+                    @Html.EditorFor(model => model.CVC_o_CVV, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CVC_o_CVV, "", new { @class = "text-danger" })
+               
+            </div>
+
+            <div class="form-group col">
+                @Html.LabelFor(model => model.Fecha_de_expiracion, htmlAttributes: new { @class = "col-form-label " })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Fecha_de_expiracion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Fecha_de_expiracion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Numero_Telefonico, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Numero_Telefonico, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Numero_Telefonico, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.e_mail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.e_mail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.e_mail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Metodo_de_Pago, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Metodo_de_Pago, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Metodo_de_Pago, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NumeroTarjeta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NumeroTarjeta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumeroTarjeta, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CVC_o_CVV, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CVC_o_CVV, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CVC_o_CVV, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fecha_de_expiracion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fecha_de_expiracion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fecha_de_expiracion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear Cliente" class="btn btn-success" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear Cliente" class="btn btn-success" />
         </div>
     </div>
+
 }
 
 <div>
@@ -109,4 +114,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('#Metodo_de_Pago').change(function() {
+            if ($(this).val() === "Tarjeta de Credito" || $(this).val() === "Tarjeta de Debito") {
+                $('#tarjeta-form').show('fast');
+            } else {
+                $('#tarjeta-form').hide('fast');
+            }
+        });
+    </script>
 }
