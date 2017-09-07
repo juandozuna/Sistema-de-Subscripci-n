@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MVCSuscriptionSystem.MethodManagers;
-using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
 {
-    public class ClienteController : ProgramManager
+    public class ServicioController : ProgramManager
     {
         public override ActionResult Borrar(int id)
         {
@@ -22,10 +20,9 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(FormCollection collection, HttpPostedFileBase image1) 
+        public override ActionResult Crear(FormCollection collection)
         {
-            if(image1 != null) ImagenManager.SubirImagen(image1);
-            
+
             return RedirectToAction("Index");
         }
 

@@ -15,7 +15,6 @@ namespace MVCSuscriptionSystem.Controllers
         //La pagina index varia dependendiendo 
         //del rol del usuario y la funcion que este utilize.
         public abstract ActionResult Modificar(int id);
-        public abstract ActionResult Modificar(FormCollection collection);
 
         public abstract ActionResult VerDetalles(int id);
 
@@ -23,7 +22,6 @@ namespace MVCSuscriptionSystem.Controllers
 
 
         public abstract ActionResult Crear();
-        public abstract ActionResult Crear(FormCollection collection);
 
 
 

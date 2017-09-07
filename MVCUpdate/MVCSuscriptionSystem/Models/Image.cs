@@ -24,7 +24,6 @@ namespace MVCSuscriptionSystem.Models
         [StringLength(225)]
         public string Nombre { get; set; }
 
-        public int Tamano { get; set; }
 
         [Required]
         public byte[] ImageData { get; set; }
