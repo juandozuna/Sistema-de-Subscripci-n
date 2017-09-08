@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
 {
@@ -10,7 +12,33 @@ namespace MVCSuscriptionSystem.Controllers
     {
         public override ActionResult Borrar(int id)
         {
-            return View();
+            var plan = db.Plans.Find(id);
+            if(plan != null)
+                return View(plan);
+            return HttpNotFound();
+
+        }
+
+
+        [HttpPost, ActionName("Borrar")]
+        public ActionResult ConfirmarBorrar(int id)
+        {
+            var plan = db.Plans.Find(id);
+            if (plan != null)
+            {
+                var servplan = db.ServicioEnPlans.Where(x => x.PlanID == plan.PlanID).ToList();
+                if (servplan.Any())
+                {
+                    foreach (var servicioEnPlan in servplan)
+                    {
+                        db.ServicioEnPlans.Remove(servicioEnPlan);
+                    }
+                }
+                db.Plans.Remove(plan);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
         }
 
         public override ActionResult Crear()
@@ -20,36 +48,63 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(FormCollection collection)
+        public ActionResult Crear(Plan p)
         {
-
-            return RedirectToAction("Index");
+            if (p != null)
+            {
+                db.Plans.Add(p);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
         }
 
         public override ActionResult Index()
         {
-            return View();
+            var planes = db.Plans.ToList();
+            return View(planes);
         }
 
 
 
         public override ActionResult Modificar(int id)
         {
-            return View();
+            var plan = db.Plans.Find(id);
+            if (plan != null)
+            {
+                return View(plan);
+            }
+            return HttpNotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  ActionResult Modificar(FormCollection collection)
+        public  ActionResult Modificar(Plan p)
         {
-            return RedirectToAction("Index");
+            var plan = db.Plans.Find(p.PlanID);
+            if (plan != null)
+            {
+                plan.ImagenID = p.ImagenID;
+                plan.Nombre = p.Nombre;
+                plan.Precio = p.Precio;
+                db.Entry(plan).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
         }
 
 
 
         public override ActionResult VerDetalles(int id)
         {
-            return View();
+            var plan = db.Plans.Find(id);
+            if (plan != null)
+            {
+
+                return View(plan);
+            }
+            return HttpNotFound();
         }
     }
 }

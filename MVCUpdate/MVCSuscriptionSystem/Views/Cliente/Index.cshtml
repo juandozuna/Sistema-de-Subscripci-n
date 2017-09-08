@@ -7,16 +7,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Crear")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Image.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subscripcion.SubscripcionID)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Primer_Nombre)
         </th>
@@ -40,12 +34,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subscripcion.SubscripcionID)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Primer_Nombre)
         </td>

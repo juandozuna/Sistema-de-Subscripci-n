@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MVCSuscriptionSystem.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,27 @@ namespace MVCSuscriptionSystem.Controllers
             return View();
         }
 
+        [HttpPost, ActionName("Borrar")]
+        public ActionResult ConfirmarBorrar(int id)
+        {
+            var servicio = db.Servicios.Find(id);
+            if (servicio != null)
+            {
+                var servplan = db.ServicioEnPlans.Where(x => x.ServicioID == servicio.ServicioID).ToList();
+                if (servplan.Any())
+                {
+                    foreach (var servicioEnPlan in servplan)
+                    {
+                        db.ServicioEnPlans.Remove(servicioEnPlan);
+                    }
+                }
+                db.Servicios.Remove(servicio);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
+        }
+
         public override ActionResult Crear()
         {
             return View();
@@ -20,36 +43,61 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(FormCollection collection)
+        public ActionResult Crear(Servicio servicio)
         {
-
-            return RedirectToAction("Index");
+            if (servicio != null)
+            {
+                db.Servicios.Add(servicio);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
         }
 
         public override ActionResult Index()
         {
-            return View();
+            var servicios = db.Servicios.ToList();
+            return View(servicios);
         }
 
 
 
         public override ActionResult Modificar(int id)
         {
-            return View();
+            var servicio = db.Servicios.Find(id);
+            if (servicio != null)
+            {
+
+                return View(servicio);
+            }
+            return HttpNotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  ActionResult Modificar(FormCollection collection)
+        public  ActionResult Modificar(Servicio servicio)
         {
-            return RedirectToAction("Index");
+            var s = db.Servicios.Find(servicio.ServicioID);
+            if (s != null)
+            {
+                s.Precio = servicio.Precio;
+                s.Nombre = servicio.Nombre;
+                s.ImagenID = servicio.ImagenID;
+                db.Entry(s).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
         }
 
 
 
         public override ActionResult VerDetalles(int id)
         {
-            return View();
+            var s = db.Servicios.Find(id);
+            if (s!=null)
+                return View(s);
+            return HttpNotFound();
         }
     }
 }

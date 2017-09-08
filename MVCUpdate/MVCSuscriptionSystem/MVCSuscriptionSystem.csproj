@@ -298,12 +298,20 @@
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\Modificar.cshtml" />
     <Content Include="Views\Cliente\Borrar.cshtml" />
+    <Content Include="Views\Plan\Index.cshtml" />
+    <Content Include="Views\Plan\Modificar.cshtml" />
+    <Content Include="Views\Plan\VerDetalles.cshtml" />
+    <Content Include="Views\Plan\Crear.cshtml" />
+    <Content Include="Views\Plan\Borrar.cshtml" />
+    <Content Include="Views\Servicio\Borrar.cshtml" />
+    <Content Include="Views\Servicio\Index.cshtml" />
+    <Content Include="Views\Servicio\Modificar.cshtml" />
+    <Content Include="Views\Servicio\VerDetalles.cshtml" />
+    <Content Include="Views\Servicio\Crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Plan\" />
     <Folder Include="Views\ProgramManager\" />
-    <Folder Include="Views\Servicio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

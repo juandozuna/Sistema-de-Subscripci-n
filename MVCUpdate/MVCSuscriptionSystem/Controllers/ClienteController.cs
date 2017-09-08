@@ -78,7 +78,9 @@ namespace MVCSuscriptionSystem.Controllers
 
         public override ActionResult Index()
         {
-            return View();
+            var clis = db.Clientes.ToList();
+           
+            return View(clis);
         }
 
 

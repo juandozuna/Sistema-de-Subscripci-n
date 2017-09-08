@@ -46,7 +46,7 @@ namespace MVCSuscriptionSystem.MethodManagers
             if (img != null)
             {
                 var base64 = Convert.ToBase64String(img.ImageData);
-                var imgsrc = String.Format("data:image/gif;base64,{0}", base64);
+                var imgsrc = String.Format("data:image/jpeg;base64,{0}", base64);
                 return imgsrc;
             }
             else
