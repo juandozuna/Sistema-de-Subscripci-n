@@ -1,0 +1,23 @@
+﻿@using MVCSuscriptionSystem.MethodManagers
+@model MVCSuscriptionSystem.Models.Cliente
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h1 class="Display-4 text-center">Detalles de @ViewBag.Nombre</h1>
+<div class="row">
+    <img src="@ImagenManager.RetornarSourceImagen(Model.ImagenID)" class="img-fluid" alt="Responsive image" style="border-radius: 3px"/>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h4>@Model.Primer_Nombre @Model.Segundo_Nombre @Model.Primer_Apellido</h4>
+        <h5>Metodo de Pago <span class="text-muted">@Model.Metodo_de_Pago</span></h5>
+    </div>
+</div>
+
+
+
+
+
+

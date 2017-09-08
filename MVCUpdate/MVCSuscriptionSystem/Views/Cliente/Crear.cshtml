@@ -58,8 +58,8 @@
             </div>
 
             <div class="form-group col-md-4">
-                <label for="imageUpload" class="col-form-label">Imagen del Usuario</label>
-                <input name="imagen" type="file" class="form-control-file" id="imageUpload" accept="image/*"/>
+                <label for="image1" class="col-form-label">Imagen del Usuario</label>
+                <input name="imagen1" type="file" class="form-control-file" id="image1" accept="image/*"/>
             </div>
         </div>
     </div>
@@ -125,8 +125,13 @@
         $('#Metodo_de_Pago').change(function() {
             if ($(this).val() === "Tarjeta de Credito" || $(this).val() === "Tarjeta de Debito") {
                 $('#tarjeta-form').show('fast');
+                $('#CVC_o_CVV').val("");
+                $('#NumeroTarjeta').val("");
+
             } else {
                 $('#tarjeta-form').hide('fast');
+                $('#CVC_o_CVV').val(0);
+                $('#NumeroTarjeta').val(0);
             }
         });
     </script>

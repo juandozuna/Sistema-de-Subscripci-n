@@ -24,21 +24,24 @@ namespace MVCSuscriptionSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Crear(FormCollection collection, HttpPostedFileBase image1) 
         {
-            if(image1 != null) ImagenManager.SubirImagen(image1);
+            
             Cliente cli = new Cliente()
             {
                 Primer_Nombre = collection["Primer_Nombre"],
                 Segundo_Nombre = collection["Segundo_Nombre"],
                 Primer_Apellido = collection["Primer_Apellido"],
-                ImagenID = ImagenManager.IdImagenSubida(),
-                Fecha_de_nacimiento = DateTime.Parse(collection["Fecha_de_nacimiento"]),
-                Fecha_de_expiracion = DateTime.Parse(collection["Fecha_de_expiracion"]),
                 Numero_Telefonico = collection["Numero_Telefonico"],
                 e_mail = collection["e_mail"],
                 Metodo_de_Pago = collection["Metodo_de_Pago"],
                 NumeroTarjeta = Int32.Parse(collection["NumeroTarjeta"]),
                 CVC_o_CVV = Int32.Parse(collection["CVC_o_CVV"])
             };
+            cli.Fecha_de_nacimiento = DateTime.ParseExact(collection["Fecha_de_nacimiento"], "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            if (image1 != null)
+            {
+                cli.ImagenID = ImagenManager.SubirImagen(image1);
+            }
+
             Db.Clientes.Add(cli);
             Db.SaveChanges();
 
@@ -66,10 +69,19 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-
+        z
         public override ActionResult VerDetalles(int id)
         {
-            return View();
+            Cliente cliente = Db.Clientes.Where(x => x.ImagenID == id).First();
+            if (cliente != null)
+            {
+                ViewBag.Nombre = string.Format("{0} {1} {2}", cliente.Primer_Nombre, cliente.Segundo_Nombre,
+                    cliente.Primer_Apellido);
+                ViewBag.ImageSource = ImagenManager.RetornarSourceImagen(cliente.ImagenID);
+                return View(cliente);
+            }
+            return HttpNotFound();
+            
         }
     }
 }

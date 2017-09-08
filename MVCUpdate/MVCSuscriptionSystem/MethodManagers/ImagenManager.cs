@@ -10,24 +10,35 @@ namespace MVCSuscriptionSystem.MethodManagers
     public class ImagenManager
     {
         
-        public static void SubirImagen(HttpPostedFileBase image)
+        public static int SubirImagen(HttpPostedFileBase image1)
         {
             EntityModel db = new EntityModel();
             Models.Image img = new Models.Image();
-            img.Nombre = image.FileName;
-            img.ImageData = new byte[image.ContentLength];
+            img.Nombre = image1.FileName;
+            img.ImageData = new byte[image1.ContentLength];
             db.Images.Add(img);
             db.SaveChanges();
+            return IdImagenSubida(img);
 
         }
 
-        public static int IdImagenSubida()
+        public static int IdImagenSubida(Models.Image image)
         {
+
             EntityModel db = new EntityModel();
-            return db.Images.Last().imagesID;
+            try
+            {
+                if (image != null)
+                    return db.Images.Find(image.imagesID).imagesID;
+            }
+            catch (NullReferenceException e)
+            {
+                return 1;
+            }
+            return 0;
         }
 
-        public string RetornarSourceImagen(int idImagen)
+        public static string RetornarSourceImagen(int? idImagen)
         {
             EntityModel db = new EntityModel();
             Models.Image img = db.Images.Find(idImagen);
@@ -43,5 +54,7 @@ namespace MVCSuscriptionSystem.MethodManagers
             }
 
         }
+
+
     }
 }
