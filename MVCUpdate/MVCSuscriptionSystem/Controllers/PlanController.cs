@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCSuscriptionSystem.MethodManagers;
 using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
@@ -48,12 +49,20 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(Plan p)
+        public ActionResult Crear(FormCollection c)
         {
+            Plan p = new Plan()
+            {
+                Nombre = c["Nombre"],
+                Precio = Double.Parse(c["Precio"])
+            };
+            string[] selectedServices = c.GetValues("servicio-select");
             if (p != null)
             {
                 db.Plans.Add(p);
                 db.SaveChanges();
+                var pl = db.Plans.OrderByDescending(x => x.PlanID).First();
+                PlanManager.AgregarServicios(selectedServices, pl);
                 return RedirectToAction("Index");
             }
             return HttpNotFound();
