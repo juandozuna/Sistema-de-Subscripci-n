@@ -17,7 +17,9 @@ namespace MVCSuscriptionSystem.Models
 
         public int SubscripcionID { get; set; }
 
-        public int PlanID { get; set; }
+        public int ClientID { get; set; }
+
+        public int? PlanID { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime Fecha_creacion { get; set; }

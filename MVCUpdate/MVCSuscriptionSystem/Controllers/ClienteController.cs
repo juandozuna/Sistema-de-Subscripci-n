@@ -49,7 +49,7 @@ namespace MVCSuscriptionSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Crear(/*FormCollection collection*/Cliente cli, HttpPostedFileBase image1) 
         {
-            
+
             /*Cliente cli = new Cliente()
             {
                 Primer_Nombre = collection["Primer_Nombre"],
@@ -62,16 +62,25 @@ namespace MVCSuscriptionSystem.Controllers
                 CVC_o_CVV = Int32.Parse(collection["CVC_o_CVV"])
             };
             cli.Fecha_de_nacimiento = DateTime.ParseExact(collection["Fecha_de_nacimiento"], "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);*/
-            if (image1 != null)
+            var emailExiste = db.Clientes.FirstOrDefault(b => b.e_mail.ToLower() == cli.e_mail.ToLower());
+            if (emailExiste == null)
             {
-                cli.ImagenID = ImagenManager.SubirImagen(image1);
+                if (image1 != null)
+                {
+                    cli.ImagenID = ImagenManager.SubirImagen(image1);
+                }
+                if (cli != null)
+                {
+                    db.Clientes.Add(cli);
+                    db.SaveChanges();
+                    cli = db.Clientes.OrderByDescending(w => w.ClientID).First();
+                    SubscripcionManager.CrearSubscripcionNueva(cli);
+                    return RedirectToAction("SeleccionarPlan",new{clienteid = cli.ClientID});
+                }
             }
-            if (cli != null)
+            else
             {
-                db.Clientes.Add(cli);
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
+                ModelState.AddModelError("Email", "El Correo que intenta utilizar ya existe");
             }
             return HttpNotFound();
         }
@@ -127,6 +136,12 @@ namespace MVCSuscriptionSystem.Controllers
             }
             return HttpNotFound();
             
+        }
+
+        public ActionResult SeleccionarPlan(int clienteid)
+        {
+            var plans = db.Plans.ToList();
+            return View(plans);
         }
     }
 }
