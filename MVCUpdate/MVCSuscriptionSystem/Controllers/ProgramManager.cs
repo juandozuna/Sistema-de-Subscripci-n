@@ -9,7 +9,7 @@ namespace MVCSuscriptionSystem.Controllers
 {
     public abstract class ProgramManager : Controller
     {
-        public EntityModel Db = new EntityModel();
+        public EntityModel db = new EntityModel();
 
         public abstract ActionResult Index(); 
         //La pagina index varia dependendiendo 

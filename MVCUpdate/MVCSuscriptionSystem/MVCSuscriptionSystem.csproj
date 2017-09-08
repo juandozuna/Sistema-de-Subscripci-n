@@ -233,6 +233,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Photo on 9-7-17 at 10.34 PM.jpg" />
     <Content Include="Content\styleRicardo.css" />
     <Content Include="Content\styleAdrian.css" />
     <Content Include="Content\styleDavid.css" />
@@ -294,6 +295,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Cliente\Crear.cshtml" />
     <Content Include="Views\Cliente\VerDetalles.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\Modificar.cshtml" />
+    <Content Include="Views\Cliente\Borrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

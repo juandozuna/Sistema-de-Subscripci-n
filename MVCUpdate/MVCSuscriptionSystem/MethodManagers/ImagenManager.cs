@@ -16,6 +16,7 @@ namespace MVCSuscriptionSystem.MethodManagers
             Models.Image img = new Models.Image();
             img.Nombre = image1.FileName;
             img.ImageData = new byte[image1.ContentLength];
+            image1.InputStream.Read(img.ImageData, 0, image1.ContentLength);
             db.Images.Add(img);
             db.SaveChanges();
             return IdImagenSubida(img);
