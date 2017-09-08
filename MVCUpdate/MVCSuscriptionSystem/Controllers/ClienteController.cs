@@ -141,7 +141,8 @@ namespace MVCSuscriptionSystem.Controllers
         public ActionResult SeleccionarPlan(int clienteid)
         {
             var plans = db.Plans.ToList();
-            return View(plans);
+            var cliente = db.Clientes.Find(clienteid);
+            return View(cliente);
         }
     }
 }

@@ -309,6 +309,7 @@
     <Content Include="Views\Servicio\Modificar.cshtml" />
     <Content Include="Views\Servicio\VerDetalles.cshtml" />
     <Content Include="Views\Servicio\Crear.cshtml" />
+    <Content Include="Views\Cliente\SeleccionarPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

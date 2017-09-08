@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Drawing;
@@ -14,7 +15,6 @@ namespace MVCSuscriptionSystem.MethodManagers
         {
             EntityModel db = new EntityModel();
             Models.Image img = new Models.Image();
-            img.Nombre = image1.FileName;
             img.ImageData = new byte[image1.ContentLength];
             image1.InputStream.Read(img.ImageData, 0, image1.ContentLength);
             db.Images.Add(img);
@@ -47,6 +47,9 @@ namespace MVCSuscriptionSystem.MethodManagers
             {
                 var base64 = Convert.ToBase64String(img.ImageData);
                 var imgsrc = String.Format("data:image/jpeg;base64,{0}", base64);
+                img.Nombre = imgsrc;
+                db.Entry(img).State = EntityState.Modified;
+                db.SaveChanges();
                 return imgsrc;
             }
             else

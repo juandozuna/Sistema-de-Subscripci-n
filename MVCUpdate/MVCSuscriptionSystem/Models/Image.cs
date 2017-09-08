@@ -21,7 +21,6 @@ namespace MVCSuscriptionSystem.Models
         public int imagesID { get; set; }
 
         [Required]
-        [StringLength(225)]
         public string Nombre { get; set; }
 
 

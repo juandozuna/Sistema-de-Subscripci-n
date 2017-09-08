@@ -21,6 +21,7 @@ namespace MVCSuscriptionSystem.Models
         [StringLength(100)]
         public string Nombre { get; set; }
 
+        [DataType(DataType.Currency)]
         public double Precio { get; set; }
 
         public int? ImagenID { get; set; }

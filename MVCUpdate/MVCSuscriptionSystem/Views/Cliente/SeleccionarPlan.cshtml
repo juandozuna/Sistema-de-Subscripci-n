@@ -1,0 +1,27 @@
+﻿@using MVCSuscriptionSystem.Models
+@model MVCSuscriptionSystem.Models.Cliente
+
+@{
+    ViewBag.Title = "Plan Select";
+    EntityModel db = new EntityModel();
+}
+
+<h2 class="display-2 text-center">Que plan desea tener</h2>
+
+@foreach (var plan in db.Plans)
+{
+    <div class="card col" style="width: 20rem;">
+        <img class="card-img-top" src="@plan.Image.Nombre" alt="Card image cap"/>
+        <div class="card-body">
+            <h4 class="card-title"><span class="text-muted">@plan.PlanID</span>. @plan.Nombre</h4>
+            <h6 class="card-subtitle text-muted mb-2">Servicios</h6>
+            @foreach (var servicio in plan.ServicioEnPlans)
+            {
+                <p>@servicio.Servicio.Nombre | <span class="text-muted">@servicio.Servicio.Precio</span></p>
+            }
+            <p>Precio <span class="text-muted">@plan.Precio</span></p>
+            @Html.ActionLink("Seleccionar", "PlanElegido", "Cliente", new RouteValueDictionary())
+        </div>
+    </div>
+}
+
