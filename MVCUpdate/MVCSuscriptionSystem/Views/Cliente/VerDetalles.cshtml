@@ -11,21 +11,6 @@
     <h4>Cliente</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Image.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Subscripcion.SubscripcionID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Subscripcion.SubscripcionID)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Primer_Nombre)
@@ -75,47 +60,21 @@
             @Html.DisplayFor(model => model.e_mail)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Metodo_de_Pago)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Metodo_de_Pago)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroTarjeta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumeroTarjeta)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CVC_o_CVV)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CVC_o_CVV)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha_de_expiracion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fecha_de_expiracion)
-        </dd>
-        <dt>
-            Imagen
-        </dt>
-        <dd>
-            <img src="@ViewBag.ImgSrc" class="img-fluid"/>
-        </dd>
-
+    </dl>
+</div>
+<hr/>
+<div>
+    <h3>Datos de la subscripcion</h3>
+    <dl>
+        <dt>Plan al que esta suscrito</dt>
+        <dd>@Model.Subscripcion.Plan.Nombre</dd>
+        <dt>Precio</dt>
+        <dd>@Model.Subscripcion.Plan.Precio</dd>
+        <dt>Fecha de Creacion</dt>
+        <dd>@Model.Subscripcion.Fecha_creacion</dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClientID }) |
+    @Html.ActionLink("Edit", "Modificar", new { id = Model.ClientID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

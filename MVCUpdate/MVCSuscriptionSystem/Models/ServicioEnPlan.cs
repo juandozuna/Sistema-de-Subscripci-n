@@ -1,3 +1,6 @@
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Web.Services.Description;
+
 namespace MVCSuscriptionSystem.Models
 {
     using System;
@@ -7,9 +10,11 @@ namespace MVCSuscriptionSystem.Models
     using System.Data.Entity.Spatial;
 
     [Table("ServicioEnPlan")]
-    public partial class ServicioEnPlan 
+    public partial class ServicioEnPlan
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+       
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ServicioEnPlanID { get; set; }
 
         public int ServicioID { get; set; }

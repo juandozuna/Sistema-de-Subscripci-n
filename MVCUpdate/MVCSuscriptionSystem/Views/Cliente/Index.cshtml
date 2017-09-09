@@ -29,6 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.e_mail)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subscripcion.Fecha_creacion);
+        </th>
         <th></th>
     </tr>
 
@@ -53,9 +56,20 @@
             @Html.DisplayFor(modelItem => item.e_mail)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Modificar", new { id=item.ClientID }) |
-            @Html.ActionLink("Details", "VerDetalles", new { id=item.ClientID }) |
-            @Html.ActionLink("Delete", "Borrar", new { id=item.ClientID })
+            @Html.DisplayFor(modelItem => item.Subscripcion.Fecha_creacion)
+        </td>
+        <td>
+            @Html.ActionLink("Detalles", "VerDetalles", new { id = item.ClientID })
+
+            @if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                   <span>|</span> @Html.ActionLink("Editar", "Modificar", new {id = item.ClientID})<span>|</span>
+
+                    @Html.ActionLink("Borrar", "Borrar", new {id = item.ClientID})
+                }
+            }
         </td>
     </tr>
 }

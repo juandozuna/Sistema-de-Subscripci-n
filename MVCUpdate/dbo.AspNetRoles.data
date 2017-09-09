@@ -1,0 +1,1 @@
+﻿INSERT INTO [dbo].[AspNetRoles] ([Id], [Name]) VALUES ('dfadfaf1243-h42h5ad1', 'Admin')

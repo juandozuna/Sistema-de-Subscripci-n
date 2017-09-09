@@ -8,8 +8,10 @@ using System.Web.Mvc;
 
 namespace MVCSuscriptionSystem.Controllers
 {
+    [Authorize]
     public class ServicioController : ProgramManager
     {
+        [Authorize(Roles = "Admin")]
         public override ActionResult Borrar(int id)
         {
             return View();
@@ -36,6 +38,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
+        [Authorize(Roles = "Admin")]
         public override ActionResult Crear()
         {
             return View();
@@ -61,7 +64,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         public override ActionResult Modificar(int id)
         {
             var servicio = db.Servicios.Find(id);

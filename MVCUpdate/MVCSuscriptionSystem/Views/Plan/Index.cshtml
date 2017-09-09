@@ -35,9 +35,18 @@
             @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Modificar", new { id=item.PlanID }) |
-            @Html.ActionLink("Details", "VerDetalles", new { id=item.PlanID }) |
-            @Html.ActionLink("Delete", "Borrar", new { id=item.PlanID })
+            @Html.ActionLink("Details", "VerDetalles", new { id = item.PlanID }) 
+            
+            @if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <span>|</span>
+                    @Html.ActionLink("Edit", "Modificar", new {id = item.PlanID})<span>|</span>
+
+                    @Html.ActionLink("Delete", "Borrar", new {id = item.PlanID})
+                }
+            }
         </td>
     </tr>
 }

@@ -4,13 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.ApplicationInsights.Web;
 using MVCSuscriptionSystem.MethodManagers;
 using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
 {
+    [Authorize]
     public class ClienteController : ProgramManager
     {
+        [Authorize(Roles = "Admin")]
         public override ActionResult Borrar(int id)
         {
             var cliente = db.Clientes.Find(id);
@@ -45,23 +48,12 @@ namespace MVCSuscriptionSystem.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(/*FormCollection collection*/Cliente cli, HttpPostedFileBase image1) 
+        public ActionResult Crear(Cliente cli, HttpPostedFileBase image1) 
         {
 
-            /*Cliente cli = new Cliente()
-            {
-                Primer_Nombre = collection["Primer_Nombre"],
-                Segundo_Nombre = collection["Segundo_Nombre"],
-                Primer_Apellido = collection["Primer_Apellido"],
-                Numero_Telefonico = collection["Numero_Telefonico"],
-                e_mail = collection["e_mail"],
-                Metodo_de_Pago = collection["Metodo_de_Pago"],
-                NumeroTarjeta = Int32.Parse(collection["NumeroTarjeta"]),
-                CVC_o_CVV = Int32.Parse(collection["CVC_o_CVV"])
-            };
-            cli.Fecha_de_nacimiento = DateTime.ParseExact(collection["Fecha_de_nacimiento"], "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);*/
             var emailExiste = db.Clientes.FirstOrDefault(b => b.e_mail.ToLower() == cli.e_mail.ToLower());
             if (emailExiste == null)
             {
@@ -85,6 +77,23 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
+        public ActionResult crear2(string userId)
+        {
+
+            ViewBag.UserId = userId;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult crear2(FormCollection collection)
+        {
+            ClienteManager.CrearCliente(collection);
+            var cliente = ClienteManager.UltimoCliente();
+            RedirectToAction("RegisterClient", "Account");
+
+        }
+
         public override ActionResult Index()
         {
             var clis = db.Clientes.ToList();
@@ -93,7 +102,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         public override ActionResult Modificar(int id)
         {
             var cliente = db.Clientes.Find(id);
@@ -142,7 +151,27 @@ namespace MVCSuscriptionSystem.Controllers
         {
             var plans = db.Plans.ToList();
             var cliente = db.Clientes.Find(clienteid);
-            return View(cliente);
+            ViewBag.ClienteId = clienteid;
+            return View(plans);
+        }
+
+        public ActionResult PlanElegido(int PlanId, int ClienteId)
+        {
+            var cliente = db.Clientes.Find(ClienteId);
+            if (cliente != null)
+            {
+                var subs = cliente.Subscripcion;
+                if (db.Plans.Find(PlanId) != null)
+                {
+                    subs.PlanID = PlanId;
+                    subs.Active = true;
+                    db.Entry(subs).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else return HttpNotFound();
+                return RedirectToAction("VerDetalles", new {id = ClienteId});
+            }
+            return RedirectToAction("Index");
         }
     }
 }

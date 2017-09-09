@@ -9,8 +9,10 @@ using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
 {
+    [System.Web.Mvc.Authorize]
     public class PlanController : ProgramManager
     {
+        [Authorize(Roles = "Admin")]
         public override ActionResult Borrar(int id)
         {
             var plan = db.Plans.Find(id);
@@ -21,7 +23,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-        [HttpPost, ActionName("Borrar")]
+        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Borrar")]
         public ActionResult ConfirmarBorrar(int id)
         {
             var plan = db.Plans.Find(id);
@@ -42,12 +44,13 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
+        [Authorize(Roles = "Admin")]
         public override ActionResult Crear()
         {
             return View();
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Crear(FormCollection c)
         {
@@ -56,13 +59,24 @@ namespace MVCSuscriptionSystem.Controllers
                 Nombre = c["Nombre"],
                 Precio = Double.Parse(c["Precio"]),
             };
-            string[] selectedServices = c.GetValues("ServicioEnPlans").ToArray();
+            string[] servicios = c.GetValues("ServicioEnPlans").ToArray();
             if (p != null)
             {
                 db.Plans.Add(p);
                 db.SaveChanges();
                 var pl = db.Plans.OrderByDescending(x => x.PlanID).First();
-                PlanManager.AgregarServicios(selectedServices, pl);
+                foreach (var s in servicios)
+                {
+                    Int32.TryParse(s, out int servId);
+                    if (db.Servicios.Find(servId) != null)
+                        db.ServicioEnPlans.Add(new ServicioEnPlan() {PlanID = pl.PlanID, ServicioID = servId});
+                    else
+                    {
+                        return HttpNotFound();
+                    }
+                }
+                db.SaveChanges();
+                //PlanManager.AgregarServicios(servicios, pl);
                 return RedirectToAction("Index");
             }
             return HttpNotFound();
@@ -75,7 +89,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         public override ActionResult Modificar(int id)
         {
             var plan = db.Plans.Find(id);
@@ -86,7 +100,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public  ActionResult Modificar(Plan p)
         {
@@ -116,6 +130,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult RemoveService(int ServPlanId, int PlanId)
         {
             var plan = db.Plans.Find(PlanId);

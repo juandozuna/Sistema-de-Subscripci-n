@@ -24,5 +24,16 @@ namespace MVCSuscriptionSystem.MethodManagers
             db.Entry(cliente).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        public static void PlanSelectedActivatePlan(int PlanId, Subscripcion subs)
+        {
+            using (EntityModel db = new EntityModel())
+            {
+                subs.PlanID = PlanId;
+                subs.Active = true;
+                db.Entry(subs).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
     }
 }

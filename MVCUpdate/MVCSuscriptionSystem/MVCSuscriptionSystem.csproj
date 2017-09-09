@@ -212,6 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MethodManagers\ClienteManager.cs" />
     <Compile Include="MethodManagers\ImagenManager.cs" />
     <Compile Include="MethodManagers\PlanManager.cs" />
     <Compile Include="MethodManagers\SubscripcionManager.cs" />
@@ -316,6 +317,7 @@
     <Content Include="Views\Subscripcion\Details.cshtml" />
     <Content Include="Views\Subscripcion\Edit.cshtml" />
     <Content Include="Views\Subscripcion\Index.cshtml" />
+    <Content Include="Views\Cliente\Crear2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
