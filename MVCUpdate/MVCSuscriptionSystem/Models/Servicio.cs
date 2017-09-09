@@ -7,7 +7,7 @@ namespace MVCSuscriptionSystem.Models
     using System.Data.Entity.Spatial;
 
     [Table("Servicio")]
-    public partial class Servicio : IModel
+    public partial class Servicio 
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Servicio()
