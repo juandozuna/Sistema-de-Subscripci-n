@@ -57,6 +57,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
+        [Authorize]
         public override ActionResult Index()
         {
             var servicios = db.Servicios.ToList();
@@ -94,7 +95,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-
+        [Authorize]
         public override ActionResult VerDetalles(int id)
         {
             var s = db.Servicios.Find(id);

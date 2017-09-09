@@ -90,10 +90,11 @@ namespace MVCSuscriptionSystem.Controllers
         {
             ClienteManager.CrearCliente(collection);
             var cliente = ClienteManager.UltimoCliente();
-            RedirectToAction("RegisterClient", "Account");
+            return RedirectToAction("RegisterClient", "Account");
 
         }
 
+        [Authorize]
         public override ActionResult Index()
         {
             var clis = db.Clientes.ToList();
@@ -131,10 +132,10 @@ namespace MVCSuscriptionSystem.Controllers
             }
             return HttpNotFound();
         }
-           
 
 
-        
+
+        [Authorize]
         public override ActionResult VerDetalles(int id)
         {
             Cliente cliente = db.Clientes.Find(id);
@@ -147,6 +148,7 @@ namespace MVCSuscriptionSystem.Controllers
             
         }
 
+        [Authorize]
         public ActionResult SeleccionarPlan(int clienteid)
         {
             var plans = db.Plans.ToList();
@@ -155,6 +157,7 @@ namespace MVCSuscriptionSystem.Controllers
             return View(plans);
         }
 
+        [Authorize]
         public ActionResult PlanElegido(int PlanId, int ClienteId)
         {
             var cliente = db.Clientes.Find(ClienteId);

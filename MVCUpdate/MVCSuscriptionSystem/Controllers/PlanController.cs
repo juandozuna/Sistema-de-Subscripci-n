@@ -82,6 +82,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
+        [Authorize]
         public override ActionResult Index()
         {
             var planes = db.Plans.ToList();
@@ -102,14 +103,25 @@ namespace MVCSuscriptionSystem.Controllers
 
         [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
-        public  ActionResult Modificar(Plan p)
+        public  ActionResult Modificar(FormCollection c)
         {
-            var plan = db.Plans.Find(p.PlanID);
+            var plan = db.Plans.Find(Int32.Parse(c["PlanID"]));
+            string[] servicios = c.GetValues("ServicioEnPlans").ToArray();
             if (plan != null)
             {
-                plan.ImagenID = p.ImagenID;
-                plan.Nombre = p.Nombre;
-                plan.Precio = p.Precio;
+                foreach (var s in servicios)
+                {
+                    Int32.TryParse(s, out int servId);
+                    if (db.Servicios.Find(servId) != null)
+                        db.ServicioEnPlans.Add(new ServicioEnPlan() { PlanID = plan.PlanID, ServicioID = servId });
+                    else
+                    {
+                        return HttpNotFound();
+                    }
+                };
+
+                plan.Nombre = c["Nombre"];
+                plan.Precio = Double.Parse(c["Precio"]);
                 db.Entry(plan).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
