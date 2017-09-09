@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MVCSuscriptionSystem.MethodManagers;
 using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
@@ -49,20 +48,12 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(FormCollection c)
+        public ActionResult Crear(Plan p)
         {
-            Plan p = new Plan()
-            {
-                Nombre = c["Nombre"],
-                Precio = Double.Parse(c["Precio"]),
-            };
-            string[] selectedServices = c.GetValues("ServicioEnPlans").ToArray();
             if (p != null)
             {
                 db.Plans.Add(p);
                 db.SaveChanges();
-                var pl = db.Plans.OrderByDescending(x => x.PlanID).First();
-                PlanManager.AgregarServicios(selectedServices, pl);
                 return RedirectToAction("Index");
             }
             return HttpNotFound();
@@ -114,22 +105,6 @@ namespace MVCSuscriptionSystem.Controllers
                 return View(plan);
             }
             return HttpNotFound();
-        }
-
-        public ActionResult RemoveService(int ServPlanId, int PlanId)
-        {
-            var plan = db.Plans.Find(PlanId);
-            if (plan != null)
-            {
-                var servicioEnPlan = db.ServicioEnPlans.Find(ServPlanId);
-                if (servicioEnPlan != null)
-                {
-                    db.Entry(servicioEnPlan).State = EntityState.Deleted;
-                    db.SaveChanges();
-                }
-                return RedirectToAction("Modificar",new{id = PlanId});
-            }
-            return RedirectToAction("Index");
         }
     }
 }

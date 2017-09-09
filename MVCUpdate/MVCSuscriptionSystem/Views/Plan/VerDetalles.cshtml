@@ -1,5 +1,4 @@
-﻿@using MVCSuscriptionSystem.Models
-@model MVCSuscriptionSystem.Models.Plan
+﻿@model MVCSuscriptionSystem.Models.Plan
 
 @{
     ViewBag.Title = "VerDetalles";
@@ -36,13 +35,6 @@
         </dd>
 
     </dl>
-    <h1>Servicios en el Plan</h1>
-    <ul class="list-group">
-    @foreach (ServicioEnPlan sp in Model.ServicioEnPlans)
-    {
-        <li class="list-group-item">@sp.Servicio.Nombre | @sp.Servicio.Precio</li>   
-    }
-    </ul>
 </div>
 <p>
     @Html.ActionLink("Edit", "Modificar", new { id = Model.PlanID }) |

@@ -2,13 +2,12 @@ namespace MVCSuscriptionSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
     [Table("Subscripcion")]
-    public partial class Subscripcion 
+    public partial class Subscripcion : IModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Subscripcion()
@@ -18,18 +17,13 @@ namespace MVCSuscriptionSystem.Models
 
         public int SubscripcionID { get; set; }
 
-        [DisplayName("ID del cliente:")]
         public int ClientID { get; set; }
 
-        [DisplayName("Plan:")]
         public int? PlanID { get; set; }
 
         [Column(TypeName = "date")]
-        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
-        [DisplayName( "Fecha de creacion:")]
         public DateTime Fecha_creacion { get; set; }
 
-        [DisplayName("Plan Activo")]
         public bool Active { get; set; }
 
         public int? ImageID { get; set; }

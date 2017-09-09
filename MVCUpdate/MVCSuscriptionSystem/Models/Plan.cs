@@ -7,7 +7,7 @@ namespace MVCSuscriptionSystem.Models
     using System.Data.Entity.Spatial;
 
     [Table("Plan")]
-    public partial class Plan 
+    public partial class Plan : IModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Plan()
@@ -29,8 +29,6 @@ namespace MVCSuscriptionSystem.Models
         public virtual Image Image { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [Display(Name = "Servicios")]
-        [Required(ErrorMessage = "Debe de seleccionar uno de los servicios para poder continuar")]
         public virtual ICollection<ServicioEnPlan> ServicioEnPlans { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
