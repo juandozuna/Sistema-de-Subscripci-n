@@ -54,9 +54,9 @@ namespace MVCSuscriptionSystem.Controllers
             Plan p = new Plan()
             {
                 Nombre = c["Nombre"],
-                Precio = Double.Parse(c["Precio"])
+                Precio = Double.Parse(c["Precio"]),
             };
-            string[] selectedServices = c.GetValues("servicio-select");
+            string[] selectedServices = c.GetValues("ServicioEnPlans").ToArray();
             if (p != null)
             {
                 db.Plans.Add(p);
@@ -114,6 +114,19 @@ namespace MVCSuscriptionSystem.Controllers
                 return View(plan);
             }
             return HttpNotFound();
+        }
+
+        public ActionResult RemoveService(int ServPlanId, int PlanId)
+        {
+            var plan = db.Plans.Find(PlanId);
+            if (plan != null)
+            {
+                var servicioEnPlan = db.ServicioEnPlans.Find(ServPlanId);
+                if (servicioEnPlan != null)
+                {
+                    db.Entry(servicioEnPlan).State = 
+                }
+            }
         }
     }
 }

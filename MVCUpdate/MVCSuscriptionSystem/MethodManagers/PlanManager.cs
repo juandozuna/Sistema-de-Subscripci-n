@@ -11,8 +11,7 @@ namespace MVCSuscriptionSystem.MethodManagers
         public static void AgregarServicios(string[] servicios, Plan pl)
         {
             EntityModel db = new EntityModel();
-            if (servicios.Any())
-            {
+          
                 foreach (var s in servicios)
                 {
                     var sp = new ServicioEnPlan()
@@ -20,8 +19,10 @@ namespace MVCSuscriptionSystem.MethodManagers
                         PlanID = pl.PlanID,
                         ServicioID = Int32.Parse(s)
                     };
+                    db.ServicioEnPlans.Add(sp);
                 }
-            }
+            db.SaveChanges();
+
         }
     }
 }
