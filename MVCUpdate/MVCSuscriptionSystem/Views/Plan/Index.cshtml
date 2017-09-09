@@ -4,16 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Planes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Crear")
+    @Html.ActionLink("Crear Nuevo", "Crear", new {@class="btn btn-success"})
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Image.Nombre)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
@@ -26,25 +23,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Image.Nombre)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
-            @Html.ActionLink("Details", "VerDetalles", new { id = item.PlanID }) 
+            @Html.ActionLink("Detalles", "VerDetalles", new { id = item.PlanID }) 
             
             @if (Request.IsAuthenticated)
             {
                 if (User.IsInRole("Admin"))
                 {
                     <span>|</span>
-                    @Html.ActionLink("Edit", "Modificar", new {id = item.PlanID})<span>|</span>
+                    @Html.ActionLink("Editar", "Modificar", new {id = item.PlanID})<span>|</span>
 
-                    @Html.ActionLink("Delete", "Borrar", new {id = item.PlanID})
+                    @Html.ActionLink("Borrar", "Borrar", new {id = item.PlanID})
                 }
             }
         </td>

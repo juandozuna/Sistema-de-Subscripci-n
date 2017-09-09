@@ -141,6 +141,11 @@ namespace MVCSuscriptionSystem.Controllers
             Cliente cliente = db.Clientes.Find(id);
             if (cliente != null)
             {
+                if (cliente.Subscripcion.Active)
+                {
+                    ViewBag.estado = "Activo";
+                }
+                else ViewBag.estado = "Inactivo";
                 ViewBag.ImgSrc = ImagenManager.RetornarSourceImagen(cliente.ImagenID);
                 return View(cliente);
             }

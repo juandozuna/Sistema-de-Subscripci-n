@@ -8,8 +8,8 @@ namespace MVCSuscriptionSystem.Models
     public partial class EntityModel : DbContext
     {
         public EntityModel()
-            //: base("LocalConnection")//Esta es la conexion local con la base de Datos
-            :base("AzureConnection") //Esta es la conexion con azure a la base de Datos
+            : base("LocalConnection")//Esta es la conexion local con la base de Datos
+            //:base("AzureConnection") //Esta es la conexion con azure a la base de Datos
         {
         }
 

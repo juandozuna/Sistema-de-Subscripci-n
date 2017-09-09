@@ -1,13 +1,15 @@
-﻿@using MVCSuscriptionSystem.MethodManagers
+﻿@using System.Activities.Statements
+@using MVCSuscriptionSystem.MethodManagers
 @model MVCSuscriptionSystem.Models.Cliente
 
 @{
-    ViewBag.Title = "VerDetalles";
+    ViewBag.Title = "Ver Detalles";
 }
 
-<h2>VerDetalles</h2>
+<h2 class="display-4 text-center">Ver Detalles</h2>
 
-<div>
+
+<!--<div>
     <h4>Cliente</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -61,18 +63,41 @@
         </dd>
 
     </dl>
+</div> -->
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="card mb-3">
+            <!--<img class="card-img-top" src="@ImagenManager.RetornarSourceImagen(Model.ImagenID)" alt="Card image cap">-->
+            <div class="card-body">
+                <h4 class="card-title">@Model.Primer_Nombre @Model.Primer_Apellido</h4>
+                <p class="card-text">Fecha de creacion: <span class="text-muted">@Model.Subscripcion.Fecha_creacion.Date</span>
+                </p>
+                <p class="card-text">Correo electronico: <a href="mailto:@Model.e_mail">@Model.e_mail</a>
+                </p>
+                <p class="card-text"><small class="text-muted">Estatus de Suscripcion: <span class="text-muted">@ViewBag.estado</span></small>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+
 <hr/>
 <div>
-    <h3>Datos de la subscripcion</h3>
-    <dl>
-        <dt>Plan al que esta suscrito</dt>
-        <dd>@Model.Subscripcion.Plan.Nombre</dd>
-        <dt>Precio</dt>
-        <dd>@Model.Subscripcion.Plan.Precio</dd>
-        <dt>Fecha de Creacion</dt>
-        <dd>@Model.Subscripcion.Fecha_creacion</dd>
-    </dl>
+    @try
+    {
+        <h3>Datos de la subscripcion</h3>
+        <dl>
+            <dt>Plan al que esta suscrito</dt>
+            <dd>@Model.Subscripcion.Plan.Nombre</dd>
+            <dt>Precio</dt>
+            <dd>@Model.Subscripcion.Plan.Precio</dd>
+            <dt>Fecha de Creacion</dt>
+            <dd>@Model.Subscripcion.Fecha_creacion</dd>
+        </dl>
+    }catch(NullReferenceException e){ 
+    
+    <h2>No hay subscripcion</h2>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Modificar", new { id = Model.ClientID }) |

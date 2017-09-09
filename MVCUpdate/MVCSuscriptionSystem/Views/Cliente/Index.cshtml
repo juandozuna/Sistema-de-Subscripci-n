@@ -7,7 +7,14 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Crear")
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Crear Nuevo", "Crear", new {@class="btn btn-dark"})
+        }
+    }
+    
 </p>
 <table class="table">
     <tr>

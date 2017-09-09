@@ -1,31 +1,62 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            ViewBag.Clientes = "Ir a manejador de Clientes";
+            ViewBag.Planes = "Ir a manejador de Planes";
+            ViewBag.Servicios = "Ir a manejador de Servicios";
+        }
+        else
+        {
+            ViewBag.Clientes = "Ver Clientes";
+            ViewBag.Planes = "Ver Planes";
+            ViewBag.Servicios = "Ver Servicios";
+        }
+    }
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Suscripcion Intenciana </h1>
+    <p class="lead">Este es un programa desarrollado por un grupo de estudiantes de la universidad de INTEC en la que estos deben de cumplir con los
+        requisitos de un proyecto final que ha sido asignado por el profesor de Programacion III (OOP) SERGIO M. LOPEZ. 
+    </p>
+    <blockquote>
+        Querido profesor, recuerde tenernos en cuenta en su corazon, hemos dado lo mejor de nosotros en este proyecto, por favor no olvide eso. Nos 
+        vemos la proxima semana.
+    </blockquote>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-primary" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="http://www.emprender-facil.com/wp-content/uploads/2015/05/300x207xClaves-para-identificar-clientes-en-perspectiva-t1.jpg.pagespeed.ic.jEjJNI-zhO.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">Clientes</h4>
+                <p class="card-text">Ingrese aqui para trabajar con los clientes</p>
+                <a href="@Url.Action("Index","Cliente")" class="btn btn-primary">Ir a Clientes</a>
+            </div>
+    </div>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-primary" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="data:image/jpeg;base64,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" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">Planes</h4>
+                <p class="card-text">Ingrese aqui para trabajar con los planes</p>
+                <a href="@Url.Action("Index","Plan")" class="btn btn-primary">Ir a PLanes</a>
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-primary" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAyeAAAAJGMxMmU5YzFiLWVhYzktNDIzMy04YzE5LTViMzk0MjZmYzY5ZQ.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">Servicios</h4>
+                <p class="card-text">Ingrese aqui para trabajar con los servicios</p>
+                <a href="@Url.Action("Index","Servicio")" class="btn btn-primary">Ir a Servicios</a>
+            </div>
+        </div>
     </div>
 </div>

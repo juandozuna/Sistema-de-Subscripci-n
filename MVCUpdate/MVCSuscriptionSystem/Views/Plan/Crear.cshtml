@@ -36,9 +36,9 @@
             var Selectlist = new SelectList(db.Servicios, "ServicioID", "Nombre");
         }
         <div class="form-group">
-            @Html.DisplayFor(model => model.ServicioEnPlans, new {@class="col-form-label"})
+            @Html.DisplayNameFor(model => model.ServicioEnPlans, new {@class="col-form-label"});
             @Html.DropDownListFor(model => model.ServicioEnPlans, Selectlist, "", new {multiple = "multiple"})
-            @Html.ValidationMessageFor(model => model.ServicioEnPlans,"",new{@class="text-danger"})
+            @Html.ValidationMessageFor(model => model.ServicioEnPlans, "", new {@class = "text-danger"})
             <br>
             <span class="text-muted">Presione ctrl para poder seleccionar mas de una opcion</span>
         </div>
@@ -52,7 +52,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a Lista", "Index")
 </div>
 
 @section Scripts {
