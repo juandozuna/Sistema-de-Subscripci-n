@@ -208,7 +208,6 @@
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\ProgramManager.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
-    <Compile Include="Controllers\SubscripcionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,6 +218,7 @@
     <Compile Include="Models\EntityModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\Servicio.cs" />
@@ -310,11 +310,6 @@
     <Content Include="Views\Servicio\VerDetalles.cshtml" />
     <Content Include="Views\Servicio\Crear.cshtml" />
     <Content Include="Views\Cliente\SeleccionarPlan.cshtml" />
-    <Content Include="Views\Subscripcions\Create.cshtml" />
-    <Content Include="Views\Subscripcions\Delete.cshtml" />
-    <Content Include="Views\Subscripcions\Details.cshtml" />
-    <Content Include="Views\Subscripcions\Edit.cshtml" />
-    <Content Include="Views\Subscripcions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
