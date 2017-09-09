@@ -124,9 +124,12 @@ namespace MVCSuscriptionSystem.Controllers
                 var servicioEnPlan = db.ServicioEnPlans.Find(ServPlanId);
                 if (servicioEnPlan != null)
                 {
-                    db.Entry(servicioEnPlan).State = 
+                    db.Entry(servicioEnPlan).State = EntityState.Deleted;
+                    db.SaveChanges();
                 }
+                return RedirectToAction("Modificar",new{id = PlanId});
             }
+            return RedirectToAction("Index");
         }
     }
 }
