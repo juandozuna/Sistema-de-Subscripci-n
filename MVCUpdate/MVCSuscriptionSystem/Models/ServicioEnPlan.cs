@@ -7,7 +7,7 @@ namespace MVCSuscriptionSystem.Models
     using System.Data.Entity.Spatial;
 
     [Table("ServicioEnPlan")]
-    public partial class ServicioEnPlan : IModel
+    public partial class ServicioEnPlan 
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ServicioEnPlanID { get; set; }
