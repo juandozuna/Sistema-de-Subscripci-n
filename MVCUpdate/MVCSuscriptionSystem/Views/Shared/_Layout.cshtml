@@ -18,6 +18,9 @@
             </div>
             <div class="navbar-collapse collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <li>@Html.ActionLink("Clientes", "Index","Cliente", "",new { @class="nav-link"})</li>
+                    <li>@Html.ActionLink("Planes", "Index","Plan", "",new { @class="nav-link"})</li>
+                    <li>@Html.ActionLink("Servicios", "Index","Servicio", "",new { @class="nav-link"})</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

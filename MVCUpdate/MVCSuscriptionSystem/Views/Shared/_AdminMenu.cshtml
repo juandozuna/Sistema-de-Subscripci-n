@@ -1,0 +1,7 @@
+﻿@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+        <li><a href="#" class="nav-link">Portal Administrativo</a></li>
+    }
+}
