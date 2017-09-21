@@ -17,7 +17,7 @@
     <div class="form-check form-check-inline">
         <label class="form-check-label">
             Usuario Administrativo  .
-            <input class="form-check-input" type="checkbox" value="Admin" name="Admin" />
+            <input class="form-check-input" type="checkbox"  name="Admin" id="Admin"/>
         </label>
     </div>
 
@@ -35,52 +35,73 @@
                 <tr>
                     <th scope="row">Clientes</th>
                     @{ string text = "VerCliente"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text" class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text" /></td>
                     @{ text = "CrearCliente"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text" class="text-center d"/></td>
-                    @{ text = "ModificarCliente"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text" /></td>
+                    @{ text = "ModificarCliente"; } 
+                    <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text" /></td>
                     @{ text = "BorrarCliente"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                 </tr>
                 <tr>
                     <th scope="row">Planes</th>
                     @{ text = "VerPlan"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                     @{ text = "CrearPlan"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                     @{ text = "ModificarPlan"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                     @{ text = "BorrarPlan"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text" /></td>
                 </tr>
                 <tr>
                     <th scope="row">Servicios</th>
                     @{ text = "VerServicio"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                     @{ text = "CrearServicio"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text"/></td>
                     @{ text = "ModificarServicio"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                     @{ text = "BorrarServicio"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                 </tr>
                 <tr>
                     <th scope="row">Suscripciones</th>
                     @{ text = "VerSuscripcion"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                     @{ text = "CrearSuscripcion"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox"  name="@text" id="@text" /></td>
                     @{ text = "ModificarSuscripcion"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text" /></td>
                     @{ text = "BorrarSuscripcion"; }
-                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text" /></td>
                 </tr>
 
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Agregrar Roles" class="btn btn-success" />
+        </div>
+    </div>
 
+                        }
+
+
+@section scripts
+{
+    <script>
+        $("#Admin").click(function(){
+            if ($('#Admin').prop('checked')) {
+                $('.d').attr('checked', true);
+            } else {
+                $('.d').removeAttr('checked');
+            }
+        });
+
+
+    </script>
 }
 
