@@ -49,8 +49,7 @@ namespace MVCSuscriptionSystem.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Display(Name = "Usuario")]
         public string Email { get; set; }
 
         [Required]
@@ -115,5 +114,24 @@ namespace MVCSuscriptionSystem.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class AdminRegisterViewModel
+    {
+
+        [Required]
+        [Display(Name = "Nombre de Usuario")]
+        public string UserName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "La {0} debe de ser de almenos {2} caracteres de largo.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contrasena")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar Contrasena")]
+        [Compare("Password", ErrorMessage = "Las contrasenas no coinciden")]
+        public string ConfirmPassword { get; set; }
     }
 }

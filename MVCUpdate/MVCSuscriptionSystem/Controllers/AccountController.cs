@@ -12,7 +12,7 @@ using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -137,7 +137,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+      
         public ActionResult Register()
         {
             return View();
@@ -146,17 +146,16 @@ namespace MVCSuscriptionSystem.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(AdminRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -164,7 +163,7 @@ namespace MVCSuscriptionSystem.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AddRoles", "Administration", new {UserId = user.Id});
                 }
                 AddErrors(result);
             }
@@ -173,7 +172,6 @@ namespace MVCSuscriptionSystem.Controllers
             return View(model);
         }
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterClient(RegisterViewModel model)
         {
@@ -183,7 +181,7 @@ namespace MVCSuscriptionSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -431,6 +429,8 @@ namespace MVCSuscriptionSystem.Controllers
             return View();
         }
 
+ 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -450,6 +450,8 @@ namespace MVCSuscriptionSystem.Controllers
 
             base.Dispose(disposing);
         }
+
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins

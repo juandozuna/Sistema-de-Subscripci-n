@@ -1,0 +1,11 @@
+﻿@model MVCSuscriptionSystem.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Agregar Roles";
+}
+
+<h2>Agregar Roles</h2>
+<h3>Usuario: <span class="text-muted">@Model.UserName</span></h3>
+
+@Html.BeginForm("AddRoles", "Administration")
+
