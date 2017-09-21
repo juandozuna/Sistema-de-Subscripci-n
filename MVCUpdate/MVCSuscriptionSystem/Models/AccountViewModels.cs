@@ -124,6 +124,11 @@ namespace MVCSuscriptionSystem.Models
         public string UserName { get; set; }
 
         [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "La {0} debe de ser de almenos {2} caracteres de largo.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contrasena")]

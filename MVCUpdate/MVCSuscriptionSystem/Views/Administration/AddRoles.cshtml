@@ -1,4 +1,5 @@
-﻿@model MVCSuscriptionSystem.Models.ApplicationUser
+﻿@using MVCSuscriptionSystem.Models
+@model MVCSuscriptionSystem.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Agregar Roles";
@@ -7,5 +8,79 @@
 <h2>Agregar Roles</h2>
 <h3>Usuario: <span class="text-muted">@Model.UserName</span></h3>
 
-@Html.BeginForm("AddRoles", "Administration")
+@using (Html.BeginForm("AddRoles", "Administration"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <h1 class="display-4  text-center">Roles</h1>
+    <div class="form-check form-check-inline">
+        <label class="form-check-label">
+            Usuario Administrativo  .
+            <input class="form-check-input" type="checkbox" value="Admin" name="Admin" />
+        </label>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 align-self-center">
+            <table class="table table-bordered">
+                <thead>
+                <th></th>
+                <th>Ver</th>
+                <th>Crear</th>
+                <th>Modificar</th>
+                <th>Borrar</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Clientes</th>
+                    @{ string text = "VerCliente"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text" class="text-center d"/></td>
+                    @{ text = "CrearCliente"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text" class="text-center d"/></td>
+                    @{ text = "ModificarCliente"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "BorrarCliente"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">Planes</th>
+                    @{ text = "VerPlan"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "CrearPlan"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "ModificarPlan"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "BorrarPlan"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">Servicios</th>
+                    @{ text = "VerServicio"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "CrearServicio"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "ModificarServicio"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "BorrarServicio"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">Suscripciones</th>
+                    @{ text = "VerSuscripcion"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "CrearSuscripcion"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "ModificarSuscripcion"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                    @{ text = "BorrarSuscripcion"; }
+                    <td><input class="form-check-input" type="checkbox" value="@text" name="@text" id="@text"class="text-center d"/></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+}
 

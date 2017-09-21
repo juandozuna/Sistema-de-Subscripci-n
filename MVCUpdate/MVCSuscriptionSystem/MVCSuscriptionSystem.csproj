@@ -213,6 +213,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MethodManagers\AdminManager.cs" />
     <Compile Include="MethodManagers\ClienteManager.cs" />
     <Compile Include="MethodManagers\ImagenManager.cs" />
     <Compile Include="MethodManagers\PlanManager.cs" />

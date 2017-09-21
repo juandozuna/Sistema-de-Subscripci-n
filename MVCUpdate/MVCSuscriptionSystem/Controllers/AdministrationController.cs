@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
+using MVCSuscriptionSystem.MethodManagers;
 using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers
@@ -36,6 +37,9 @@ namespace MVCSuscriptionSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddRoles(FormCollection collection)
         {
+            
+                AdminManager.AddRolesToUser(collection);
+                return View();
             
         }
 
