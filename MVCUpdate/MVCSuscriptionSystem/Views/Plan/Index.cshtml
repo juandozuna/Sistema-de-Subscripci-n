@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVCSuscriptionSystem.Models.Plan>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Planes";
 }
 
-<h2>Planes</h2>
+<h2>Listado de PLanes</h2>
 
 <p>
     @Html.ActionLink("Crear Nuevo", "Crear", new {@class="btn btn-success"})
@@ -31,14 +31,24 @@
         <td>
             @Html.ActionLink("Detalles", "VerDetalles", new { id = item.PlanID }) 
             
+         
+            
             @if (Request.IsAuthenticated)
             {
-                if (User.IsInRole("Admin"))
+                if (User.IsInRole("ModificiarPlan"))
                 {
-                    <span>|</span>
-                    @Html.ActionLink("Editar", "Modificar", new {id = item.PlanID})<span>|</span>
+                    <span>|</span> @Html.ActionLink("Editar", "Modificar", new { id = item.PlanID })
 
-                    @Html.ActionLink("Borrar", "Borrar", new {id = item.PlanID})
+
+                }
+            }
+            @if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("BorrarPlan"))
+                {
+                    <span>|</span>@Html.ActionLink("Borrar", "Borrar", new {id = item.PlanID})
+
+
                 }
             }
         </td>
