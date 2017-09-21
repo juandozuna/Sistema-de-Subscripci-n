@@ -15,6 +15,7 @@ namespace MVCSuscriptionSystem.Controllers
         private EntityModel db = new EntityModel();
 
         // GET: Subscripcions
+        [Authorize(Roles = "VerSuscripcion, ListarSuscripcion")]
         public ActionResult Index()
         {
             var subscripcions = db.Subscripcions.Include(s => s.Image).Include(s => s.Plan);
@@ -22,6 +23,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
         // GET: Subscripcions/Details/5
+        [Authorize(Roles = "VerSuscripcion, ListarSuscripcion")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +41,7 @@ namespace MVCSuscriptionSystem.Controllers
         // GET: Subscripcions/Create
         //Cambiar Authorize por condicion para revisar el rol del usuario
         //[Authorize]
+        [Authorize(Roles = "CrearSuscripcion")]
         public ActionResult Create()
         {
             ViewBag.ImageID = new SelectList(db.Images, "imagesID", "Nombre");
@@ -51,6 +54,7 @@ namespace MVCSuscriptionSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CrearSuscripcion")]
         public ActionResult Create([Bind(Include = "SubscripcionID,ClientID,PlanID,Fecha_creacion,Active,ImageID")] Subscripcion subscripcion)
         {
             if (ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
         // GET: Subscripcions/Edit/5
+        [Authorize(Roles = "ModificarSuscripcion")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,6 +92,7 @@ namespace MVCSuscriptionSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ModificarSuscripcion")]
         public ActionResult Edit([Bind(Include = "SubscripcionID,ClientID,PlanID,Fecha_creacion,Active,ImageID")] Subscripcion subscripcion)
         {
             if (ModelState.IsValid)
@@ -101,6 +107,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
         // GET: Subscripcions/Delete/5
+        [Authorize(Roles = "BorrarSuscripcion")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,6 +125,7 @@ namespace MVCSuscriptionSystem.Controllers
         // POST: Subscripcions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "BorrarSuscripcion")]
         public ActionResult DeleteConfirmed(int id)
         {
             Subscripcion subscripcion = db.Subscripcions.Find(id);

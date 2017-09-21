@@ -13,7 +13,7 @@ namespace MVCSuscriptionSystem.Controllers
     [Authorize]
     public class ClienteController : ProgramManager
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "BorrarCliente")]
         public override ActionResult Borrar(int id)
         {
             var cliente = db.Clientes.Find(id);
@@ -23,6 +23,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
         [HttpPost, ActionName("Borrar")]
+        [Authorize(Roles="BorrarCliente")]
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmarBorrar(int id)
         {
@@ -43,6 +44,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
+        [Authorize(Roles = "CrearCliente")]
         public override ActionResult Crear()
         {
             return View();
@@ -51,6 +53,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CrearCliente")]
         public ActionResult Crear(Cliente cli, HttpPostedFileBase image1) 
         {
 
@@ -77,24 +80,9 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
-        public ActionResult crear2(string userId)
-        {
+       
 
-            ViewBag.UserId = userId;
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult crear2(FormCollection collection)
-        {
-            ClienteManager.CrearCliente(collection);
-            var cliente = ClienteManager.UltimoCliente();
-            return RedirectToAction("RegisterClient", "Account");
-
-        }
-
-        [Authorize]
+        [Authorize(Roles = "VerCliente, ListarCliente")]
         public override ActionResult Index()
         {
             var clis = db.Clientes.ToList();
@@ -103,7 +91,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ModificarCliente")]
         public override ActionResult Modificar(int id)
         {
             var cliente = db.Clientes.Find(id);
@@ -112,6 +100,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ModificarCliente")]
         public ActionResult Modificar(FormCollection collection)
         {
             Int32.TryParse(collection["ClientID"], out int id);
@@ -136,6 +125,7 @@ namespace MVCSuscriptionSystem.Controllers
 
 
         [Authorize]
+        [Authorize(Roles = "VerCliente, ListarCliente")]
         public override ActionResult VerDetalles(int id)
         {
             Cliente cliente = db.Clientes.Find(id);
@@ -153,7 +143,7 @@ namespace MVCSuscriptionSystem.Controllers
             
         }
 
-        [Authorize]
+        [Authorize(Roles = "CrearCliente")]
         public ActionResult SeleccionarPlan(int clienteid)
         {
             var plans = db.Plans.ToList();
@@ -162,7 +152,7 @@ namespace MVCSuscriptionSystem.Controllers
             return View(plans);
         }
 
-        [Authorize]
+        [Authorize(Roles = "CrearCliente")]
         public ActionResult PlanElegido(int PlanId, int ClienteId)
         {
             var cliente = db.Clientes.Find(ClienteId);

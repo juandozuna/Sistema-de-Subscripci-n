@@ -12,7 +12,7 @@ namespace MVCSuscriptionSystem.Controllers
     [System.Web.Mvc.Authorize]
     public class PlanController : ProgramManager
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "BorrarPlan")]
         public override ActionResult Borrar(int id)
         {
             var plan = db.Plans.Find(id);
@@ -24,6 +24,7 @@ namespace MVCSuscriptionSystem.Controllers
 
 
         [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Borrar")]
+        [Authorize(Roles = "BorrarPlan")]
         public ActionResult ConfirmarBorrar(int id)
         {
             var plan = db.Plans.Find(id);
@@ -44,7 +45,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "CrearPlan")]
         public override ActionResult Crear()
         {
             return View();
@@ -52,6 +53,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CrearPlan")]
         public ActionResult Crear(FormCollection c)
         {
             Plan p = new Plan()
@@ -83,6 +85,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = "VerPlan, ListarPlan")]
         public override ActionResult Index()
         {
             var planes = db.Plans.ToList();
@@ -90,7 +93,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ModificarPlan")]
         public override ActionResult Modificar(int id)
         {
             var plan = db.Plans.Find(id);
@@ -103,6 +106,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ModificarPlan")]
         public  ActionResult Modificar(FormCollection c)
         {
             var plan = db.Plans.Find(Int32.Parse(c["PlanID"]));
@@ -130,7 +134,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-
+        [Authorize(Roles = "VerPlan, ListarPlan")]
         public override ActionResult VerDetalles(int id)
         {
             var plan = db.Plans.Find(id);
@@ -142,7 +146,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ModificarPlan")]
         public ActionResult RemoveService(int ServPlanId, int PlanId)
         {
             var plan = db.Plans.Find(PlanId);

@@ -11,13 +11,14 @@ namespace MVCSuscriptionSystem.Controllers
     [Authorize]
     public class ServicioController : ProgramManager
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "BorrarServicio")]
         public override ActionResult Borrar(int id)
         {
             return View();
         }
 
         [HttpPost, ActionName("Borrar")]
+        [Authorize(Roles = "BorrarServicio")]
         public ActionResult ConfirmarBorrar(int id)
         {
             var servicio = db.Servicios.Find(id);
@@ -38,7 +39,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "CrearServicio")]
         public override ActionResult Crear()
         {
             return View();
@@ -46,6 +47,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="CrearServicio")]
         public ActionResult Crear(Servicio servicio)
         {
             if (servicio != null)
@@ -57,7 +59,7 @@ namespace MVCSuscriptionSystem.Controllers
             return HttpNotFound();
         }
 
-        [Authorize]
+        [Authorize(Roles = "VerServicio, ListarServicio")]
         public override ActionResult Index()
         {
             var servicios = db.Servicios.ToList();
@@ -65,7 +67,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ModificarServicio")]
         public override ActionResult Modificar(int id)
         {
             var servicio = db.Servicios.Find(id);
@@ -79,6 +81,7 @@ namespace MVCSuscriptionSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ModificarServicio")]
         public  ActionResult Modificar(Servicio servicio)
         {
             var s = db.Servicios.Find(servicio.ServicioID);
@@ -95,7 +98,7 @@ namespace MVCSuscriptionSystem.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "VerServicio, ListarServicio")]
         public override ActionResult VerDetalles(int id)
         {
             var s = db.Servicios.Find(id);

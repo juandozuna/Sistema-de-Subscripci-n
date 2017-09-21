@@ -39,7 +39,7 @@ namespace MVCSuscriptionSystem.Controllers
         {
             
                 AdminManager.AddRolesToUser(collection);
-                return View();
+                return View("Index");
             
         }
 
