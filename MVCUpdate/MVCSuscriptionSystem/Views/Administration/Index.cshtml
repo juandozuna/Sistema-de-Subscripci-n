@@ -1,7 +1,53 @@
-﻿
+﻿@using MVCSuscriptionSystem.Models
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Portal Administrativo";
+    EntityModel db = new EntityModel();
 }
 
-<h2>Index</h2>
+@Html.Partial("_AdminPortalMenu");
 
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Clientes</div>
+            <div class="card-body">
+                <h4 class="card-title">Total: @db.Clientes.Count()</h4>
+                <p class="card-text">Si desea ir a la pagina de clientes continue aqui</p>
+                <a href="@Url.Action("Index","Cliente")" class="btn btn-outline-primary">Clientes</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+            <div class="card-header">Planes</div>
+            <div class="card-body">
+                <h4 class="card-title">Total: @db.Plans.Count()</h4>
+                <p class="card-text">Si desea ir a la pagina de planes continue aqui</p>
+                <a href="@Url.Action("Index","Plan")" class="btn btn-outline-warning">Planes</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card-header">Servicios</div>
+            <div class="card-body">
+                <h4 class="card-title">Total: @db.Servicios.Count()</h4>
+                <p class="card-text">Si desea ir a la pagina de Servicios continue aqui</p>
+                <a href="@Url.Action("Index","Servicio")" class="btn btn-outline-success">Servicios</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+            <div class="card-header">Suscripciones</div>
+            <div class="card-body">
+                <h4 class="card-title">Total Activos: @db.Subscripcions.Where(x=>x.Active == true).ToList().Count</h4>
+
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-outline-info"></a>
+            </div>
+        </div>
+    </div>
+</div>

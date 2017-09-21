@@ -2,6 +2,6 @@
 {
     if (User.IsInRole("Admin"))
     {
-        <li><a href="#" class="nav-link">Portal Administrativo</a></li>
+        <li><a href="@Url.Action("Index","Administration")" class="nav-link">Portal Administrativo</a></li>
     }
 }

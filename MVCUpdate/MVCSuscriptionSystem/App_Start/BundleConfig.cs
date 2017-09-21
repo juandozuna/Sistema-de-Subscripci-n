@@ -29,6 +29,10 @@ namespace MVCSuscriptionSystem
                       "~/Content/bootstrap-*",
                       "~/Content/site.css",
                       "~/Content/style*"));
+
+            bundles.Add(new StyleBundle("~/Content/admin").Include(
+                "~/Content/AdminStyle.css"));
+
         }
     }
 }

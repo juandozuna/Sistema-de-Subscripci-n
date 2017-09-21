@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Listado de Clientes</h2>
 
 <p>
     @if (Request.IsAuthenticated)
@@ -70,13 +70,23 @@
 
             @if (Request.IsAuthenticated)
             {
-                if (User.IsInRole("Admin"))
+                if (User.IsInRole("ModificiarCliente"))
                 {
-                   <span>|</span> @Html.ActionLink("Editar", "Modificar", new {id = item.ClientID})<span>|</span>
+                   <span>|</span> @Html.ActionLink("Editar", "Modificar", new {id = item.ClientID})
 
-                    @Html.ActionLink("Borrar", "Borrar", new {id = item.ClientID})
+                    
                 }
             }
+            @if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("BorrarCliente"))
+                {
+                    <span>|</span>@Html.ActionLink("Borrar", "Borrar", new { id = item.ClientID })
+
+
+                }
+            }
+            
         </td>
     </tr>
 }
