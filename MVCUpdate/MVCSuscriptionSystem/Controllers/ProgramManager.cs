@@ -9,8 +9,8 @@ namespace MVCSuscriptionSystem.Controllers
 {
     public abstract class ProgramManager : Controller
     {
-        public EntityModel db = new EntityModel();
-
+        //public EntityModel db = new EntityModel();
+        public MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
         public abstract ActionResult Index(); 
         //La pagina index varia dependendiendo 
         //del rol del usuario y la funcion que este utilize.

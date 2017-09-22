@@ -70,10 +70,7 @@
             <!--<img class="card-img-top" src="@ImagenManager.RetornarSourceImagen(Model.ImagenID)" alt="Card image cap">-->
             <div class="card-body">
                 <h4 class="card-title">@Model.Primer_Nombre @Model.Primer_Apellido</h4>
-                <p class="card-text">Fecha de creacion: <span class="text-muted">@Model.ClienteSuscripcions.First().Subscripcion.Fecha_creacion</span>
-                </p>
-                <p class="card-text">Correo electronico: <a href="mailto:@Model.e_mail">@Model.e_mail</a>
-                </p>
+                <p class="card-text">E-mail: <a href="mailto:@Model.e_mail">@Model.e_mail</a></p>
                 <p class="card-text"><small class="text-muted">Numero de Suscripciones: <span class="text-muted">@ViewBag.estado</span></small>
                 </p>
             </div>
@@ -101,9 +98,8 @@
                 <tr>
                     <th scope="row">@m.Subscripcion.SubscripcionID</th>
                     <td>@m.Subscripcion.Plan.Nombre</td>
-                    <td>@m.Subscripcion.Plan.Precio</td>
                     <td class="text-center">@m.Subscripcion.Plan.ServicioEnPlans.Count</td>
-                    <td class="text-center">@string.Format("US${0.00}",m.Subscripcion.Plan.Precio)</td>
+                    <td class="text-center">@string.Format("US${0:0.00}",m.Subscripcion.Plan.Precio)</td>
                     <td class="text-center">@m.Subscripcion.Fecha_creacion</td>
                 </tr>
             }
@@ -113,13 +109,14 @@
     
     <h2>No hay subscripciones</h2>
     }
+    <a href="@Url.Action("NuevaSuscripcion","Cliente", new {ClientId=Model.ClientID})" class="btn btn-outline-info">Crear una nueva suscripcion</a>
 </div>
 <p>
 @if (Request.IsAuthenticated)
 {
     if (User.IsInRole("ModificarCliente"))
     {
-        @Html.ActionLink("Editar", "Modificar", new {id = Model.ClientID}) |
+        @Html.ActionLink("Editar", "Modificar", new {id = Model.ClientID}) <span>|</span>
     }
 }
     @Html.ActionLink("Volver a Lista", "Index")

@@ -16,7 +16,7 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         public static void CrearCliente(FormCollection collection)
         {
-            EntityModel db = new EntityModel();
+            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             var cli = new Cliente()
             {
                 Primer_Nombre = collection["Primer_Nombre"],
@@ -44,7 +44,7 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         public static void CrearCliente(Cliente cli)
         {
-            EntityModel db = new EntityModel();
+            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             if (cli != null)
             {
                 db.Clientes.Add(cli);
@@ -57,7 +57,7 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         public static Cliente UltimoCliente()
         {
-            EntityModel db = new EntityModel();
+            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             return db.Clientes.OrderByDescending(x => x.ClientID).First();
         }
 

@@ -13,7 +13,7 @@ namespace MVCSuscriptionSystem.MethodManagers
         
         public static int SubirImagen(HttpPostedFileBase image1)
         {
-            EntityModel db = new EntityModel();
+            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             Models.Image img = new Models.Image();
             img.ImageData = new byte[image1.ContentLength];
             image1.InputStream.Read(img.ImageData, 0, image1.ContentLength);
@@ -26,7 +26,7 @@ namespace MVCSuscriptionSystem.MethodManagers
         public static int IdImagenSubida(Models.Image image)
         {
 
-            EntityModel db = new EntityModel();
+            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             try
             {
                 if (image != null)
@@ -41,7 +41,7 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         public static string RetornarSourceImagen(int? idImagen)
         {
-            EntityModel db = new EntityModel();
+            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             Models.Image img = db.Images.Find(idImagen);
             if (img != null)
             {

@@ -12,14 +12,11 @@ namespace MVCSuscriptionSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ClienteSuscripcion
+    public partial class C__MigrationHistory
     {
-        public int ClienteSuscripcionId { get; set; }
-        public int ClienteId { get; set; }
-        public int SubscripcionId { get; set; }
-        public Nullable<int> Cliente_ClientID { get; set; }
-    
-        public virtual Cliente Cliente { get; set; }
-        public virtual Subscripcion Subscripcion { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

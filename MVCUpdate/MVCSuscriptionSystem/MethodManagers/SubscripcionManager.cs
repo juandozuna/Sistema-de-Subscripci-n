@@ -15,10 +15,12 @@ namespace MVCSuscriptionSystem.MethodManagers
             {
                 Active = false,
                 Fecha_creacion = DateTime.Now,
+                PlanID = 1
                 //ClientID = cliente.ClientID,
             };
-            var ClienteSuscripcion = new ClienteSuscripcion(){ClienteId = cliente.ClientID};
-            using (EntityModel db = new EntityModel())
+            int? idN = cliente.ClientID;
+            var ClienteSuscripcion = new ClienteSuscripcion(){ClienteId = cliente.ClientID, Cliente_ClientID = idN};
+            using (MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities())
             {
                 db.Subscripcions.Add(sus);
                 db.SaveChanges();
@@ -32,7 +34,7 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         public static void PlanSelectedActivatePlan(int PlanId, Subscripcion subs)
         {
-            using (EntityModel db = new EntityModel())
+            using (MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities())
             {
                 subs.PlanID = PlanId;
                 subs.Active = true;

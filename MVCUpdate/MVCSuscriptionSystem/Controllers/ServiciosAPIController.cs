@@ -12,9 +12,9 @@ using MVCSuscriptionSystem.Models;
 
 namespace MVCSuscriptionSystem.Controllers.api
 {
-    public class ServiciosController : ApiController
+    public class ServiciosAPIController : ApiController
     {
-        private EntityModel db = new EntityModel();
+        private MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
 
         // GET: api/Servicios
         public IQueryable<Servicio> GetServicios()

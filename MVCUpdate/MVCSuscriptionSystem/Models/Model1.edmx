@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVCSuscriptionDatabseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Primer Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Segundo Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Primer_Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_de_nacimiento" Type="date" Nullable="false" />
+          <Property Name="Numero Telefonico" Type="varchar" MaxLength="50" />
+          <Property Name="e-mail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Metodo de Pago" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumeroTarjeta" Type="int" />
+          <Property Name="CVC_o_CVV" Type="int" />
+          <Property Name="Fecha_de_expiracion" Type="date" />
+          <Property Name="ImagenID" Type="int" />
+        </EntityType>
+        <EntityType Name="ClienteSuscripcion">
+          <Key>
+            <PropertyRef Name="ClienteSuscripcionId" />
+          </Key>
+          <Property Name="ClienteSuscripcionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="SubscripcionId" Type="int" Nullable="false" />
+          <Property Name="Cliente_ClientID" Type="int" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="imagesID" />
+          </Key>
+          <Property Name="imagesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+          <Property Name="ImagenID" Type="int" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="ServicioID" />
+          </Key>
+          <Property Name="ServicioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+          <Property Name="ImagenID" Type="int" />
+        </EntityType>
+        <EntityType Name="ServicioEnPlan">
+          <Key>
+            <PropertyRef Name="ServicioEnPlanID" />
+          </Key>
+          <Property Name="ServicioEnPlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServicioID" Type="int" Nullable="false" />
+          <Property Name="PlanID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscripcions">
+          <Key>
+            <PropertyRef Name="SubscripcionID" />
+          </Key>
+          <Property Name="SubscripcionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanID" Type="int" Nullable="false" />
+          <Property Name="Fecha_creacion" Type="date" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ImageID" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_Clientes_dbo_Images_ImagenID">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="ImagenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="ClienteSuscripcion" Type="Self.ClienteSuscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClienteSuscripcion">
+              <PropertyRef Name="Cliente_ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId">
+          <End Role="Subscripcions" Type="Self.Subscripcions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClienteSuscripcion" Type="Self.ClienteSuscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscripcions">
+              <PropertyRef Name="SubscripcionID" />
+            </Principal>
+            <Dependent Role="ClienteSuscripcion">
+              <PropertyRef Name="SubscripcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Plan_dbo_Images_ImagenID">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+          <End Role="Plan" Type="Self.Plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Plan">
+              <PropertyRef Name="ImagenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Servicio_dbo_Images_ImagenID">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="ImagenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ServicioEnPlan_dbo_Plan_PlanID">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="ServicioEnPlan" Type="Self.ServicioEnPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="ServicioEnPlan">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="ServicioEnPlan" Type="Self.ServicioEnPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ServicioID" />
+            </Principal>
+            <Dependent Role="ServicioEnPlan">
+              <PropertyRef Name="ServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscripcions_dbo_Images_ImageID">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+          <End Role="Subscripcions" Type="Self.Subscripcions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Subscripcions">
+              <PropertyRef Name="ImageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscripcions_dbo_Plan_PlanID">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="Subscripcions" Type="Self.Subscripcions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="Subscripcions">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVCSuscriptionDatabseModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteSuscripcion" EntityType="Self.ClienteSuscripcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan" EntityType="Self.Plan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicioEnPlan" EntityType="Self.ServicioEnPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscripcions" EntityType="Self.Subscripcions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Clientes_dbo_Images_ImagenID" Association="Self.FK_dbo_Clientes_dbo_Images_ImagenID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID" Association="Self.FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ClienteSuscripcion" EntitySet="ClienteSuscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId" Association="Self.FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId">
+            <End Role="Subscripcions" EntitySet="Subscripcions" />
+            <End Role="ClienteSuscripcion" EntitySet="ClienteSuscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Plan_dbo_Images_ImagenID" Association="Self.FK_dbo_Plan_dbo_Images_ImagenID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Plan" EntitySet="Plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Servicio_dbo_Images_ImagenID" Association="Self.FK_dbo_Servicio_dbo_Images_ImagenID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ServicioEnPlan_dbo_Plan_PlanID" Association="Self.FK_dbo_ServicioEnPlan_dbo_Plan_PlanID">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="ServicioEnPlan" EntitySet="ServicioEnPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID" Association="Self.FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="ServicioEnPlan" EntitySet="ServicioEnPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscripcions_dbo_Images_ImageID" Association="Self.FK_dbo_Subscripcions_dbo_Images_ImageID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Subscripcions" EntitySet="Subscripcions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscripcions_dbo_Plan_PlanID" Association="Self.FK_dbo_Subscripcions_dbo_Plan_PlanID">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="Subscripcions" EntitySet="Subscripcions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVCSuscriptionDatabseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Primer_Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Segundo_Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Primer_Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_de_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Numero_Telefonico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="e_mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Metodo_de_Pago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroTarjeta" Type="Int32" />
+          <Property Name="CVC_o_CVV" Type="Int32" />
+          <Property Name="Fecha_de_expiracion" Type="DateTime" Precision="0" />
+          <Property Name="ImagenID" Type="Int32" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_dbo_Clientes_dbo_Images_ImagenID" FromRole="Clientes" ToRole="Images" />
+          <NavigationProperty Name="ClienteSuscripcions" Relationship="Self.FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID" FromRole="Clientes" ToRole="ClienteSuscripcion" />
+        </EntityType>
+        <EntityType Name="ClienteSuscripcion">
+          <Key>
+            <PropertyRef Name="ClienteSuscripcionId" />
+          </Key>
+          <Property Name="ClienteSuscripcionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="SubscripcionId" Type="Int32" Nullable="false" />
+          <Property Name="Cliente_ClientID" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID" FromRole="ClienteSuscripcion" ToRole="Clientes" />
+          <NavigationProperty Name="Subscripcion" Relationship="Self.FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId" FromRole="ClienteSuscripcion" ToRole="Subscripcions" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="imagesID" />
+          </Key>
+          <Property Name="imagesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_dbo_Clientes_dbo_Images_ImagenID" FromRole="Images" ToRole="Clientes" />
+          <NavigationProperty Name="Plans" Relationship="Self.FK_dbo_Plan_dbo_Images_ImagenID" FromRole="Images" ToRole="Plan" />
+          <NavigationProperty Name="Servicios" Relationship="Self.FK_dbo_Servicio_dbo_Images_ImagenID" FromRole="Images" ToRole="Servicio" />
+          <NavigationProperty Name="Subscripcions" Relationship="Self.FK_dbo_Subscripcions_dbo_Images_ImageID" FromRole="Images" ToRole="Subscripcions" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <Property Name="ImagenID" Type="Int32" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_dbo_Plan_dbo_Images_ImagenID" FromRole="Plan" ToRole="Images" />
+          <NavigationProperty Name="ServicioEnPlans" Relationship="Self.FK_dbo_ServicioEnPlan_dbo_Plan_PlanID" FromRole="Plan" ToRole="ServicioEnPlan" />
+          <NavigationProperty Name="Subscripcions" Relationship="Self.FK_dbo_Subscripcions_dbo_Plan_PlanID" FromRole="Plan" ToRole="Subscripcions" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="ServicioID" />
+          </Key>
+          <Property Name="ServicioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <Property Name="ImagenID" Type="Int32" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_dbo_Servicio_dbo_Images_ImagenID" FromRole="Servicio" ToRole="Images" />
+          <NavigationProperty Name="ServicioEnPlans" Relationship="Self.FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID" FromRole="Servicio" ToRole="ServicioEnPlan" />
+        </EntityType>
+        <EntityType Name="ServicioEnPlan">
+          <Key>
+            <PropertyRef Name="ServicioEnPlanID" />
+          </Key>
+          <Property Name="ServicioEnPlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServicioID" Type="Int32" Nullable="false" />
+          <Property Name="PlanID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plan" Relationship="Self.FK_dbo_ServicioEnPlan_dbo_Plan_PlanID" FromRole="ServicioEnPlan" ToRole="Plan" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID" FromRole="ServicioEnPlan" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="Subscripcion">
+          <Key>
+            <PropertyRef Name="SubscripcionID" />
+          </Key>
+          <Property Name="SubscripcionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlanID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ImageID" Type="Int32" />
+          <NavigationProperty Name="ClienteSuscripcions" Relationship="Self.FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId" FromRole="Subscripcions" ToRole="ClienteSuscripcion" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_dbo_Subscripcions_dbo_Images_ImageID" FromRole="Subscripcions" ToRole="Images" />
+          <NavigationProperty Name="Plan" Relationship="Self.FK_dbo_Subscripcions_dbo_Plan_PlanID" FromRole="Subscripcions" ToRole="Plan" />
+        </EntityType>
+        <Association Name="FK_dbo_Clientes_dbo_Images_ImagenID">
+          <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="ImagenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="ClienteSuscripcion" Type="Self.ClienteSuscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClienteSuscripcion">
+              <PropertyRef Name="Cliente_ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId">
+          <End Role="Subscripcions" Type="Self.Subscripcion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClienteSuscripcion" Type="Self.ClienteSuscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscripcions">
+              <PropertyRef Name="SubscripcionID" />
+            </Principal>
+            <Dependent Role="ClienteSuscripcion">
+              <PropertyRef Name="SubscripcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Plan_dbo_Images_ImagenID">
+          <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Plan" Type="Self.Plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Plan">
+              <PropertyRef Name="ImagenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Servicio_dbo_Images_ImagenID">
+          <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="ImagenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscripcions_dbo_Images_ImageID">
+          <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
+          <End Role="Subscripcions" Type="Self.Subscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="imagesID" />
+            </Principal>
+            <Dependent Role="Subscripcions">
+              <PropertyRef Name="ImageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ServicioEnPlan_dbo_Plan_PlanID">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="ServicioEnPlan" Type="Self.ServicioEnPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="ServicioEnPlan">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscripcions_dbo_Plan_PlanID">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="Subscripcions" Type="Self.Subscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="Subscripcions">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="ServicioEnPlan" Type="Self.ServicioEnPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ServicioID" />
+            </Principal>
+            <Dependent Role="ServicioEnPlan">
+              <PropertyRef Name="ServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVCSuscriptionDatabseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="ClienteSuscripcions" EntityType="Self.ClienteSuscripcion" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="Plans" EntityType="Self.Plan" />
+          <EntitySet Name="Servicios" EntityType="Self.Servicio" />
+          <EntitySet Name="ServicioEnPlans" EntityType="Self.ServicioEnPlan" />
+          <EntitySet Name="Subscripcions" EntityType="Self.Subscripcion" />
+          <AssociationSet Name="FK_dbo_Clientes_dbo_Images_ImagenID" Association="Self.FK_dbo_Clientes_dbo_Images_ImagenID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID" Association="Self.FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ClienteSuscripcion" EntitySet="ClienteSuscripcions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId" Association="Self.FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId">
+            <End Role="Subscripcions" EntitySet="Subscripcions" />
+            <End Role="ClienteSuscripcion" EntitySet="ClienteSuscripcions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Plan_dbo_Images_ImagenID" Association="Self.FK_dbo_Plan_dbo_Images_ImagenID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Plan" EntitySet="Plans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Servicio_dbo_Images_ImagenID" Association="Self.FK_dbo_Servicio_dbo_Images_ImagenID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Servicio" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscripcions_dbo_Images_ImageID" Association="Self.FK_dbo_Subscripcions_dbo_Images_ImageID">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Subscripcions" EntitySet="Subscripcions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ServicioEnPlan_dbo_Plan_PlanID" Association="Self.FK_dbo_ServicioEnPlan_dbo_Plan_PlanID">
+            <End Role="Plan" EntitySet="Plans" />
+            <End Role="ServicioEnPlan" EntitySet="ServicioEnPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscripcions_dbo_Plan_PlanID" Association="Self.FK_dbo_Subscripcions_dbo_Plan_PlanID">
+            <End Role="Plan" EntitySet="Plans" />
+            <End Role="Subscripcions" EntitySet="Subscripcions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID" Association="Self.FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID">
+            <End Role="Servicio" EntitySet="Servicios" />
+            <End Role="ServicioEnPlan" EntitySet="ServicioEnPlans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVCSuscriptionDatabseModelStoreContainer" CdmEntityContainer="MVCSuscriptionDatabseEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer Nombre" />
+                <ScalarProperty Name="Segundo_Nombre" ColumnName="Segundo Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Fecha_de_nacimiento" ColumnName="Fecha_de_nacimiento" />
+                <ScalarProperty Name="Numero_Telefonico" ColumnName="Numero Telefonico" />
+                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
+                <ScalarProperty Name="Metodo_de_Pago" ColumnName="Metodo de Pago" />
+                <ScalarProperty Name="NumeroTarjeta" ColumnName="NumeroTarjeta" />
+                <ScalarProperty Name="CVC_o_CVV" ColumnName="CVC_o_CVV" />
+                <ScalarProperty Name="Fecha_de_expiracion" ColumnName="Fecha_de_expiracion" />
+                <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClienteSuscripcions">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.ClienteSuscripcion">
+              <MappingFragment StoreEntitySet="ClienteSuscripcion">
+                <ScalarProperty Name="ClienteSuscripcionId" ColumnName="ClienteSuscripcionId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="SubscripcionId" ColumnName="SubscripcionId" />
+                <ScalarProperty Name="Cliente_ClientID" ColumnName="Cliente_ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="imagesID" ColumnName="imagesID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plans">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.Plan">
+              <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicios">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.Servicio">
+              <MappingFragment StoreEntitySet="Servicio">
+                <ScalarProperty Name="ServicioID" ColumnName="ServicioID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicioEnPlans">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.ServicioEnPlan">
+              <MappingFragment StoreEntitySet="ServicioEnPlan">
+                <ScalarProperty Name="ServicioEnPlanID" ColumnName="ServicioEnPlanID" />
+                <ScalarProperty Name="ServicioID" ColumnName="ServicioID" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscripcions">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.Subscripcion">
+              <MappingFragment StoreEntitySet="Subscripcions">
+                <ScalarProperty Name="SubscripcionID" ColumnName="SubscripcionID" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
