@@ -8,7 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Script.Serialization;
 using MVCSuscriptionSystem.Models;
+using Newtonsoft.Json;
 
 namespace MVCSuscriptionSystem.Controllers.api
 {
@@ -18,10 +20,18 @@ namespace MVCSuscriptionSystem.Controllers.api
 
         // GET: api/Servicios
         public IQueryable<Servicio> GetServicios()
-        {
+        { 
             return db.Servicios;
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetServi()
+        {
+            var services = db.Servicios.ToList();
+            var json = JsonConvert.SerializeObject(services);
+            return Request.CreateResponse(json);
+        }
+          
         // GET: api/Servicios/5
         [ResponseType(typeof(Servicio))]
         public IHttpActionResult GetServicio(int id)
