@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using MVCSuscriptionSystem.Models;
 
-namespace MVCSuscriptionSystem.Controllers
+namespace MVCSuscriptionSystem.Controllers.api
 {
     public class ServiciosController : ApiController
     {
