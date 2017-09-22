@@ -71,6 +71,7 @@ namespace MVCSuscriptionSystem.Controllers
                 return RedirectToAction("Index");
             }
 
+
             ViewBag.ImageID = new SelectList(db.Images, "imagesID", "Nombre", subscripcion.ImageID);
             ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nombre", subscripcion.PlanID);
             return View(subscripcion);
