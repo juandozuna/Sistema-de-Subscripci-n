@@ -14,7 +14,7 @@ namespace MVCSuscriptionSystem.Controllers
 {
     public class SubscripcionsController : Controller
     {
-        private EntityModel db = new EntityModel();
+        private MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
 
         // GET: Subscripcions
         [Authorize(Roles = "VerSuscripcion, ListarSuscripcion")]

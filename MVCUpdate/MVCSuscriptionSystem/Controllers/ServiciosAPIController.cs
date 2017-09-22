@@ -6,28 +6,27 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MVCSuscriptionSystem.Models;
 
-namespace MVCSuscriptionSystem.Controllers
+namespace MVCSuscriptionSystem.Controllers.api
 {
     public class ServiciosAPIController : ApiController
     {
-        private EntityModel db = new EntityModel();
+        private MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
 
-        // GET: api/ServiciosAPI
+        // GET: api/Servicios
         public IQueryable<Servicio> GetServicios()
         {
             return db.Servicios;
         }
 
-        // GET: api/ServiciosAPI/5
+        // GET: api/Servicios/5
         [ResponseType(typeof(Servicio))]
-        public async Task<IHttpActionResult> GetServicio(int id)
+        public IHttpActionResult GetServicio(int id)
         {
-            Servicio servicio = await db.Servicios.FindAsync(id);
+            Servicio servicio = db.Servicios.Find(id);
             if (servicio == null)
             {
                 return NotFound();
@@ -36,9 +35,9 @@ namespace MVCSuscriptionSystem.Controllers
             return Ok(servicio);
         }
 
-        // PUT: api/ServiciosAPI/5
+        // PUT: api/Servicios/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutServicio(int id, Servicio servicio)
+        public IHttpActionResult PutServicio(int id, Servicio servicio)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace MVCSuscriptionSystem.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,9 +70,9 @@ namespace MVCSuscriptionSystem.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/ServiciosAPI
+        // POST: api/Servicios
         [ResponseType(typeof(Servicio))]
-        public async Task<IHttpActionResult> PostServicio(Servicio servicio)
+        public IHttpActionResult PostServicio(Servicio servicio)
         {
             if (!ModelState.IsValid)
             {
@@ -81,23 +80,23 @@ namespace MVCSuscriptionSystem.Controllers
             }
 
             db.Servicios.Add(servicio);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = servicio.ServicioID }, servicio);
         }
 
-        // DELETE: api/ServiciosAPI/5
+        // DELETE: api/Servicios/5
         [ResponseType(typeof(Servicio))]
-        public async Task<IHttpActionResult> DeleteServicio(int id)
+        public IHttpActionResult DeleteServicio(int id)
         {
-            Servicio servicio = await db.Servicios.FindAsync(id);
+            Servicio servicio = db.Servicios.Find(id);
             if (servicio == null)
             {
                 return NotFound();
             }
 
             db.Servicios.Remove(servicio);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(servicio);
         }

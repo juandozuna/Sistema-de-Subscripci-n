@@ -16,7 +16,7 @@ namespace MVCSuscriptionSystem.Controllers
 {
     public class SubscripcionsAPIController : ApiController
     {
-        private EntityModel db = new EntityModel();
+        private MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
 
         // GET: api/SubscripcionsAPI
         public IQueryable<Subscripcion> GetSubscripcions()

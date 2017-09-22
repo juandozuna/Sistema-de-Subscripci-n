@@ -10,7 +10,7 @@ namespace MVCSuscriptionSystem.MethodManagers
     {
         public static void AgregarServicios(string[] servicios, Plan pl)
         {
-            EntityModel db = new EntityModel();
+            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
 
             foreach (var s in servicios)
             {
