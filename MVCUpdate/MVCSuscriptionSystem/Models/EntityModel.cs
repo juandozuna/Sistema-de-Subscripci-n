@@ -10,7 +10,8 @@ namespace MVCSuscriptionSystem.Models
         public EntityModel()
             //: base("LocalConnection")//Esta es la conexion local con la base de Datos
             //:base("AzureConnection") //Esta es la conexion con azure a la base de Datos
-            :base("JuanMigratedConnection") //Esta conexion es para probar la migracion de la base de datos
+            //:base("JuanMigratedConnection") //Esta conexion es para probar la migracion de la base de datos
+            :base("AdrianConnection")
         {
         }
 
