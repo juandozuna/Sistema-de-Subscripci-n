@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Plan Select";
-    EntityModel db = new EntityModel();
+    MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
     var planes = db.Plans.ToList();
 }
 
