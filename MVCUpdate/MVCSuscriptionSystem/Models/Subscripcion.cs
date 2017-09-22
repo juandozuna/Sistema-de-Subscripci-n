@@ -7,19 +7,20 @@ namespace MVCSuscriptionSystem.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Subscripcion")]
+   // [Table("Subscripcion")]
     public partial class Subscripcion 
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Subscripcion()
         {
-            Clientes = new HashSet<Cliente>();
+           // Clientes = new HashSet<Cliente>();
+           ClienteSuscripcions = new HashSet<ClienteSuscripcion>();
         }
 
         public int SubscripcionID { get; set; }
 
-        [DisplayName("ID del cliente:")]
-        public int ClientID { get; set; }
+       // [DisplayName("ID del cliente:")]
+        //public int ClientID { get; set; }
 
         [DisplayName("Plan:")]
         public int? PlanID { get; set; }
@@ -34,8 +35,11 @@ namespace MVCSuscriptionSystem.Models
 
         public int? ImageID { get; set; }
 
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Cliente> Clientes { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual ICollection<ClienteSuscripcion> ClienteSuscripcions { get; set; }
 
         public virtual Image Image { get; set; }
 

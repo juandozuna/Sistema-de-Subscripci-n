@@ -10,6 +10,12 @@ namespace MVCSuscriptionSystem.Models
 
     public partial class Cliente
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cliente()
+        {
+            ClienteSuscripcions = new HashSet<ClienteSuscripcion>();
+        }
+
         [Key]
         public int ClientID { get; set; }
 
@@ -68,12 +74,15 @@ namespace MVCSuscriptionSystem.Models
         [Display(Name = "Fecha de Expiracion")]
         public DateTime? Fecha_de_expiracion { get; set; }
 
-        public int? SubscripcionID { get; set; }
+        //public int? SubscripcionID { get; set; }
 
         public int? ImagenID { get; set; }
 
         public virtual Image Image { get; set; }
 
-        public virtual Subscripcion Subscripcion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual  ICollection<ClienteSuscripcion> ClienteSuscripcions { get; set; }
+
+        //public virtual Subscripcion Subscripcion { get; set; }
     }
 }
