@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCSuscriptionSystem.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MVCSuscriptionSystem.Controllers
 {
@@ -18,8 +20,10 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "VerSuscripcion, ListarSuscripcion")]
         public ActionResult Index()
         {
-            var subscripcions = db.Subscripcions.Include(s => s.Image).Include(s => s.Plan);
-            return View(subscripcions.ToList());
+            var cliente = new HttpClient();
+            var respuesta = cliente.GetAsync("http://localhost:55040/api/SubscripcionsAPI").Result;
+            var suscripciones = respuesta.Content.ReadAsAsync<IEnumerable<Subscripcion>>().Result;
+            return View(suscripciones.ToList());
         }
 
         // GET: Subscripcions/Details/5
@@ -57,6 +61,9 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "CrearSuscripcion")]
         public ActionResult Create([Bind(Include = "SubscripcionID,ClientID,PlanID,Fecha_creacion,Active,ImageID")] Subscripcion subscripcion)
         {
+            //var cliente = new HttpClient();
+            //HttpResponseMessage httpResponseMessage = await cliente.PostAsJsonAsync("http://localhost:55040/api/SubscripcionsAPI", subscripcion);
+            //CONTINUAR AQUI
             if (ModelState.IsValid)
             {
                 db.Subscripcions.Add(subscripcion);
