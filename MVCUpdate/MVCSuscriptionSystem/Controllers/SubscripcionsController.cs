@@ -61,20 +61,33 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "CrearSuscripcion")]
         public ActionResult Create([Bind(Include = "SubscripcionID,ClientID,PlanID,Fecha_creacion,Active,ImageID")] Subscripcion subscripcion)
         {
-            //var cliente = new HttpClient();
-            //HttpResponseMessage httpResponseMessage = await cliente.PostAsJsonAsync("http://localhost:55040/api/SubscripcionsAPI", subscripcion);
-            //CONTINUAR AQUI
-            if (ModelState.IsValid)
+            using (var cliente = new HttpClient())
             {
-                db.Subscripcions.Add(subscripcion);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var postTask = cliente.PostAsJsonAsync("http://localhost:55040/api/SubscripcionsAPI", subscripcion);
+                postTask.Wait();
+
+                var resultado = postTask.Result;
+
+                if (resultado.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
-
-            ViewBag.ImageID = new SelectList(db.Images, "imagesID", "Nombre", subscripcion.ImageID);
-            ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nombre", subscripcion.PlanID);
+            ModelState.AddModelError(string.Empty, "Error!!");
             return View(subscripcion);
+            //CONTINUAR AQUI
+            //if (ModelState.IsValid)
+            //{
+            //    db.Subscripcions.Add(subscripcion);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+
+            //ViewBag.ImageID = new SelectList(db.Images, "imagesID", "Nombre", subscripcion.ImageID);
+            //ViewBag.PlanID = new SelectList(db.Plans, "PlanID", "Nombre", subscripcion.PlanID);
+            //return View(subscripcion);
         }
 
         // GET: Subscripcions/Edit/5
