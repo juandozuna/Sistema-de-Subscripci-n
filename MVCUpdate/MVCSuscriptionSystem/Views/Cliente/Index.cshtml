@@ -38,7 +38,7 @@
             @Html.DisplayNameFor(model => model.e_mail)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subscripcion.Fecha_creacion);
+            @Html.DisplayNameFor(model => model.ClienteSuscripcions.First().Subscripcion.Fecha_creacion)
         </th>
         <th></th>
     </tr>
@@ -64,14 +64,14 @@
             @Html.DisplayFor(modelItem => item.e_mail)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Subscripcion.Fecha_creacion)
+            @Html.DisplayFor(modelItem => item.ClienteSuscripcions.First().Subscripcion.Fecha_creacion)
         </td>
         <td>
             @Html.ActionLink("Detalles", "VerDetalles", new { id = item.ClientID })
 
             @if (Request.IsAuthenticated)
             {
-                if (User.IsInRole("ModificiarCliente"))
+                if (User.IsInRole("ModificarCliente"))
                 {
                    <span>|</span> @Html.ActionLink("Editar", "Modificar", new {id = item.ClientID})
 

@@ -21,6 +21,7 @@ namespace MVCSuscriptionSystem.Models
         public virtual DbSet<Servicio> Servicios { get; set; }
         public virtual DbSet<ServicioEnPlan> ServicioEnPlans { get; set; }
         public virtual DbSet<Subscripcion> Subscripcions { get; set; }
+        public virtual DbSet<ClienteSuscripcion> ClienteSuscripcions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

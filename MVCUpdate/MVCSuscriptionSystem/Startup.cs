@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -218,7 +219,8 @@ namespace MVCSuscriptionSystem
                 roleManager.Create(role);
 
             }
-            var user = context.Users.Where(x => x.UserName == "admin").First();
+
+            var user = UserManager.FindByName("admin");
             if (user == null)
             {
                 user = new ApplicationUser();

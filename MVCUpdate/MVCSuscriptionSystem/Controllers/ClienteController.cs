@@ -131,13 +131,11 @@ namespace MVCSuscriptionSystem.Controllers
             Cliente cliente = db.Clientes.Find(id);
             if (cliente != null)
             {
-              /*  if (cliente.Subscripcion.Active)
-                {
-                    ViewBag.estado = "Activo";
-                }
-                else ViewBag.estado = "Inactivo";
+                int count = 0;
+                foreach (var s in cliente.ClienteSuscripcions) if (s.Subscripcion.Active) count++;
+                ViewBag.estado = count + "Activas";
                 ViewBag.ImgSrc = ImagenManager.RetornarSourceImagen(cliente.ImagenID);
-                return View(cliente);*/
+                return View(cliente);
             }
             return HttpNotFound();
             
@@ -158,15 +156,17 @@ namespace MVCSuscriptionSystem.Controllers
             var cliente = db.Clientes.Find(ClienteId);
             if (cliente != null)
             {
-                /*var subs = cliente.Subscripcion;
+                var subs = cliente.ClienteSuscripcions.OrderByDescending(x=>x.ClienteSuscripcionId).First();
                 if (db.Plans.Find(PlanId) != null)
                 {
-                    subs.PlanID = PlanId;
-                    subs.Active = true;
+                    subs.Subscripcion.PlanID = PlanId;
+                    subs.Subscripcion.Active = true;
+                    var suscripcion = subs.Subscripcion;
                     db.Entry(subs).State = EntityState.Modified;
+                    db.Entry(suscripcion).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                else return HttpNotFound();*/
+                else return HttpNotFound();
                 return RedirectToAction("VerDetalles", new {id = ClienteId});
             }
             return RedirectToAction("Index");

@@ -17,12 +17,17 @@ namespace MVCSuscriptionSystem.MethodManagers
                 Fecha_creacion = DateTime.Now,
                 //ClientID = cliente.ClientID,
             };
-            EntityModel db = new EntityModel();
-            db.Subscripcions.Add(sus);
-            db.SaveChanges();
-            //cliente.SubscripcionID = db.Subscripcions.OrderByDescending(d => d.SubscripcionID).First().SubscripcionID;
-            db.Entry(cliente).State = EntityState.Modified;
-            db.SaveChanges();
+            var ClienteSuscripcion = new ClienteSuscripcion(){ClienteId = cliente.ClientID};
+            using (EntityModel db = new EntityModel())
+            {
+                db.Subscripcions.Add(sus);
+                db.SaveChanges();
+                sus = db.Subscripcions.OrderByDescending(w => w.SubscripcionID).First();
+                ClienteSuscripcion.SubscripcionId = sus.SubscripcionID;
+                db.ClienteSuscripcions.Add(ClienteSuscripcion);
+
+                db.SaveChanges();
+            }
         }
 
         public static void PlanSelectedActivatePlan(int PlanId, Subscripcion subs)

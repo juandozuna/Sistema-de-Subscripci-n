@@ -35,7 +35,7 @@
             
             @if (Request.IsAuthenticated)
             {
-                if (User.IsInRole("ModificiarPlan"))
+                if (User.IsInRole("ModificarPlan"))
                 {
                     <span>|</span> @Html.ActionLink("Editar", "Modificar", new { id = item.PlanID })
 
