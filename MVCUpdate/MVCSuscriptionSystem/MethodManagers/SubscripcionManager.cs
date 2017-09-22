@@ -15,12 +15,12 @@ namespace MVCSuscriptionSystem.MethodManagers
             {
                 Active = false,
                 Fecha_creacion = DateTime.Now,
-                ClientID = cliente.ClientID,
+                //ClientID = cliente.ClientID,
             };
             EntityModel db = new EntityModel();
             db.Subscripcions.Add(sus);
             db.SaveChanges();
-            cliente.SubscripcionID = db.Subscripcions.OrderByDescending(d => d.SubscripcionID).First().SubscripcionID;
+            //cliente.SubscripcionID = db.Subscripcions.OrderByDescending(d => d.SubscripcionID).First().SubscripcionID;
             db.Entry(cliente).State = EntityState.Modified;
             db.SaveChanges();
         }

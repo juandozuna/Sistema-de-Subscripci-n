@@ -219,8 +219,14 @@
     <Compile Include="MethodManagers\ImagenManager.cs" />
     <Compile Include="MethodManagers\PlanManager.cs" />
     <Compile Include="MethodManagers\SubscripcionManager.cs" />
+    <Compile Include="Migrations\201709220343188_Initial.cs" />
+    <Compile Include="Migrations\201709220343188_Initial.Designer.cs">
+      <DependentUpon>201709220343188_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\ClienteSuscripcion.cs" />
     <Compile Include="Models\EntityModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
@@ -266,7 +272,9 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -343,6 +351,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709220343188_Initial.resx">
+      <DependentUpon>201709220343188_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

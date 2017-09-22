@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Linq;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using MVCSuscriptionSystem.Models;
@@ -34,40 +35,7 @@ namespace MVCSuscriptionSystem
 
                 //Here we create a Admin super user who will maintain the website                  
 
-                var user = new ApplicationUser();
-                user.UserName = "admin";
-                user.Email = "admin@admin.com";
-
-                string userPWD = "Intec.123";
-
-                var chkUser = UserManager.Create(user, userPWD);
-
-                //Add default User to Role Admin   
-                if (chkUser.Succeeded)
-                {
-                    var result1 = UserManager.AddToRole(user.Id, "Admin");
-                    result1 = UserManager.AddToRole(user.Id, "CrearCliente");
-                    result1 = UserManager.AddToRole(user.Id, "ListarCliente");
-                    result1 = UserManager.AddToRole(user.Id, "VerCliente");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarCliente");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarCliente");
-                    result1 = UserManager.AddToRole(user.Id, "CrearPlan");
-                    result1 = UserManager.AddToRole(user.Id, "ListarPlan");
-                    result1 = UserManager.AddToRole(user.Id, "VerPlan");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarPlan");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarPlan");
-                    result1 = UserManager.AddToRole(user.Id, "CrearServicio");
-                    result1 = UserManager.AddToRole(user.Id, "ListarServicio");
-                    result1 = UserManager.AddToRole(user.Id, "VerServicio");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarServicio");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarServicio");
-                    result1 = UserManager.AddToRole(user.Id, "CrearSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "ListarSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "VerSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarSuscripcion");
-
-                }
+            
             }
 
             // creating Creating Manager role  
@@ -250,10 +218,47 @@ namespace MVCSuscriptionSystem
                 roleManager.Create(role);
 
             }
+            var user = context.Users.Where(x => x.UserName == "admin").First();
+            if (user == null)
+            {
+                user = new ApplicationUser();
+                user.UserName = "admin";
+                user.Email = "admin@admin.com";
 
+                string userPWD = "Intec.123";
 
+                var chkUser = UserManager.Create(user, userPWD);
 
+                //Add default User to Role Admin   
+                if (chkUser.Succeeded)
+                {
+                    var result1 = UserManager.AddToRole(user.Id, "Admin");
+                    result1 = UserManager.AddToRole(user.Id, "CrearCliente");
+                    result1 = UserManager.AddToRole(user.Id, "ListarCliente");
+                    result1 = UserManager.AddToRole(user.Id, "VerCliente");
+                    result1 = UserManager.AddToRole(user.Id, "ModificarCliente");
+                    result1 = UserManager.AddToRole(user.Id, "BorrarCliente");
+                    result1 = UserManager.AddToRole(user.Id, "CrearPlan");
+                    result1 = UserManager.AddToRole(user.Id, "ListarPlan");
+                    result1 = UserManager.AddToRole(user.Id, "VerPlan");
+                    result1 = UserManager.AddToRole(user.Id, "ModificarPlan");
+                    result1 = UserManager.AddToRole(user.Id, "BorrarPlan");
+                    result1 = UserManager.AddToRole(user.Id, "CrearServicio");
+                    result1 = UserManager.AddToRole(user.Id, "ListarServicio");
+                    result1 = UserManager.AddToRole(user.Id, "VerServicio");
+                    result1 = UserManager.AddToRole(user.Id, "ModificarServicio");
+                    result1 = UserManager.AddToRole(user.Id, "BorrarServicio");
+                    result1 = UserManager.AddToRole(user.Id, "CrearSuscripcion");
+                    result1 = UserManager.AddToRole(user.Id, "ListarSuscripcion");
+                    result1 = UserManager.AddToRole(user.Id, "VerSuscripcion");
+                    result1 = UserManager.AddToRole(user.Id, "ModificarSuscripcion");
+                    result1 = UserManager.AddToRole(user.Id, "BorrarSuscripcion");
 
+                }
+            }
         }
+
+
     }
+    
 }

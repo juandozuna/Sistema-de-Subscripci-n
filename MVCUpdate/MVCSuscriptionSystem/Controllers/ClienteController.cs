@@ -30,7 +30,7 @@ namespace MVCSuscriptionSystem.Controllers
             var cliente = db.Clientes.Find(id);
             if (cliente != null)
             {
-                var subscripcion = cliente.Subscripcion;
+               /* var subscripcion = cliente.Subscripcion;
                 if (subscripcion != null)
                 {
                     var plan = cliente.Subscripcion.Plan;
@@ -38,7 +38,7 @@ namespace MVCSuscriptionSystem.Controllers
                     db.Subscripcions.Remove(subscripcion);
                 }
                 db.Clientes.Remove(cliente);
-                db.SaveChanges();
+                db.SaveChanges();*/
                 return RedirectToAction("Index");
             }
             return HttpNotFound();
@@ -131,13 +131,13 @@ namespace MVCSuscriptionSystem.Controllers
             Cliente cliente = db.Clientes.Find(id);
             if (cliente != null)
             {
-                if (cliente.Subscripcion.Active)
+              /*  if (cliente.Subscripcion.Active)
                 {
                     ViewBag.estado = "Activo";
                 }
                 else ViewBag.estado = "Inactivo";
                 ViewBag.ImgSrc = ImagenManager.RetornarSourceImagen(cliente.ImagenID);
-                return View(cliente);
+                return View(cliente);*/
             }
             return HttpNotFound();
             
@@ -158,7 +158,7 @@ namespace MVCSuscriptionSystem.Controllers
             var cliente = db.Clientes.Find(ClienteId);
             if (cliente != null)
             {
-                var subs = cliente.Subscripcion;
+                /*var subs = cliente.Subscripcion;
                 if (db.Plans.Find(PlanId) != null)
                 {
                     subs.PlanID = PlanId;
@@ -166,7 +166,7 @@ namespace MVCSuscriptionSystem.Controllers
                     db.Entry(subs).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                else return HttpNotFound();
+                else return HttpNotFound();*/
                 return RedirectToAction("VerDetalles", new {id = ClienteId});
             }
             return RedirectToAction("Index");

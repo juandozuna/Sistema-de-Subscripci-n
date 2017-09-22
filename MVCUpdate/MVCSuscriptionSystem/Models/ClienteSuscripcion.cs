@@ -7,19 +7,20 @@ using System.Web;
 
 namespace MVCSuscriptionSystem.Models
 {
-    [Table("ClienteSubscripcion")]
-    public class ClienteSubscripcion
+    [Table("ClienteSuscripcion")]
+    public class ClienteSuscripcion
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ServicioEnPlanID { get; set; }
+        public int ClienteSuscripcionId { get; set; }
 
-        public int ClienteID { get; set; }
+        public int ClienteId { get; set; }
 
-        public int SuscripcionID { get; set; }
+        public int SubscripcionId { get; set; }
 
         public virtual Cliente Cliente { get; set; }
 
         public virtual Subscripcion Subscripcion { get; set; }
+        
     }
 }
