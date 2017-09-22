@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MVCSuscriptionSystem.Controllers
 {
@@ -62,8 +64,10 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "VerServicio, ListarServicio")]
         public override ActionResult Index()
         {
-            var servicios = db.Servicios.ToList();
-            return View(servicios);
+            var cliente = new HttpClient();
+            var respuesta = cliente.GetAsync("http://localhost:55040/api/ServiciosAPI").Result;
+            var servicios = respuesta.Content.ReadAsAsync<IEnumerable<Servicio>>().Result;
+            return View(servicios.ToList());
         }
 
 
