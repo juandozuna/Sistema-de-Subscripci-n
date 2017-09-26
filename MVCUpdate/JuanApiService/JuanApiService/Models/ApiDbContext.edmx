@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ApiDatabaseDbContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Pais" Type="varchar" MaxLength="64" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="64" />
+          <Property Name="Sector" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="ServicioId" />
+          </Key>
+          <Property Name="ServicioId" Type="int" Nullable="false" />
+          <Property Name="NombreServicio" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suscripciones">
+          <Key>
+            <PropertyRef Name="SuscripcionId" />
+          </Key>
+          <Property Name="SuscripcionId" Type="int" Nullable="false" />
+          <Property Name="ServicioId" Type="int" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="SuscriptorId" Type="int" Nullable="false" />
+          <Property Name="FechaDeCreacion" Type="date" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuscripcionServicios">
+          <Key>
+            <PropertyRef Name="SuscServiciosId" />
+          </Key>
+          <Property Name="SuscServiciosId" Type="int" Nullable="false" />
+          <Property Name="ServicioId" Type="int" Nullable="false" />
+          <Property Name="SuscripcionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suscriptor">
+          <Key>
+            <PropertyRef Name="SuscriptorId" />
+          </Key>
+          <Property Name="SuscriptorId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="100" />
+          <Property Name="Cedula" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pais" Type="varchar" MaxLength="128" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="128" />
+          <Property Name="Sector" Type="varchar" MaxLength="100" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Suscripciones_Cliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Suscripciones" Type="Self.Suscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Suscripciones">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscripciones_Servicios">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="Suscripciones" Type="Self.Suscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ServicioId" />
+            </Principal>
+            <Dependent Role="Suscripciones">
+              <PropertyRef Name="ServicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscripciones_Suscriptor">
+          <End Role="Suscriptor" Type="Self.Suscriptor" Multiplicity="1" />
+          <End Role="Suscripciones" Type="Self.Suscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suscriptor">
+              <PropertyRef Name="SuscriptorId" />
+            </Principal>
+            <Dependent Role="Suscripciones">
+              <PropertyRef Name="SuscriptorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuscripcionServicios_Servicio">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="SuscripcionServicios" Type="Self.SuscripcionServicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ServicioId" />
+            </Principal>
+            <Dependent Role="SuscripcionServicios">
+              <PropertyRef Name="ServicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuscripcionServicios_Suscripcion">
+          <End Role="Suscripciones" Type="Self.Suscripciones" Multiplicity="1" />
+          <End Role="SuscripcionServicios" Type="Self.SuscripcionServicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suscripciones">
+              <PropertyRef Name="SuscripcionId" />
+            </Principal>
+            <Dependent Role="SuscripcionServicios">
+              <PropertyRef Name="SuscripcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscriptor_Cliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Suscriptor" Type="Self.Suscriptor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Suscriptor">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ApiDatabaseDbContextStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suscripciones" EntityType="Self.Suscripciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuscripcionServicios" EntityType="Self.SuscripcionServicios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suscriptor" EntityType="Self.Suscriptor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Suscripciones_Cliente" Association="Self.FK_Suscripciones_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscripciones_Servicios" Association="Self.FK_Suscripciones_Servicios">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscripciones_Suscriptor" Association="Self.FK_Suscripciones_Suscriptor">
+            <End Role="Suscriptor" EntitySet="Suscriptor" />
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuscripcionServicios_Servicio" Association="Self.FK_SuscripcionServicios_Servicio">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="SuscripcionServicios" EntitySet="SuscripcionServicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuscripcionServicios_Suscripcion" Association="Self.FK_SuscripcionServicios_Suscripcion">
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+            <End Role="SuscripcionServicios" EntitySet="SuscripcionServicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscriptor_Cliente" Association="Self.FK_Suscriptor_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Suscriptor" EntitySet="Suscriptor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ApiDatabaseDbContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="NombreCliente" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Sector" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Suscripciones" Relationship="Self.FK_Suscripciones_Cliente" FromRole="Clientes" ToRole="Suscripciones" />
+          <NavigationProperty Name="Suscriptors" Relationship="Self.FK_Suscriptor_Cliente" FromRole="Clientes" ToRole="Suscriptor" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="ServicioId" />
+          </Key>
+          <Property Name="ServicioId" Type="Int32" Nullable="false" />
+          <Property Name="NombreServicio" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Suscripciones" Relationship="Self.FK_Suscripciones_Servicios" FromRole="Servicio" ToRole="Suscripciones" />
+          <NavigationProperty Name="SuscripcionServicios" Relationship="Self.FK_SuscripcionServicios_Servicio" FromRole="Servicio" ToRole="SuscripcionServicios" />
+        </EntityType>
+        <EntityType Name="Suscripcione">
+          <Key>
+            <PropertyRef Name="SuscripcionId" />
+          </Key>
+          <Property Name="SuscripcionId" Type="Int32" Nullable="false" />
+          <Property Name="ServicioId" Type="Int32" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="SuscriptorId" Type="Int32" Nullable="false" />
+          <Property Name="FechaDeCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Suscripciones_Cliente" FromRole="Suscripciones" ToRole="Clientes" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_Suscripciones_Servicios" FromRole="Suscripciones" ToRole="Servicio" />
+          <NavigationProperty Name="Suscriptor" Relationship="Self.FK_Suscripciones_Suscriptor" FromRole="Suscripciones" ToRole="Suscriptor" />
+          <NavigationProperty Name="SuscripcionServicios" Relationship="Self.FK_SuscripcionServicios_Suscripcion" FromRole="Suscripciones" ToRole="SuscripcionServicios" />
+        </EntityType>
+        <EntityType Name="SuscripcionServicio">
+          <Key>
+            <PropertyRef Name="SuscServiciosId" />
+          </Key>
+          <Property Name="SuscServiciosId" Type="Int32" Nullable="false" />
+          <Property Name="ServicioId" Type="Int32" Nullable="false" />
+          <Property Name="SuscripcionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK_SuscripcionServicios_Servicio" FromRole="SuscripcionServicios" ToRole="Servicio" />
+          <NavigationProperty Name="Suscripcione" Relationship="Self.FK_SuscripcionServicios_Suscripcion" FromRole="SuscripcionServicios" ToRole="Suscripciones" />
+        </EntityType>
+        <EntityType Name="Suscriptor">
+          <Key>
+            <PropertyRef Name="SuscriptorId" />
+          </Key>
+          <Property Name="SuscriptorId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Sector" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Suscriptor_Cliente" FromRole="Suscriptor" ToRole="Clientes" />
+          <NavigationProperty Name="Suscripciones" Relationship="Self.FK_Suscripciones_Suscriptor" FromRole="Suscriptor" ToRole="Suscripciones" />
+        </EntityType>
+        <Association Name="FK_Suscripciones_Cliente">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Suscripciones" Type="Self.Suscripcione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Suscripciones">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscriptor_Cliente">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Suscriptor" Type="Self.Suscriptor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Suscriptor">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscripciones_Servicios">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="Suscripciones" Type="Self.Suscripcione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ServicioId" />
+            </Principal>
+            <Dependent Role="Suscripciones">
+              <PropertyRef Name="ServicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuscripcionServicios_Servicio">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="SuscripcionServicios" Type="Self.SuscripcionServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ServicioId" />
+            </Principal>
+            <Dependent Role="SuscripcionServicios">
+              <PropertyRef Name="ServicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscripciones_Suscriptor">
+          <End Role="Suscriptor" Type="Self.Suscriptor" Multiplicity="1" />
+          <End Role="Suscripciones" Type="Self.Suscripcione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suscriptor">
+              <PropertyRef Name="SuscriptorId" />
+            </Principal>
+            <Dependent Role="Suscripciones">
+              <PropertyRef Name="SuscriptorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuscripcionServicios_Suscripcion">
+          <End Role="Suscripciones" Type="Self.Suscripcione" Multiplicity="1" />
+          <End Role="SuscripcionServicios" Type="Self.SuscripcionServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suscripciones">
+              <PropertyRef Name="SuscripcionId" />
+            </Principal>
+            <Dependent Role="SuscripcionServicios">
+              <PropertyRef Name="SuscripcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ApiDatabaseConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="Servicios" EntityType="Self.Servicio" />
+          <EntitySet Name="Suscripciones" EntityType="Self.Suscripcione" />
+          <EntitySet Name="SuscripcionServicios" EntityType="Self.SuscripcionServicio" />
+          <EntitySet Name="Suscriptors" EntityType="Self.Suscriptor" />
+          <AssociationSet Name="FK_Suscripciones_Cliente" Association="Self.FK_Suscripciones_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscriptor_Cliente" Association="Self.FK_Suscriptor_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Suscriptor" EntitySet="Suscriptors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscripciones_Servicios" Association="Self.FK_Suscripciones_Servicios">
+            <End Role="Servicio" EntitySet="Servicios" />
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuscripcionServicios_Servicio" Association="Self.FK_SuscripcionServicios_Servicio">
+            <End Role="Servicio" EntitySet="Servicios" />
+            <End Role="SuscripcionServicios" EntitySet="SuscripcionServicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscripciones_Suscriptor" Association="Self.FK_Suscripciones_Suscriptor">
+            <End Role="Suscriptor" EntitySet="Suscriptors" />
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuscripcionServicios_Suscripcion" Association="Self.FK_SuscripcionServicios_Suscripcion">
+            <End Role="Suscripciones" EntitySet="Suscripciones" />
+            <End Role="SuscripcionServicios" EntitySet="SuscripcionServicios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ApiDatabaseDbContextStoreContainer" CdmEntityContainer="ApiDatabaseConnection">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicios">
+            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Servicio">
+              <MappingFragment StoreEntitySet="Servicio">
+                <ScalarProperty Name="ServicioId" ColumnName="ServicioId" />
+                <ScalarProperty Name="NombreServicio" ColumnName="NombreServicio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suscripciones">
+            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Suscripcione">
+              <MappingFragment StoreEntitySet="Suscripciones">
+                <ScalarProperty Name="SuscripcionId" ColumnName="SuscripcionId" />
+                <ScalarProperty Name="ServicioId" ColumnName="ServicioId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="SuscriptorId" ColumnName="SuscriptorId" />
+                <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuscripcionServicios">
+            <EntityTypeMapping TypeName="ApiDatabaseDbContext.SuscripcionServicio">
+              <MappingFragment StoreEntitySet="SuscripcionServicios">
+                <ScalarProperty Name="SuscServiciosId" ColumnName="SuscServiciosId" />
+                <ScalarProperty Name="ServicioId" ColumnName="ServicioId" />
+                <ScalarProperty Name="SuscripcionId" ColumnName="SuscripcionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suscriptors">
+            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Suscriptor">
+              <MappingFragment StoreEntitySet="Suscriptor">
+                <ScalarProperty Name="SuscriptorId" ColumnName="SuscriptorId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

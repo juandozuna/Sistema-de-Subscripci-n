@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace MVCSuscriptionSystem
+namespace JuanApiService
 {
     public static class WebApiConfig
     {
@@ -16,7 +16,7 @@ namespace MVCSuscriptionSystem
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }
