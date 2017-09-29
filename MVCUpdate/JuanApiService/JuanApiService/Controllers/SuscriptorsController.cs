@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using JuanApiService.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace JuanApiService.Controllers
 {
@@ -79,6 +80,17 @@ namespace JuanApiService.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (suscriptor.ClienteId != 0)
+            {
+                var suscripcion = new Suscripcione()
+                {
+                    ClienteId = suscriptor.ClienteId,
+                    SuscriptorId = suscriptor.SuscriptorId,
+                    Activo = false,
+                    FechaDeCreacion = DateTime.Today
+                };
+                db.Suscripciones.Add(suscripcion);
+            }
             db.Suscriptors.Add(suscriptor);
 
             try

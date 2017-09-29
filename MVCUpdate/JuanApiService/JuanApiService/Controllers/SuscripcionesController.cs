@@ -116,6 +116,39 @@ namespace JuanApiService.Controllers
             return Ok(suscripcione);
         }
 
+        //POST: api/Suscripciones/1/0
+        [ResponseType(typeof(Suscripcione))]
+        public IHttpActionResult GetSuscripcione(int id, int status)
+        {
+            bool estado;
+            if (status == 1) estado = true;
+            else estado = false;
+            var suscripcion = db.Suscripciones.Find(id);
+            if (suscripcion != null)
+            {
+                suscripcion.Activo = estado;
+                db.Entry(suscripcion).State = EntityState.Modified;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (SuscripcioneExists(suscripcion.SuscripcionId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return Ok(suscripcion);
+
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

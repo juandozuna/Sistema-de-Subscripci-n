@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -192,35 +193,35 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApiDbContext.Context.cs">
+    <Compile Include="Models\ApiDatabaseConnection.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ApiDbContext.Context.tt</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApiDbContext.cs">
+    <Compile Include="Models\ApiDatabaseConnection.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ApiDbContext.tt</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApiDbContext.Designer.cs">
+    <Compile Include="Models\ApiDatabaseConnection.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ApiDbContext.edmx</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Cliente.cs">
-      <DependentUpon>ApiDbContext.tt</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Servicio.cs">
-      <DependentUpon>ApiDbContext.tt</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Suscripcione.cs">
-      <DependentUpon>ApiDbContext.tt</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SuscripcionServicio.cs">
-      <DependentUpon>ApiDbContext.tt</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Suscriptor.cs">
-      <DependentUpon>ApiDbContext.tt</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -231,15 +232,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ApiDbContext.Context.tt">
+    <Content Include="Models\ApiDatabaseConnection.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ApiDbContext.Context.cs</LastGenOutput>
-      <DependentUpon>ApiDbContext.edmx</DependentUpon>
+      <DependentUpon>ApiDatabaseConnection.edmx</DependentUpon>
+      <LastGenOutput>ApiDatabaseConnection.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ApiDbContext.tt">
+    <Content Include="Models\ApiDatabaseConnection.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ApiDbContext.edmx</DependentUpon>
-      <LastGenOutput>ApiDbContext.cs</LastGenOutput>
+      <DependentUpon>ApiDatabaseConnection.edmx</DependentUpon>
+      <LastGenOutput>ApiDatabaseConnection.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -265,12 +266,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\ApiDbContext.edmx">
+    <EntityDeploy Include="Models\ApiDatabaseConnection.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ApiDbContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>ApiDatabaseConnection.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ApiDbContext.edmx.diagram">
-      <DependentUpon>ApiDbContext.edmx</DependentUpon>
+    <Content Include="Models\ApiDatabaseConnection.edmx.diagram">
+      <DependentUpon>ApiDatabaseConnection.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

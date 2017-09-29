@@ -79,6 +79,7 @@ namespace JuanApiService.Controllers
                 return BadRequest(ModelState);
             }
 
+
             db.Clientes.Add(cliente);
 
             try

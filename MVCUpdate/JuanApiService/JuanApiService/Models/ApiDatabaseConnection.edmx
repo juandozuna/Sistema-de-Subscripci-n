@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ApiDatabaseDbContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ApiDatabaseConnection.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="ClienteId" />
           </Key>
-          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreCliente" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="Telefono" Type="varchar" MaxLength="14" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="128" Nullable="false" />
@@ -21,7 +21,7 @@
           <Key>
             <PropertyRef Name="ServicioId" />
           </Key>
-          <Property Name="ServicioId" Type="int" Nullable="false" />
+          <Property Name="ServicioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreServicio" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="Descripcion" Type="varchar(max)" />
           <Property Name="Precio" Type="float" Nullable="false" />
@@ -30,7 +30,7 @@
           <Key>
             <PropertyRef Name="SuscripcionId" />
           </Key>
-          <Property Name="SuscripcionId" Type="int" Nullable="false" />
+          <Property Name="SuscripcionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServicioId" Type="int" />
           <Property Name="ClienteId" Type="int" Nullable="false" />
           <Property Name="SuscriptorId" Type="int" Nullable="false" />
@@ -41,7 +41,7 @@
           <Key>
             <PropertyRef Name="SuscServiciosId" />
           </Key>
-          <Property Name="SuscServiciosId" Type="int" Nullable="false" />
+          <Property Name="SuscServiciosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServicioId" Type="int" Nullable="false" />
           <Property Name="SuscripcionId" Type="int" Nullable="false" />
         </EntityType>
@@ -49,7 +49,7 @@
           <Key>
             <PropertyRef Name="SuscriptorId" />
           </Key>
-          <Property Name="SuscriptorId" Type="int" Nullable="false" />
+          <Property Name="SuscriptorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="128" Nullable="false" />
@@ -132,7 +132,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ApiDatabaseDbContextStoreContainer">
+        <EntityContainer Name="ApiDatabaseConnectionStoreContainer">
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suscripciones" EntityType="Self.Suscripciones" Schema="dbo" store:Type="Tables" />
@@ -167,12 +167,12 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ApiDatabaseDbContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ApiDatabaseConnection" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="ClienteId" />
           </Key>
-          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreCliente" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefono" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
@@ -186,7 +186,7 @@
           <Key>
             <PropertyRef Name="ServicioId" />
           </Key>
-          <Property Name="ServicioId" Type="Int32" Nullable="false" />
+          <Property Name="ServicioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreServicio" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Precio" Type="Double" Nullable="false" />
@@ -197,7 +197,7 @@
           <Key>
             <PropertyRef Name="SuscripcionId" />
           </Key>
-          <Property Name="SuscripcionId" Type="Int32" Nullable="false" />
+          <Property Name="SuscripcionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServicioId" Type="Int32" />
           <Property Name="ClienteId" Type="Int32" Nullable="false" />
           <Property Name="SuscriptorId" Type="Int32" Nullable="false" />
@@ -212,7 +212,7 @@
           <Key>
             <PropertyRef Name="SuscServiciosId" />
           </Key>
-          <Property Name="SuscServiciosId" Type="Int32" Nullable="false" />
+          <Property Name="SuscServiciosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServicioId" Type="Int32" Nullable="false" />
           <Property Name="SuscripcionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Servicio" Relationship="Self.FK_SuscripcionServicios_Servicio" FromRole="SuscripcionServicios" ToRole="Servicio" />
@@ -222,7 +222,7 @@
           <Key>
             <PropertyRef Name="SuscriptorId" />
           </Key>
-          <Property Name="SuscriptorId" Type="Int32" Nullable="false" />
+          <Property Name="SuscriptorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
@@ -307,7 +307,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ApiDatabaseConnection" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ApiDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clientes" EntityType="Self.Cliente" />
           <EntitySet Name="Servicios" EntityType="Self.Servicio" />
           <EntitySet Name="Suscripciones" EntityType="Self.Suscripcione" />
@@ -343,9 +343,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ApiDatabaseDbContextStoreContainer" CdmEntityContainer="ApiDatabaseConnection">
+        <EntityContainerMapping StorageEntityContainer="ApiDatabaseConnectionStoreContainer" CdmEntityContainer="ApiDatabaseEntities">
           <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Cliente">
+            <EntityTypeMapping TypeName="ApiDatabaseConnection.Cliente">
               <MappingFragment StoreEntitySet="Clientes">
                 <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
                 <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
@@ -358,7 +358,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Servicios">
-            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Servicio">
+            <EntityTypeMapping TypeName="ApiDatabaseConnection.Servicio">
               <MappingFragment StoreEntitySet="Servicio">
                 <ScalarProperty Name="ServicioId" ColumnName="ServicioId" />
                 <ScalarProperty Name="NombreServicio" ColumnName="NombreServicio" />
@@ -368,7 +368,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Suscripciones">
-            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Suscripcione">
+            <EntityTypeMapping TypeName="ApiDatabaseConnection.Suscripcione">
               <MappingFragment StoreEntitySet="Suscripciones">
                 <ScalarProperty Name="SuscripcionId" ColumnName="SuscripcionId" />
                 <ScalarProperty Name="ServicioId" ColumnName="ServicioId" />
@@ -380,7 +380,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SuscripcionServicios">
-            <EntityTypeMapping TypeName="ApiDatabaseDbContext.SuscripcionServicio">
+            <EntityTypeMapping TypeName="ApiDatabaseConnection.SuscripcionServicio">
               <MappingFragment StoreEntitySet="SuscripcionServicios">
                 <ScalarProperty Name="SuscServiciosId" ColumnName="SuscServiciosId" />
                 <ScalarProperty Name="ServicioId" ColumnName="ServicioId" />
@@ -389,7 +389,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Suscriptors">
-            <EntityTypeMapping TypeName="ApiDatabaseDbContext.Suscriptor">
+            <EntityTypeMapping TypeName="ApiDatabaseConnection.Suscriptor">
               <MappingFragment StoreEntitySet="Suscriptor">
                 <ScalarProperty Name="SuscriptorId" ColumnName="SuscriptorId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />

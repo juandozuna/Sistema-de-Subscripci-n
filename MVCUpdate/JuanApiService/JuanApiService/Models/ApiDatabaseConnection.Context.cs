@@ -16,7 +16,7 @@ namespace JuanApiService.Models
     public partial class ApiDatabaseConnection : DbContext
     {
         public ApiDatabaseConnection()
-            : base("name=ApiDatabaseConnection")
+            : base("name=ApiDatabaseEntities")
         {
         }
     

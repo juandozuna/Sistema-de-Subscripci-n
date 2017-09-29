@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 using JuanApiService.Models;
 
 namespace JuanApiService.Controllers
@@ -17,6 +18,9 @@ namespace JuanApiService.Controllers
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
 
         // GET: api/Servicios
+        //<summary>
+        //Retorna arreglos de todo los servicios en la base de datos
+        //</summary>
         public IQueryable<Servicio> GetServicios()
         {
             return db.Servicios;
@@ -33,6 +37,30 @@ namespace JuanApiService.Controllers
             }
 
             return Ok(servicio);
+        }
+
+        //get: / /api/Servicios/5?sId=1
+        [ResponseType(typeof(SuscripcionServicio))]
+        [HttpPost]
+        public IHttpActionResult ServiceToSuscription(int id, int sId)
+        {
+            var servi = db.Servicios.Find(id);
+            if (servi != null)
+            {
+                var suscrip = db.Suscripciones.Find(sId);
+                if (suscrip != null)
+                {
+                    var serviSuscri = new SuscripcionServicio()
+                    {
+                        ServicioId = servi.ServicioId,
+                        SuscripcionId = suscrip.SuscripcionId
+                    };
+                    db.SuscripcionServicios.Add(serviSuscri);
+                    db.SaveChanges();
+                    return Ok(serviSuscri);
+                }
+            }
+            return NotFound();
         }
 
         // PUT: api/Servicios/5
@@ -109,7 +137,11 @@ namespace JuanApiService.Controllers
             {
                 return NotFound();
             }
-
+            foreach (var a in db.Suscripciones)
+            {
+                var b = a.SuscripcionServicios.Where(x => x.ServicioId == servicio.ServicioId).ToList();
+                db.SuscripcionServicios.RemoveRange(b);
+            }
             db.Servicios.Remove(servicio);
             db.SaveChanges();
 
