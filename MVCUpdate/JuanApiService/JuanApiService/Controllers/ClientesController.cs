@@ -17,12 +17,21 @@ namespace JuanApiService.Controllers
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
 
         // GET: api/Clientes
+        /// <summary>
+        /// Retorna un arreglo de todos los clientes contenidos en la base de datos
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Cliente> GetClientes()
         {
             return db.Clientes;
         }
 
         // GET: api/Clientes/5
+        /// <summary>
+        /// Retorna el objeto del cliente si es encontrado por el id suministrado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult GetCliente(int id)
         {
@@ -36,6 +45,13 @@ namespace JuanApiService.Controllers
         }
 
         // PUT: api/Clientes/5
+        /// <summary>
+        /// Tomando el id del cliente, recibe al mismo cliente modificado. Por lo que 
+        /// este metodo sirve para modificar al cliente
+        /// </summary>
+        /// <param name="id">Id Del Cliente</param>
+        /// <param name="cliente">Objeto del cliente que recibe por JSON</param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCliente(int id, Cliente cliente)
         {
@@ -71,6 +87,11 @@ namespace JuanApiService.Controllers
         }
 
         // POST: api/Clientes
+        /// <summary>
+        /// Este metodo crea un cliente nuevo
+        /// </summary>
+        /// <param name="cliente">Recibe un objeto en JSON de cliente</param>
+        /// <returns></returns>
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult PostCliente(Cliente cliente)
         {
@@ -102,6 +123,11 @@ namespace JuanApiService.Controllers
         }
 
         // DELETE: api/Clientes/5
+        /// <summary>
+        /// Borra a un cliente de la base de datos
+        /// </summary>
+        /// <param name="id">Recibe el ID del clientes</param>
+        /// <returns></returns>
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult DeleteCliente(int id)
         {

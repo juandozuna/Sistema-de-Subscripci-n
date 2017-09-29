@@ -17,16 +17,22 @@ namespace JuanApiService.Controllers
     {
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
 
-        // GET: api/Servicios
-        //<summary>
-        //Retorna arreglos de todo los servicios en la base de datos
-        //</summary>
+        // GET: api/Servicio
+        /// <summary>
+        /// Retorna un arreglo de los servicios disponibles en la base de datos
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Servicio> GetServicios()
         {
             return db.Servicios;
         }
 
         // GET: api/Servicios/5
+        /// <summary>
+        /// Retorna un servicio en especifico con todos sus datos
+        /// </summary>
+        /// <param name="id">Recibe el ID del servicio</param>
+        /// <returns></returns>
         [ResponseType(typeof(Servicio))]
         public IHttpActionResult GetServicio(int id)
         {
@@ -40,6 +46,12 @@ namespace JuanApiService.Controllers
         }
 
         //get: / /api/Servicios/5?sId=1
+        /// <summary>
+        /// Este metodo le agrega un servicio a una suscripcion que este actualmente activa
+        /// </summary>
+        /// <param name="id">ID del servicio a agregar</param>
+        /// <param name="sId">ID de la suscripcion que recibe el servicio</param>
+        /// <returns></returns>
         [ResponseType(typeof(SuscripcionServicio))]
         [HttpPost]
         public IHttpActionResult ServiceToSuscription(int id, int sId)
@@ -48,6 +60,10 @@ namespace JuanApiService.Controllers
             if (servi != null)
             {
                 var suscrip = db.Suscripciones.Find(sId);
+                if (suscrip.Activo == false)
+                {
+                    return new ConflictResult(new HttpRequestMessage());
+                }
                 if (suscrip != null)
                 {
                     var serviSuscri = new SuscripcionServicio()
@@ -64,6 +80,12 @@ namespace JuanApiService.Controllers
         }
 
         // PUT: api/Servicios/5
+        /// <summary>
+        /// Modifica el servicio
+        /// </summary>
+        /// <param name="id">Id del servicio</param>
+        /// <param name="servicio">objeto de servicio</param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutServicio(int id, Servicio servicio)
         {
@@ -99,6 +121,11 @@ namespace JuanApiService.Controllers
         }
 
         // POST: api/Servicios
+        /// <summary>
+        /// Este crea un servicio nuevo en la base de datos
+        /// </summary>
+        /// <param name="servicio">Objeto de tipo servicio que recibe por POST</param>
+        /// <returns></returns>
         [ResponseType(typeof(Servicio))]
         public IHttpActionResult PostServicio(Servicio servicio)
         {
@@ -129,6 +156,11 @@ namespace JuanApiService.Controllers
         }
 
         // DELETE: api/Servicios/5
+        /// <summary>
+        /// Borra una servicio que exista en la base de dato y todas las instancias que el mismo tiene en otras tablas
+        /// </summary>
+        /// <param name="id">Id del servicio</param>
+        /// <returns></returns>
         [ResponseType(typeof(Servicio))]
         public IHttpActionResult DeleteServicio(int id)
         {

@@ -17,12 +17,20 @@ namespace JuanApiService.Controllers
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
 
         // GET: api/Suscripciones
+        ///<summary>
+        ///Retorna lista de suscripciones en base de datos
+        ///</summary>
+        /// <returns></returns>
         public IQueryable<Suscripcione> GetSuscripciones()
         {
             return db.Suscripciones;
         }
 
         // GET: api/Suscripciones/5
+        ///<summary>
+        ///Busca una suscripcion en especifico y la retorna
+        ///<summary>
+        /// <returns></returns>
         [ResponseType(typeof(Suscripcione))]
         public IHttpActionResult GetSuscripcione(int id)
         {
@@ -36,6 +44,10 @@ namespace JuanApiService.Controllers
         }
 
         // PUT: api/Suscripciones/5
+        ///<summary>
+        ///Busca una suscripcion y la modifica
+        ///</summary>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutSuscripcione(int id, Suscripcione suscripcione)
         {
@@ -71,6 +83,10 @@ namespace JuanApiService.Controllers
         }
 
         // POST: api/Suscripciones
+        ///<summary>
+        ///Crea una suscripcion nueva
+        ///</summary>
+        /// <returns></returns>
         [ResponseType(typeof(Suscripcione))]
         public IHttpActionResult PostSuscripcione(Suscripcione suscripcione)
         {
@@ -101,6 +117,10 @@ namespace JuanApiService.Controllers
         }
 
         // DELETE: api/Suscripciones/5
+        ///<summary>
+        ///Borra una suscripcion existente de ID tal
+        ///</summary>
+        /// <returns></returns>
         [ResponseType(typeof(Suscripcione))]
         public IHttpActionResult DeleteSuscripcione(int id)
         {
@@ -117,6 +137,10 @@ namespace JuanApiService.Controllers
         }
 
         //POST: api/Suscripciones/1/0
+        ///<summary>
+        ///Modifica el estado de una suscripcion si activa o no
+        ///</summary>
+        /// <returns></returns>
         [ResponseType(typeof(Suscripcione))]
         public IHttpActionResult GetSuscripcione(int id, int status)
         {
