@@ -113,10 +113,12 @@ namespace MVCSuscriptionSystem.Controllers
                 cliente.Segundo_Nombre = collection["Segundo_Nombre"];
                 cliente.Primer_Apellido = collection["Primer_Apellido"];
                 cliente.Numero_Telefonico = collection["Numero_Telefonico"];
+                var fdn = collection["Fecha_de_nacimiento"];
+                if (fdn != null)
+                {
+                    cliente.Fecha_de_nacimiento = DateTime.Parse(fdn);
+                }
                 cliente.e_mail = collection["e_mail"];
-                cliente.Metodo_de_Pago = collection["Metodo_de_Pago"];
-                cliente.NumeroTarjeta = Int32.Parse(collection["NumeroTarjeta"]);
-                cliente.CVC_o_CVV = Int32.Parse(collection["CVC_o_CVV"]);
                 db.Entry(cliente).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
