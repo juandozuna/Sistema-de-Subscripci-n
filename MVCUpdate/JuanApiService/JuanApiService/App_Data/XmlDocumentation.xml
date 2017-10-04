@@ -481,6 +481,17 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:JuanApiService.Controllers.ClientesController">
+            <summary>
+            Estos son los metodos del controlador de clientes
+            </summary>
+        </member>
+        <member name="F:JuanApiService.Controllers.ClientesController.db">
+            <summary>
+            Este es el DBset el cual tiene la conexion
+            a la base de datos a traves de ENTITY
+            </summary>
+        </member>
         <member name="M:JuanApiService.Controllers.ClientesController.GetClientes">
             <summary>
             Retorna un arreglo de todos los clientes contenidos en la base de datos
@@ -491,7 +502,7 @@
             <summary>
             Retorna el objeto del cliente si es encontrado por el id suministrado
             </summary>
-            <param name="id"></param>
+            <param name="id">Recibe el id del cliente a buscar</param>
             <returns></returns>
         </member>
         <member name="M:JuanApiService.Controllers.ClientesController.PutCliente(System.Int32,JuanApiService.Models.Cliente)">
@@ -516,6 +527,22 @@
             </summary>
             <param name="id">Recibe el ID del clientes</param>
             <returns></returns>
+        </member>
+        <member name="M:JuanApiService.Controllers.ClientesController.Dispose(System.Boolean)">
+            <summary>
+            Metodo de Dispose
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:JuanApiService.Controllers.ServiciosController">
+            <summary>
+            Controlador de Servicios
+            </summary>
+        </member>
+        <member name="F:JuanApiService.Controllers.ServiciosController.db">
+            <summary>
+            dbSet a EntityFramework
+            </summary>
         </member>
         <member name="M:JuanApiService.Controllers.ServiciosController.GetServicios">
             <summary>
@@ -560,36 +587,68 @@
             <param name="id">Id del servicio</param>
             <returns></returns>
         </member>
+        <member name="M:JuanApiService.Controllers.ServiciosController.Dispose(System.Boolean)">
+            <summary>
+            Disposable
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:JuanApiService.Controllers.SuscripcionesController">
+            <summary>
+            Controlador de suscripciones
+            </summary>
+        </member>
         <member name="M:JuanApiService.Controllers.SuscripcionesController.GetSuscripciones">
             <summary>
             Retorna lista de suscripciones en base de datos
             </summary>
              <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:JuanApiService.Controllers.SuscripcionesController.GetSuscripcione(System.Int32)" -->
+        <member name="M:JuanApiService.Controllers.SuscripcionesController.GetSuscripcione(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:JuanApiService.Controllers.SuscripcionesController.PutSuscripcione(System.Int32,JuanApiService.Models.Suscripcione)">
             <summary>
-            Busca una suscripcion y la modifica
+            Este metodo sirve para modificar una suscripcion ya existente
             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:JuanApiService.Controllers.SuscripcionesController.PostSuscripcione(JuanApiService.Models.Suscripcione)">
-            <summary>
-            Crea una suscripcion nueva
-            </summary>
-             <returns></returns>
+            <param name="id">Este es el ID de la suscripcion a modificar</param>
+            <param name="suscripcione">Recibe un objeto por PUT con los parametros a modificar de dicha suscripcion</param>
+            <returns>Retorna void</returns>
         </member>
         <member name="M:JuanApiService.Controllers.SuscripcionesController.DeleteSuscripcione(System.Int32)">
             <summary>
-            Borra una suscripcion existente de ID tal
+            Este metodo borra una suscripcion ya existente
             </summary>
-             <returns></returns>
+            <param name="id">Recibe el id de la suscripcion a borrar</param>
+            <returns>Retorna la informacion contenida en la suscripcion borrada</returns>
         </member>
-        <member name="M:JuanApiService.Controllers.SuscripcionesController.GetSuscripcione(System.Int32,System.Int32)">
+        <member name="M:JuanApiService.Controllers.SuscripcionesController.EstadoSuscripcion(System.Int32,System.Int32)">
             <summary>
-            Modifica el estado de una suscripcion si activa o no
+            Esta funcion modifica el estado de una suscripcion, Si esta activa o desactivada
             </summary>
-             <returns></returns>
+            <param name="id">Recibe el id de la suscripcion a activar o desactivar</param>
+            <param name="status">Recibe 1 para activar una suscripcion o 0 para desactivar la suscripcion</param>
+            <returns></returns>
+        </member>
+        <member name="M:JuanApiService.Controllers.SuscripcionesController.Dispose(System.Boolean)">
+            <summary>
+            Disposable
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:JuanApiService.Controllers.SuscriptorsController">
+            <summary>
+            Controlador de suscriptores
+            </summary>
+        </member>
+        <member name="F:JuanApiService.Controllers.SuscriptorsController.db">
+            <summary>
+            Db context
+            </summary>
         </member>
         <member name="M:JuanApiService.Controllers.SuscriptorsController.GetSuscriptors">
             <summary>
@@ -627,6 +686,276 @@
             </summary>
             <param name="id">ID del suscriptor</param>
             <returns></returns>
+        </member>
+        <member name="M:JuanApiService.Controllers.SuscriptorsController.Dispose(System.Boolean)">
+            <summary>
+            Dispose
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:JuanApiService.Models.Cliente">
+            <summary>
+            Esta es la clase Modelo de clientes
+            </summary>
+        </member>
+        <member name="M:JuanApiService.Models.Cliente.#ctor">
+            <summary>
+            Contiene los hashset del modelo de clientes
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.ClienteId">
+            <summary>
+            Campo asignado automaticamente
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.NombreCliente">
+            <summary>
+            Campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.Telefono">
+            <summary>
+            Campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.Email">
+            <summary>
+            Campo Obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.Pais">
+            <summary>
+            Este es un campo opcional
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.Ciudad">
+            <summary>
+            Este campo no es obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.Sector">
+            <summary>
+            Este campo no es obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.Suscripciones">
+            <summary>
+            Este un campo dinamico, el cual contienen una coleccion de suscripcions, pero este se llena de manera autoamtica
+            no es necesario enviarle esta informacion a la base de datos.
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Cliente.Suscriptors">
+            <summary>
+            Este un campo dinamico que se asigna automaticamente, no es necesario llenarlo
+            </summary>
+        </member>
+        <member name="T:JuanApiService.Models.Servicio">
+            <summary>
+            Esta es la clase modelo de los Servicios
+            </summary>
+        </member>
+        <member name="M:JuanApiService.Models.Servicio.#ctor">
+            <summary>
+            Constructor de Servicio hace un Hashset a suscr
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Servicio.ServicioId">
+            <summary>
+            Este es un valor asignado automaticamente
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Servicio.NombreServicio">
+            <summary>
+            Este es un valor obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Servicio.Descripcion">
+            <summary>
+            Este es un campo opcional
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Servicio.Precio">
+            <summary>
+            Este es un campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Servicio.Suscripciones">
+            <summary>
+            Campo dinamico, no necesita ser asignado
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Servicio.SuscripcionServicios">
+            <summary>
+            Campo dinamico, no necesita ser asignado
+            </summary>
+        </member>
+        <member name="T:JuanApiService.Models.Suscripcione">
+            <summary>
+            Notese que las suscripciones se crean automaticamente
+            Cuando un suscriptor es creado, este es acompanado de una suscripcion en estado
+            de desactivado
+            </summary>
+        </member>
+        <member name="M:JuanApiService.Models.Suscripcione.#ctor">
+            <summary>
+            El constructor de la clase, le asigna la fecha en la que este fue creado
+             y a su vez aniade el estado de la suscripcion como desactivada.
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.SuscripcionId">
+            <summary>
+            Valor asignado automaticamente
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.ServicioId">
+            <summary>
+            Este campo no tiene ninguna funcionalidad en el WebApo
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.ClienteId">
+            <summary>
+            Este es un campo obligatorio, que hay que dictarle al modelo en la creacion para evitar errores.
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.SuscriptorId">
+            <summary>
+            Este un campo obligatorio a la hora de crear una suscripcion
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.FechaDeCreacion">
+            <summary>
+            Este es un campo que es asignado automaticamente en la creacion del objeto, no tiene que ser hecho por el usuario
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.Activo">
+            <summary>
+            Este campo se asigna automaticamente con la creacion del objeto
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.Cliente">
+            <summary>
+            No es necesario llenar este campo
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.Servicio">
+            <summary>
+            No es necesario llenar este campo
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.Suscriptor">
+            <summary>
+            No es necesario llenar este campo
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscripcione.SuscripcionServicios">
+            <summary>
+            No es necesario llenar este campo
+            </summary>
+        </member>
+        <member name="T:JuanApiService.Models.SuscripcionServicio">
+            <summary>
+            Esta clase maneja en enlace que dice que servicios del api
+            contiene una suscripcion en especifico
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.SuscripcionServicio.SuscServiciosId">
+            <summary>
+            Valor asignado automaticamente
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.SuscripcionServicio.ServicioId">
+            <summary>
+            Valor se asigna por el metodo SerivceToSuscription
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.SuscripcionServicio.SuscripcionId">
+            <summary>
+            Valor se asigna por el metodo serviceToSuscription
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.SuscripcionServicio.Servicio">
+            <summary>
+            Campo dinamico, no necesita ser asignado
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.SuscripcionServicio.Suscripcione">
+            <summary>
+            campo dinamico, no necesita ser asignado
+            </summary>
+        </member>
+        <member name="T:JuanApiService.Models.Suscriptor">
+            <summary>
+            Esta clase contiene los datos del suscriptor
+            </summary>
+        </member>
+        <member name="M:JuanApiService.Models.Suscriptor.#ctor">
+            <summary>
+            El constructor de la clase
+            Autoamticamente asigna las suscripciones que le corresponden a este 
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.SuscriptorId">
+             <summary>
+            Valor asignado automaticamente
+             </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Nombre">
+            <summary>
+            Campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Apellido">
+            <summary>
+            Campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Email">
+            <summary>
+            Campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Telefono">
+            <summary>
+            Campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Cedula">
+            <summary>
+            Campo obligatorio
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Pais">
+            <summary>
+            Campo opcional
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Ciudad">
+            <summary>
+            Campo opcional
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Sector">
+            <summary>
+            Campo opcional
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.ClienteId">
+            <summary>
+            Campo obligatorio
+            Un Suscriptor no puede existir si no forma parte de un cliente.
+            El cliente en este caso es la persona que accede al api para 
+            Usar los servicios del mismo.
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Cliente">
+            <summary>
+            Campo asignado por el enlace entre esta tabla y la de clietnes
+            </summary>
+        </member>
+        <member name="P:JuanApiService.Models.Suscriptor.Suscripciones">
+            <summary>
+            Campo asignado por el enlace entre esta tabla y la de clientes
+            </summary>
         </member>
     </members>
 </doc>

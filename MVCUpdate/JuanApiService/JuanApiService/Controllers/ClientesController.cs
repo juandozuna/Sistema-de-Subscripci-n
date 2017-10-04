@@ -6,14 +6,22 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Description;
 using JuanApiService.Models;
 
 namespace JuanApiService.Controllers
 {
+    /// <summary>
+    /// Estos son los metodos del controlador de clientes
+    /// </summary>
     public class ClientesController : ApiController
     {
+        /// <summary>
+        /// Este es el DBset el cual tiene la conexion
+        /// a la base de datos a traves de ENTITY
+        /// </summary>
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
 
         // GET: api/Clientes
@@ -21,6 +29,7 @@ namespace JuanApiService.Controllers
         /// Retorna un arreglo de todos los clientes contenidos en la base de datos
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public IQueryable<Cliente> GetClientes()
         {
             return db.Clientes;
@@ -30,7 +39,7 @@ namespace JuanApiService.Controllers
         /// <summary>
         /// Retorna el objeto del cliente si es encontrado por el id suministrado
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Recibe el id del cliente a buscar</param>
         /// <returns></returns>
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult GetCliente(int id)
@@ -52,7 +61,7 @@ namespace JuanApiService.Controllers
         /// <param name="id">Id Del Cliente</param>
         /// <param name="cliente">Objeto del cliente que recibe por JSON</param>
         /// <returns></returns>
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(Cliente))]
         public IHttpActionResult PutCliente(int id, Cliente cliente)
         {
             if (!ModelState.IsValid)
@@ -60,12 +69,18 @@ namespace JuanApiService.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != cliente.ClienteId)
+            var c = db.Clientes.Find(id);
+            if (c != null)
             {
-                return BadRequest();
+                c.NombreCliente = cliente.NombreCliente;
+                c.Ciudad = cliente.Ciudad;
+                c.Email = cliente.Email;
+                c.Pais = cliente.Pais;
+                c.Sector = cliente.Sector;
+                c.Telefono = cliente.Telefono;
             }
-
-            db.Entry(cliente).State = EntityState.Modified;
+            
+            db.Entry(c).State = EntityState.Modified;
 
             try
             {
@@ -143,6 +158,11 @@ namespace JuanApiService.Controllers
             return Ok(cliente);
         }
 
+
+        /// <summary>
+        /// Metodo de Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

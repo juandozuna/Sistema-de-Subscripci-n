@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,18 +12,18 @@ namespace MVCSuscriptionSystem
 {
     public partial class Startup
     {
-        public void Configuration(IAppBuilder app)
+        public async void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //createRolesandUsers();
+            await CreateRolesandUsersAsync();
         }
 
-        private void createRolesandUsers()
+        private async Task CreateRolesandUsersAsync()
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
             // In Startup iam creating first Admin Role and creating a default Admin User    
@@ -220,7 +221,8 @@ namespace MVCSuscriptionSystem
 
             }
 
-            var user = UserManager.FindByName("admin");
+            var roles = roleManager.Roles.Select(r => r.Name).ToArray();
+            var user = userManager.FindByName("admin");
             if (user == null)
             {
                 user = new ApplicationUser();
@@ -229,32 +231,13 @@ namespace MVCSuscriptionSystem
 
                 string userPWD = "Intec.123";
 
-                var chkUser = UserManager.Create(user, userPWD);
+                var chkUser = userManager.Create(user, userPWD);
 
                 //Add default User to Role Admin   
                 if (chkUser.Succeeded)
                 {
-                    var result1 = UserManager.AddToRole(user.Id, "Admin");
-                    result1 = UserManager.AddToRole(user.Id, "CrearCliente");
-                    result1 = UserManager.AddToRole(user.Id, "ListarCliente");
-                    result1 = UserManager.AddToRole(user.Id, "VerCliente");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarCliente");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarCliente");
-                    result1 = UserManager.AddToRole(user.Id, "CrearPlan");
-                    result1 = UserManager.AddToRole(user.Id, "ListarPlan");
-                    result1 = UserManager.AddToRole(user.Id, "VerPlan");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarPlan");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarPlan");
-                    result1 = UserManager.AddToRole(user.Id, "CrearServicio");
-                    result1 = UserManager.AddToRole(user.Id, "ListarServicio");
-                    result1 = UserManager.AddToRole(user.Id, "VerServicio");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarServicio");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarServicio");
-                    result1 = UserManager.AddToRole(user.Id, "CrearSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "ListarSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "VerSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "ModificarSuscripcion");
-                    result1 = UserManager.AddToRole(user.Id, "BorrarSuscripcion");
+                    
+                    var result = await userManager.AddToRolesAsync(user.Id, roles);
 
                 }
             }
@@ -264,3 +247,27 @@ namespace MVCSuscriptionSystem
     }
     
 }
+
+
+
+//var result1 = userManager.AddToRole(user.Id, "Admin");
+//result1 = userManager.AddToRole(user.Id, "CrearCliente");
+//result1 = userManager.AddToRole(user.Id, "ListarCliente");
+//result1 = userManager.AddToRole(user.Id, "VerCliente");
+//result1 = userManager.AddToRole(user.Id, "ModificarCliente");
+//result1 = userManager.AddToRole(user.Id, "BorrarCliente");
+//result1 = userManager.AddToRole(user.Id, "CrearPlan");
+//result1 = userManager.AddToRole(user.Id, "ListarPlan");
+//result1 = userManager.AddToRole(user.Id, "VerPlan");
+//result1 = userManager.AddToRole(user.Id, "ModificarPlan");
+//result1 = userManager.AddToRole(user.Id, "BorrarPlan");
+//result1 = userManager.AddToRole(user.Id, "CrearServicio");
+//result1 = userManager.AddToRole(user.Id, "ListarServicio");
+//result1 = userManager.AddToRole(user.Id, "VerServicio");
+//result1 = userManager.AddToRole(user.Id, "ModificarServicio");
+//result1 = userManager.AddToRole(user.Id, "BorrarServicio");
+//result1 = userManager.AddToRole(user.Id, "CrearSuscripcion");
+//result1 = userManager.AddToRole(user.Id, "ListarSuscripcion");
+//result1 = userManager.AddToRole(user.Id, "VerSuscripcion");
+//result1 = userManager.AddToRole(user.Id, "ModificarSuscripcion");
+//result1 = userManager.AddToRole(user.Id, "BorrarSuscripcion");

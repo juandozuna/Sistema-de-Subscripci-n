@@ -13,8 +13,15 @@ using Microsoft.Ajax.Utilities;
 
 namespace JuanApiService.Controllers
 {
+    /// <summary>
+    /// Controlador de suscriptores
+    /// </summary>
     public class SuscriptorsController : ApiController
     {
+
+        /// <summary>
+        /// Db context
+        /// </summary>
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
 
         // GET: api/Suscriptors
@@ -64,9 +71,21 @@ namespace JuanApiService.Controllers
             {
                 return BadRequest();
             }
-
-            db.Entry(suscriptor).State = EntityState.Modified;
-
+            var s = db.Suscriptors.Find(id);
+            
+            if(s != null)
+            {
+                s.Apellido = suscriptor.Apellido;
+                s.Cedula = suscriptor.Cedula;
+                s.Ciudad = suscriptor.Ciudad;
+                s.Nombre = suscriptor.Nombre;
+                s.ClienteId = suscriptor.ClienteId;
+                s.Email = suscriptor.Email;
+                s.Pais = suscriptor.Pais;
+                s.Sector = suscriptor.Sector;
+                s.Telefono = suscriptor.Telefono;
+                db.Entry(s).State = EntityState.Modified;
+            }
             try
             {
                 db.SaveChanges();
@@ -154,7 +173,10 @@ namespace JuanApiService.Controllers
 
             return Ok(suscriptor);
         }
-
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

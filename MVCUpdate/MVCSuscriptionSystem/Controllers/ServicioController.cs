@@ -64,9 +64,7 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "VerServicio, ListarServicio")]
         public override ActionResult Index()
         {
-            var cliente = new HttpClient();
-            var respuesta = cliente.GetAsync("http://localhost:55040/api/ServiciosAPI").Result;
-            var servicios = respuesta.Content.ReadAsAsync<IEnumerable<Servicio>>().Result;
+            var servicios = db.Servicios;
             return View(servicios.ToList());
         }
 

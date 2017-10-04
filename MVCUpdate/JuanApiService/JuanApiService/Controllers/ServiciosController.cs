@@ -13,8 +13,15 @@ using JuanApiService.Models;
 
 namespace JuanApiService.Controllers
 {
+    /// <summary>
+    /// Controlador de Servicios
+    /// </summary>
     public class ServiciosController : ApiController
     {
+
+        /// <summary>
+        /// dbSet a EntityFramework
+        /// </summary>
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
 
         // GET: api/Servicio
@@ -86,7 +93,7 @@ namespace JuanApiService.Controllers
         /// <param name="id">Id del servicio</param>
         /// <param name="servicio">objeto de servicio</param>
         /// <returns></returns>
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(Servicio))]
         public IHttpActionResult PutServicio(int id, Servicio servicio)
         {
             if (!ModelState.IsValid)
@@ -94,16 +101,20 @@ namespace JuanApiService.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != servicio.ServicioId)
+            var s = db.Servicios.Find(id);
+            if (s != null)
             {
-                return BadRequest();
+                s.NombreServicio = servicio.NombreServicio;
+                s.Descripcion = servicio.Descripcion;
+                s.Precio = servicio.Precio;
             }
 
-            db.Entry(servicio).State = EntityState.Modified;
+            db.Entry(s).State = EntityState.Modified;
 
             try
             {
                 db.SaveChanges();
+                return Ok(s);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -116,8 +127,7 @@ namespace JuanApiService.Controllers
                     throw;
                 }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            
         }
 
         // POST: api/Servicios
@@ -180,6 +190,10 @@ namespace JuanApiService.Controllers
             return Ok(servicio);
         }
 
+        /// <summary>
+        /// Disposable
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

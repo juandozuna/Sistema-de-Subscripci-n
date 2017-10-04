@@ -4,11 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c207b0477dc14b2f8fda73d3ce23e32d" Name="Diagram1">
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="4dca177d203a402daa150196b0dd8c88" Name="Diagram1">
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Cliente" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.ClienteSuscripcion" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Image" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Perfile" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.PerfilRole" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.PerfilUsuario" Width="1.5" PointX="10" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Plan" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Servicio" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.ServicioEnPlan" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
@@ -19,6 +22,8 @@
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_Plan_dbo_Images_ImagenID" ManuallyRouted="false" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_Servicio_dbo_Images_ImagenID" ManuallyRouted="false" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_Subscripcions_dbo_Images_ImageID" ManuallyRouted="false" />
+        <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_PerfilRoles_Perfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_PerfilUsuario_Perfil" ManuallyRouted="false" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_ServicioEnPlan_dbo_Plan_PlanID" ManuallyRouted="false" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_Subscripcions_dbo_Plan_PlanID" ManuallyRouted="false" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID" ManuallyRouted="false" />

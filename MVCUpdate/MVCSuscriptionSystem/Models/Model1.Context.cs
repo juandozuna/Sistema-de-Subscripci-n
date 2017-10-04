@@ -29,6 +29,9 @@ namespace MVCSuscriptionSystem.Models
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<ClienteSuscripcion> ClienteSuscripcions { get; set; }
         public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Perfile> Perfiles { get; set; }
+        public virtual DbSet<PerfilRole> PerfilRoles { get; set; }
+        public virtual DbSet<PerfilUsuario> PerfilUsuarios { get; set; }
         public virtual DbSet<Plan> Plans { get; set; }
         public virtual DbSet<Servicio> Servicios { get; set; }
         public virtual DbSet<ServicioEnPlan> ServicioEnPlans { get; set; }

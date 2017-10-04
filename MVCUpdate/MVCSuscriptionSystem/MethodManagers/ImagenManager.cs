@@ -10,10 +10,13 @@ namespace MVCSuscriptionSystem.MethodManagers
 {
     public class ImagenManager
     {
+
+     //  private static EntityModel db = new EntityModel();
+        private static MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
         
         public static int SubirImagen(HttpPostedFileBase image1)
         {
-            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
+            //MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             Models.Image img = new Models.Image();
             img.ImageData = new byte[image1.ContentLength];
             image1.InputStream.Read(img.ImageData, 0, image1.ContentLength);
@@ -26,13 +29,13 @@ namespace MVCSuscriptionSystem.MethodManagers
         public static int IdImagenSubida(Models.Image image)
         {
 
-            MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
+            //MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
             try
             {
                 if (image != null)
                     return db.Images.Find(image.imagesID).imagesID;
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 return 1;
             }

@@ -11,25 +11,73 @@ namespace JuanApiService.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    /// <summary>
+    /// Notese que las suscripciones se crean automaticamente
+    /// Cuando un suscriptor es creado, este es acompanado de una suscripcion en estado
+    /// de desactivado
+    /// </summary>
     public partial class Suscripcione
     {
+        /// <summary>
+        /// El constructor de la clase, le asigna la fecha en la que este fue creado
+        ///  y a su vez aniade el estado de la suscripcion como desactivada.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Suscripcione()
         {
             this.SuscripcionServicios = new HashSet<SuscripcionServicio>();
+            this.FechaDeCreacion = DateTime.Now;
+            this.Activo = false;
         }
     
+        /// <summary>
+        /// Valor asignado automaticamente
+        /// </summary>
         public int SuscripcionId { get; set; }
+
+        /// <summary>
+        /// Este campo no tiene ninguna funcionalidad en el WebApo
+        /// </summary>
         public Nullable<int> ServicioId { get; set; }
+
+        /// <summary>
+        /// Este es un campo obligatorio, que hay que dictarle al modelo en la creacion para evitar errores.
+        /// </summary>
         public int ClienteId { get; set; }
+
+        /// <summary>
+        /// Este un campo obligatorio a la hora de crear una suscripcion
+        /// </summary>
         public int SuscriptorId { get; set; }
+
+        /// <summary>
+        /// Este es un campo que es asignado automaticamente en la creacion del objeto, no tiene que ser hecho por el usuario
+        /// </summary>
         public System.DateTime FechaDeCreacion { get; set; }
+
+        /// <summary>
+        /// Este campo se asigna automaticamente con la creacion del objeto
+        /// </summary>
         public bool Activo { get; set; }
     
+        /// <summary>
+        /// No es necesario llenar este campo
+        /// </summary>
         public virtual Cliente Cliente { get; set; }
+
+        /// <summary>
+        /// No es necesario llenar este campo
+        /// </summary>
         public virtual Servicio Servicio { get; set; }
+
+        /// <summary>
+        /// No es necesario llenar este campo
+        /// </summary>
         public virtual Suscriptor Suscriptor { get; set; }
+
+        /// <summary>
+        /// No es necesario llenar este campo
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuscripcionServicio> SuscripcionServicios { get; set; }
     }

@@ -12,6 +12,9 @@ using JuanApiService.Models;
 
 namespace JuanApiService.Controllers
 {
+    /// <summary>
+    /// Controlador de suscripciones
+    /// </summary>
     public class SuscripcionesController : ApiController
     {
         private ApiDatabaseConnection db = new ApiDatabaseConnection();
@@ -27,9 +30,10 @@ namespace JuanApiService.Controllers
         }
 
         // GET: api/Suscripciones/5
-        ///<summary>
-        ///Busca una suscripcion en especifico y la retorna
-        ///<summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(Suscripcione))]
         public IHttpActionResult GetSuscripcione(int id)
@@ -44,10 +48,12 @@ namespace JuanApiService.Controllers
         }
 
         // PUT: api/Suscripciones/5
-        ///<summary>
-        ///Busca una suscripcion y la modifica
-        ///</summary>
-        /// <returns></returns>
+        /// <summary>
+        /// Este metodo sirve para modificar una suscripcion ya existente
+        /// </summary>
+        /// <param name="id">Este es el ID de la suscripcion a modificar</param>
+        /// <param name="suscripcione">Recibe un objeto por PUT con los parametros a modificar de dicha suscripcion</param>
+        /// <returns>Retorna void</returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutSuscripcione(int id, Suscripcione suscripcione)
         {
@@ -56,13 +62,15 @@ namespace JuanApiService.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != suscripcione.SuscripcionId)
+            var s = db.Suscripciones.Find(id);
+            if (s != null)
             {
-                return BadRequest();
+                s.Activo = suscripcione.Activo;
+                s.FechaDeCreacion = suscripcione.FechaDeCreacion;
+                s.ClienteId = suscripcione.ClienteId;
+                s.SuscriptorId = suscripcione.SuscriptorId;
+                db.Entry(suscripcione).State = EntityState.Modified;
             }
-
-            db.Entry(suscripcione).State = EntityState.Modified;
-
             try
             {
                 db.SaveChanges();
@@ -82,45 +90,12 @@ namespace JuanApiService.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Suscripciones
-        ///<summary>
-        ///Crea una suscripcion nueva
-        ///</summary>
-        /// <returns></returns>
-        [ResponseType(typeof(Suscripcione))]
-        public IHttpActionResult PostSuscripcione(Suscripcione suscripcione)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Suscripciones.Add(suscripcione);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (SuscripcioneExists(suscripcione.SuscripcionId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = suscripcione.SuscripcionId }, suscripcione);
-        }
-
         // DELETE: api/Suscripciones/5
-        ///<summary>
-        ///Borra una suscripcion existente de ID tal
-        ///</summary>
-        /// <returns></returns>
+      /// <summary>
+      /// Este metodo borra una suscripcion ya existente
+      /// </summary>
+      /// <param name="id">Recibe el id de la suscripcion a borrar</param>
+      /// <returns>Retorna la informacion contenida en la suscripcion borrada</returns>
         [ResponseType(typeof(Suscripcione))]
         public IHttpActionResult DeleteSuscripcione(int id)
         {
@@ -129,7 +104,8 @@ namespace JuanApiService.Controllers
             {
                 return NotFound();
             }
-
+            var ser = suscripcione.SuscripcionServicios.ToList();
+            db.SuscripcionServicios.RemoveRange(ser);
             db.Suscripciones.Remove(suscripcione);
             db.SaveChanges();
 
@@ -137,12 +113,15 @@ namespace JuanApiService.Controllers
         }
 
         //POST: api/Suscripciones/1/0
-        ///<summary>
-        ///Modifica el estado de una suscripcion si activa o no
-        ///</summary>
+        /// <summary>
+        /// Esta funcion modifica el estado de una suscripcion, Si esta activa o desactivada
+        /// </summary>
+        /// <param name="id">Recibe el id de la suscripcion a activar o desactivar</param>
+        /// <param name="status">Recibe 1 para activar una suscripcion o 0 para desactivar la suscripcion</param>
         /// <returns></returns>
         [ResponseType(typeof(Suscripcione))]
-        public IHttpActionResult GetSuscripcione(int id, int status)
+        [HttpPost]
+        public IHttpActionResult EstadoSuscripcion(int id, int status)
         {
             bool estado;
             if (status == 1) estado = true;
@@ -172,7 +151,10 @@ namespace JuanApiService.Controllers
 
         }
 
-
+        /// <summary>
+        /// Disposable
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

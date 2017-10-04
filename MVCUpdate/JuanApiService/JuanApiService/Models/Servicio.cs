@@ -12,22 +12,52 @@ namespace JuanApiService.Models
     using System;
     using System.Collections.Generic;
     
+
+    /// <summary>
+    /// Esta es la clase modelo de los Servicios
+    /// </summary>
     public partial class Servicio
     {
+        /// <summary>
+        /// Constructor de Servicio hace un Hashset a suscr
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Servicio()
         {
             this.Suscripciones = new HashSet<Suscripcione>();
             this.SuscripcionServicios = new HashSet<SuscripcionServicio>();
         }
-    
+
+        /// <summary>
+        /// Este es un valor asignado automaticamente
+        /// </summary>
         public int ServicioId { get; set; }
+
+        /// <summary>
+        /// Este es un valor obligatorio
+        /// </summary>
         public string NombreServicio { get; set; }
+
+        /// <summary>
+        /// Este es un campo opcional
+        /// </summary>
         public string Descripcion { get; set; }
+
+        /// <summary>
+        /// Este es un campo obligatorio
+        /// </summary>
         public double Precio { get; set; }
     
+
+        /// <summary>
+        /// Campo dinamico, no necesita ser asignado
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suscripcione> Suscripciones { get; set; }
+
+        /// <summary>
+        /// Campo dinamico, no necesita ser asignado
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuscripcionServicio> SuscripcionServicios { get; set; }
     }

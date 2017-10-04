@@ -12,26 +12,83 @@ namespace JuanApiService.Models
     using System;
     using System.Collections.Generic;
     
+
+    /// <summary>
+    /// Esta clase contiene los datos del suscriptor
+    /// </summary>
     public partial class Suscriptor
     {
+        /// <summary>
+        /// El constructor de la clase
+        /// Autoamticamente asigna las suscripciones que le corresponden a este 
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Suscriptor()
         {
             this.Suscripciones = new HashSet<Suscripcione>();
         }
     
+        /// <summary>
+        ///Valor asignado automaticamente
+        /// </summary>
         public int SuscriptorId { get; set; }
+
+        /// <summary>
+        /// Campo obligatorio
+        /// </summary>
         public string Nombre { get; set; }
+
+        /// <summary>
+        /// Campo obligatorio
+        /// </summary>
         public string Apellido { get; set; }
+
+        /// <summary>
+        /// Campo obligatorio
+        /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// Campo obligatorio
+        /// </summary>
         public string Telefono { get; set; }
+        
+        /// <summary>
+        /// Campo obligatorio
+        /// </summary>
         public string Cedula { get; set; }
+
+        /// <summary>
+        /// Campo opcional
+        /// </summary>
         public string Pais { get; set; }
+
+        /// <summary>
+        /// Campo opcional
+        /// </summary>
         public string Ciudad { get; set; }
+
+        /// <summary>
+        /// Campo opcional
+        /// </summary>
         public string Sector { get; set; }
+
+        /// <summary>
+        /// Campo obligatorio
+        /// Un Suscriptor no puede existir si no forma parte de un cliente.
+        /// El cliente en este caso es la persona que accede al api para 
+        /// Usar los servicios del mismo.
+        /// </summary>
         public int ClienteId { get; set; }
     
+        /// <summary>
+        /// Campo asignado por el enlace entre esta tabla y la de clietnes
+        /// </summary>
         public virtual Cliente Cliente { get; set; }
+
+        /// <summary>
+        /// Campo asignado por el enlace entre esta tabla y la de clientes
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suscripcione> Suscripciones { get; set; }
     }

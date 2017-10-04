@@ -49,6 +49,29 @@
           <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
           <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Perfiles">
+          <Key>
+            <PropertyRef Name="PerfilID" />
+          </Key>
+          <Property Name="PerfilID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombrePerfil" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerfilRoles">
+          <Key>
+            <PropertyRef Name="perfiRolesID" />
+          </Key>
+          <Property Name="perfiRolesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perfilId" Type="int" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerfilUsuario">
+          <Key>
+            <PropertyRef Name="perfilUserId" />
+          </Key>
+          <Property Name="perfilUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perfilId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Plan">
           <Key>
             <PropertyRef Name="PlanID" />
@@ -195,11 +218,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PerfilRoles_Perfiles">
+          <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
+          <End Role="PerfilRoles" Type="Self.PerfilRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfiles">
+              <PropertyRef Name="PerfilID" />
+            </Principal>
+            <Dependent Role="PerfilRoles">
+              <PropertyRef Name="perfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilUsuario_Perfil">
+          <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
+          <End Role="PerfilUsuario" Type="Self.PerfilUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfiles">
+              <PropertyRef Name="PerfilID" />
+            </Principal>
+            <Dependent Role="PerfilUsuario">
+              <PropertyRef Name="perfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MVCSuscriptionDatabseModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClienteSuscripcion" EntityType="Self.ClienteSuscripcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerfilRoles" EntityType="Self.PerfilRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerfilUsuario" EntityType="Self.PerfilUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plan" EntityType="Self.Plan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServicioEnPlan" EntityType="Self.ServicioEnPlan" Schema="dbo" store:Type="Tables" />
@@ -239,6 +289,14 @@
           <AssociationSet Name="FK_dbo_Subscripcions_dbo_Plan_PlanID" Association="Self.FK_dbo_Subscripcions_dbo_Plan_PlanID">
             <End Role="Plan" EntitySet="Plan" />
             <End Role="Subscripcions" EntitySet="Subscripcions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilRoles_Perfiles" Association="Self.FK_PerfilRoles_Perfiles">
+            <End Role="Perfiles" EntitySet="Perfiles" />
+            <End Role="PerfilRoles" EntitySet="PerfilRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilUsuario_Perfil" Association="Self.FK_PerfilUsuario_Perfil">
+            <End Role="Perfiles" EntitySet="Perfiles" />
+            <End Role="PerfilUsuario" EntitySet="PerfilUsuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -297,6 +355,33 @@
           <NavigationProperty Name="Plans" Relationship="Self.FK_dbo_Plan_dbo_Images_ImagenID" FromRole="Images" ToRole="Plan" />
           <NavigationProperty Name="Servicios" Relationship="Self.FK_dbo_Servicio_dbo_Images_ImagenID" FromRole="Images" ToRole="Servicio" />
           <NavigationProperty Name="Subscripcions" Relationship="Self.FK_dbo_Subscripcions_dbo_Images_ImageID" FromRole="Images" ToRole="Subscripcions" />
+        </EntityType>
+        <EntityType Name="Perfile">
+          <Key>
+            <PropertyRef Name="PerfilID" />
+          </Key>
+          <Property Name="PerfilID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombrePerfil" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PerfilRoles" Relationship="Self.FK_PerfilRoles_Perfiles" FromRole="Perfiles" ToRole="PerfilRoles" />
+          <NavigationProperty Name="PerfilUsuarios" Relationship="Self.FK_PerfilUsuario_Perfil" FromRole="Perfiles" ToRole="PerfilUsuario" />
+        </EntityType>
+        <EntityType Name="PerfilRole">
+          <Key>
+            <PropertyRef Name="perfiRolesID" />
+          </Key>
+          <Property Name="perfiRolesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perfilId" Type="Int32" Nullable="false" />
+          <Property Name="roleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Perfile" Relationship="Self.FK_PerfilRoles_Perfiles" FromRole="PerfilRoles" ToRole="Perfiles" />
+        </EntityType>
+        <EntityType Name="PerfilUsuario">
+          <Key>
+            <PropertyRef Name="perfilUserId" />
+          </Key>
+          <Property Name="perfilUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perfilId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Perfile" Relationship="Self.FK_PerfilUsuario_Perfil" FromRole="PerfilUsuario" ToRole="Perfiles" />
         </EntityType>
         <EntityType Name="Plan">
           <Key>
@@ -418,6 +503,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PerfilRoles_Perfiles">
+          <End Role="Perfiles" Type="Self.Perfile" Multiplicity="1" />
+          <End Role="PerfilRoles" Type="Self.PerfilRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfiles">
+              <PropertyRef Name="PerfilID" />
+            </Principal>
+            <Dependent Role="PerfilRoles">
+              <PropertyRef Name="perfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilUsuario_Perfil">
+          <End Role="Perfiles" Type="Self.Perfile" Multiplicity="1" />
+          <End Role="PerfilUsuario" Type="Self.PerfilUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfiles">
+              <PropertyRef Name="PerfilID" />
+            </Principal>
+            <Dependent Role="PerfilUsuario">
+              <PropertyRef Name="perfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_ServicioEnPlan_dbo_Plan_PlanID">
           <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
           <End Role="ServicioEnPlan" Type="Self.ServicioEnPlan" Multiplicity="*" />
@@ -459,6 +568,9 @@
           <EntitySet Name="Clientes" EntityType="Self.Cliente" />
           <EntitySet Name="ClienteSuscripcions" EntityType="Self.ClienteSuscripcion" />
           <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="Perfiles" EntityType="Self.Perfile" />
+          <EntitySet Name="PerfilRoles" EntityType="Self.PerfilRole" />
+          <EntitySet Name="PerfilUsuarios" EntityType="Self.PerfilUsuario" />
           <EntitySet Name="Plans" EntityType="Self.Plan" />
           <EntitySet Name="Servicios" EntityType="Self.Servicio" />
           <EntitySet Name="ServicioEnPlans" EntityType="Self.ServicioEnPlan" />
@@ -486,6 +598,14 @@
           <AssociationSet Name="FK_dbo_Subscripcions_dbo_Images_ImageID" Association="Self.FK_dbo_Subscripcions_dbo_Images_ImageID">
             <End Role="Images" EntitySet="Images" />
             <End Role="Subscripcions" EntitySet="Subscripcions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilRoles_Perfiles" Association="Self.FK_PerfilRoles_Perfiles">
+            <End Role="Perfiles" EntitySet="Perfiles" />
+            <End Role="PerfilRoles" EntitySet="PerfilRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilUsuario_Perfil" Association="Self.FK_PerfilUsuario_Perfil">
+            <End Role="Perfiles" EntitySet="Perfiles" />
+            <End Role="PerfilUsuario" EntitySet="PerfilUsuarios" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ServicioEnPlan_dbo_Plan_PlanID" Association="Self.FK_dbo_ServicioEnPlan_dbo_Plan_PlanID">
             <End Role="Plan" EntitySet="Plans" />
@@ -550,6 +670,32 @@
                 <ScalarProperty Name="imagesID" ColumnName="imagesID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfiles">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.Perfile">
+              <MappingFragment StoreEntitySet="Perfiles">
+                <ScalarProperty Name="PerfilID" ColumnName="PerfilID" />
+                <ScalarProperty Name="nombrePerfil" ColumnName="nombrePerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerfilRoles">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.PerfilRole">
+              <MappingFragment StoreEntitySet="PerfilRoles">
+                <ScalarProperty Name="perfiRolesID" ColumnName="perfiRolesID" />
+                <ScalarProperty Name="perfilId" ColumnName="perfilId" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerfilUsuarios">
+            <EntityTypeMapping TypeName="MVCSuscriptionDatabseModel.PerfilUsuario">
+              <MappingFragment StoreEntitySet="PerfilUsuario">
+                <ScalarProperty Name="perfilUserId" ColumnName="perfilUserId" />
+                <ScalarProperty Name="perfilId" ColumnName="perfilId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
