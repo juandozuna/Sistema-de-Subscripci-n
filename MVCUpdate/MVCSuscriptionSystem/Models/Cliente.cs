@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace MVCSuscriptionSystem.Models
 {
     using System;
@@ -21,12 +23,26 @@ namespace MVCSuscriptionSystem.Models
         }
     
         public int ClientID { get; set; }
+        
+        [Display(Name = "Primer Nombre")]
         public string Primer_Nombre { get; set; }
+
+        [Display(Name="Segundo Nombre")]
         public string Segundo_Nombre { get; set; }
+
+        [Display(Name = "Apellido")]
         public string Primer_Apellido { get; set; }
+
+        [Display(Name = "Fecha de Nacimiento")]
+        [DataType(DataType.Date)]
         public System.DateTime Fecha_de_nacimiento { get; set; }
+
+        [Display(Name = "Numero Telefonico")]
         public string Numero_Telefonico { get; set; }
+
+        [Display(Name = "Email")]
         public string e_mail { get; set; }
+        [Display(Name = "Metodo de pago")]
         public string Metodo_de_Pago { get; set; }
         public Nullable<int> NumeroTarjeta { get; set; }
         public Nullable<int> CVC_o_CVV { get; set; }

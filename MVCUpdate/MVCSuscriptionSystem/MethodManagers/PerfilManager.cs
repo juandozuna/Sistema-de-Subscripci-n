@@ -56,5 +56,11 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         }
 
+        public static void ModificarPerfil(int pId)
+        {
+            var perfilUsuario = db.PerfilUsuarios.Where(x => x.perfilId == pId).ToList();
+
+        }
+
     }
 }
