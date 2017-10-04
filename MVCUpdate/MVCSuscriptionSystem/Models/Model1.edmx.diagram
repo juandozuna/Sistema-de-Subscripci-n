@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4dca177d203a402daa150196b0dd8c88" Name="Diagram1">
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="4dca177d203a402daa150196b0dd8c88" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.C__MigrationHistory" Width="1.5" PointX="18.125" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Cliente" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.ClienteSuscripcion" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Image" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
