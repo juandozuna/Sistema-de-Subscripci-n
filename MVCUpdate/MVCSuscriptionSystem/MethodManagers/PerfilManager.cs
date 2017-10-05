@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MVCSuscriptionSystem.Models;
@@ -41,8 +42,22 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         private static bool RemoverRolesDePerfil(int pId)
         {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(adb));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(adb));
+
+            //Remueve los roles de la base de datos personal
             var perfiRoles = db.PerfilRoles.Where(r => r.perfilId == pId).ToList();
             db.PerfilRoles.RemoveRange(perfiRoles);
+
+            //este busca los usuarios
+            var perfilUsuario = db.PerfilUsuarios.Where(x => x.perfilId == pId).ToList();
+            var users = adb.Roles.Where(x => perfilUsuario.All(p => p.userId == x.Id)).ToList();
+
+            foreach (var u in users)
+            {
+                var roles = userManager.GetRoles(u.Id).ToArray();
+                userManager.RemoveFromRoles(u.Id, roles);
+            }
 
             try
             {
@@ -56,10 +71,13 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         }
 
-        public static void ModificarPerfil(int pId)
+        public static void ModificarPerfil(int pId, string roles)
         {
-            var perfilUsuario = db.PerfilUsuarios.Where(x => x.perfilId == pId).ToList();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(adb));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(adb));
 
+            
+             
         }
 
     }
