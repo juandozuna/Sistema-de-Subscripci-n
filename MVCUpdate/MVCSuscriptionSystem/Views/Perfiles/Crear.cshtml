@@ -1,0 +1,114 @@
+﻿
+
+@{
+    ViewBag.Title = "Agregar Roles";
+}
+<div ng-app="perfil" ng-controller="CrearPerfil">
+
+    <h2>Crear Perfil Nuevo</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <label>Nombre del Perfil:<span class="text-muted">{{NombrePerfil}}</span></label>
+        <br/>
+        <input name="nombrePerfil" type="text" ng-model="NombrePerfil" placeholder="Escriba el nombre del perfil aqui" required/>
+        <br/>
+        <div ng-show="NombreRequerido" class="alert alert-danger">Debe de escribir un nombre para el Perfil</div>
+        <h1 class="display-4  text-center">Roles</h1>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                Usuario Administrativo
+                <input class="form-check-input" type="checkbox" name="Admin" id="Admin" ng-model="adminChecked"/>
+            </label>
+        </div>
+        <div class="alert alert-info" role="alert" ng-show="adminChecked">Seleccionando el rol de <strong>admin</strong> asegura que este perfil tambien incluye todos los roles disponibles en el programa
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 align-self-center">
+                <table class="table table-bordered">
+                    <thead>
+                    <th></th>
+                    <th>Ver</th>
+                    <th>Crear</th>
+                    <th>Modificar</th>
+                    <th>Borrar</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Clientes</th>
+                        @{ string text = "VerCliente"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "CrearCliente"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "ModificarCliente"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "BorrarCliente"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Planes</th>
+                        @{ text = "VerPlan"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "CrearPlan"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "ModificarPlan"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "BorrarPlan"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Servicios</th>
+                        @{ text = "VerServicio"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "CrearServicio"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "ModificarServicio"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "BorrarServicio"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Suscripciones</th>
+                        @{ text = "VerSuscripcion"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "CrearSuscripcion"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "ModificarSuscripcion"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                        @{ text = "BorrarSuscripcion"; }
+                        <td><input class="form-check-input text-center d" type="checkbox" name="@text" id="@text"/></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Agregrar Roles" class="btn btn-success"/>
+            </div>
+        </div>
+
+    }                     
+</div>
+
+@section scripts
+{
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
+    <script>
+        (function() {
+            var app = angular.module('perfil', []);
+            var CrearPerfil = function($scope, $http) {
+
+               
+              
+
+            }
+
+            app.controller('CrearPerfil', CrearPerfil);
+        })();
+    
+    </script>
+}
+

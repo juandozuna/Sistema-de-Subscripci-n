@@ -1,0 +1,45 @@
+﻿@using MVCSuscriptionSystem.Models
+@model  IEnumerable<Perfile>
+
+@{
+    ViewBag.Title = "Perfiles Administrativos";
+   // Layout = "_Layout";
+}
+
+        <h1 class="display-1 text-center">Perfiles de usuario</h1>
+        <a href="@Url.Action("Crear")" type="button" class="btn btn-primary btn-block">Crear perfil nuevo</a>
+
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PerfilID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombrePerfil)
+        </th>
+        <th>Cantidad de Roles</th>
+        <th>Usuarios con este perfil</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.PerfilID</td>
+            <td>@item.nombrePerfil</td>
+            <td>@item.PerfilRoles.Count</td>
+            <td>@item.PerfilUsuarios.Count</td>
+            <td class="text-center"><a href="#" class="btn btn-secondary">Ver</a></td>
+            <td class="text-center"><a href="#" class="btn btn-secondary">Modificar</a></td>
+            <td class="text-center"><a href="#" class="btn btn-secondary">Borrar</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+

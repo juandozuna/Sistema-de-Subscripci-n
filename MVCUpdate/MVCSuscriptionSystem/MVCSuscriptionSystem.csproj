@@ -217,6 +217,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\ProgramManager.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
@@ -311,6 +312,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\angular-mocks.js" />
+    <None Include="Scripts\angular.intellisense.js" />
+    <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -335,6 +339,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -396,9 +401,14 @@
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Administration\AddRoles.cshtml" />
     <Content Include="Views\Administration\_AdminPortalMenu.cshtml" />
+    <Content Include="Views\Perfiles\Index.cshtml" />
+    <Content Include="Views\Perfiles\Crear.cshtml" />
+    <Content Include="Views\Perfiles\VerDetalles.cshtml" />
+    <Content Include="Views\Perfiles\Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\angular\" />
     <Folder Include="Views\ProgramManager\" />
   </ItemGroup>
   <ItemGroup>

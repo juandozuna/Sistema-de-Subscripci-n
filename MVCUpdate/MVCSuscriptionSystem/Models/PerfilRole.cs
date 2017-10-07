@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+
 namespace MVCSuscriptionSystem.Models
 {
     using System;
@@ -17,7 +20,8 @@ namespace MVCSuscriptionSystem.Models
         public int perfiRolesID { get; set; }
         public int perfilId { get; set; }
         public string roleName { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Perfile Perfile { get; set; }
     }
 }

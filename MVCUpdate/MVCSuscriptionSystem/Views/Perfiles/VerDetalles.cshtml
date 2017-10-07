@@ -1,0 +1,30 @@
+﻿@using MVCSuscriptionSystem.Models
+@model MVCSuscriptionSystem.Models.Perfile
+
+@{
+    ViewBag.Title = "Ver Detalles";
+    ApplicationDbContext adb = new ApplicationDbContext();
+}
+
+<h1 class="display-2 text-center">Perfil: @Model.nombrePerfil</h1>
+<hr/>
+<h2>Roles en El Perfil</h2>
+<ul class="list-group w-100">
+    @foreach (var item in Model.PerfilRoles)
+    {
+        <li class="list-group-item">@item.roleName</li>
+    }
+</ul>
+<hr />
+<h2>Usuarios que tienen este Rol</h2>
+<ul class="list-group w-100">
+    @foreach (var item in Model.PerfilUsuarios)
+    {
+        var user = adb.Users.Find(item.userId);
+        if (user != null)
+        {
+            <li class="list-group-item">@user.UserName</li>
+        }
+    }
+</ul>
+
