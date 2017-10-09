@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MVCSuscriptionSystem.Models.ViewModel.UsuarioListado>
+
+@{
+    ViewBag.Title = "Usuarios";
+
+    
+}
+
+<h1 class="display-3 text-center">Listado de Usuarios</h1>
+<a class="btn btn-primary btn-block" href="@Url.Action("Register","Account")">Crear nuevo Usuario</a>
+<table class="table">
+    <thead class="thead-default">
+    <tr>
+        <th>Nombre de usuario</th>
+        <th>Correo electronico</th>
+        <th>Perfil Seleccionado</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            
+
+            <tr id="fila @item.IdPerfilUsuario">     
+                <td>@item.NombreDeUsuario</td>
+                <td>@item.CorreoElectronico</td>
+                <td>@item.perfile.nombrePerfil</td>
+                <td><a class="btn btn-primary btn-block" href="@Url.Action("Modificar", new{id = item.Id})">Editar</a></td>
+                <td id="@item.IdPerfilUsuario"><a class="btn btn-primary btn-block"  href="@Url.Action("BorrarUsuario", new{id = item.Id})">Borrar</a></td>
+            </tr>
+
+            
+
+        }
+    </tbody>
+</table>
+
+
+@section scripts{
+    
+    <script>
+
+        $(document).ready(function() {
+            $('.borrar').click(function() {
+                var id = $(this).attr('id');
+                ConfirmarBorrar(id);
+            });
+
+            
+        });
+
+        var ConfirmarBorrar = function(id) {
+            var confirmarBorrar = '<button class="btn btn-outline-primary" onclick="Borrar(' + id + ')">Confirmar</button><button class="btn btn-danger" onclick="NormalDeleteBtn(' + id + ')" >NO</button>';
+            $('#' + id).empty();
+            $('#' + id).html(confirmarBorrar);
+        }
+
+        var NormalDeleteBtn = function (id) {
+            var row = $('#' + id);
+            row.empty()
+            row.append('<button class="btn btn-primary btn-block" onclick="ConfimarBorrar(' + id + ')">Borrar</button>');
+        }
+
+        function Borrar(uId) {
+            $.ajax({
+                type: 'POST',
+                url: '/Administration/BorrarUsuario/' + uId,
+                success:function(data) {
+                    $('#fila ' + uId).hide(600);
+                }
+        });
+        }
+
+    </script>
+
+
+
+}

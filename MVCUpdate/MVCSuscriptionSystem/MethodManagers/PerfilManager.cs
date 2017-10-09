@@ -79,9 +79,9 @@ namespace MVCSuscriptionSystem.MethodManagers
         {
             //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(adb));
             //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(adb));
-
-            var perfilUsuario = db.PerfilUsuarios.Where(x => x.perfilId == pId).ToList().AsEnumerable();
-            var usersId = perfilUsuario.Select(x => x.userId).ToList();
+            
+            
+            var usersId =db.PerfilUsuarios.Where(p => p.perfilId == pId).Select(x => x.userId).ToList();
             var perfil = db.Perfiles.Find(pId);
             perfil.nombrePerfil = nombrePerfil;
             db.Entry(perfil).State = EntityState.Modified;
@@ -106,17 +106,27 @@ namespace MVCSuscriptionSystem.MethodManagers
         /// </summary>
         /// <param name="userId">ID en string del usuario</param>
         /// <param name="pId">ID del perfil a seleccionar</param>
-        public static void AsociarRolesAUsuario(string userId, int pId)
+        public static void AsociarRolesAUsuario(string uId, int pId)
         {
             //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(adb));
+            
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(adb));
             var perfile = db.Perfiles.Find(pId);
             if (perfile != null)
             {
-                var roles = perfile.PerfilRoles.Select(x => x.roleName).ToArray();
-                if (userManager.FindById(userId) != null)
+                var perfilUsuario = new PerfilUsuario()
                 {
-                    userManager.AddToRoles(userId, roles);
+                    userId = uId,
+                    perfilId = pId
+                };
+
+                db.PerfilUsuarios.Add(perfilUsuario);
+                db.SaveChanges();
+
+                var roles = perfile.PerfilRoles.Select(x => x.roleName).ToArray();
+                if (userManager.FindById(uId) != null)
+                {
+                    userManager.AddToRoles(uId, roles);
                     
 
                 }
@@ -131,6 +141,9 @@ namespace MVCSuscriptionSystem.MethodManagers
 
             try
             {
+                var perfilUsuario = db.PerfilUsuarios.SingleOrDefault(x => x.userId == userId);
+                db.PerfilUsuarios.Remove(perfilUsuario);
+                db.SaveChanges();
                 userManager.RemoveFromRoles(userId,roles);
                 AsociarRolesAUsuario(userId, pId);
                 return true;
@@ -143,6 +156,38 @@ namespace MVCSuscriptionSystem.MethodManagers
         }
 
 
+        public static bool BorrarPerfil(int pId)
+        {
+            var perfil = db.Perfiles.Find(pId);
+            if (perfil == null) return false;
+            //var perfilRoles = perfil.PerfilRoles.ToList();
+            //var perfilUsuarios = perfil.PerfilUsuarios.ToList();
+
+           var test = RemoverRolesDePerfil(pId);
+            perfil.nombrePerfil = "   ";
+            db.Entry(perfil).State = EntityState.Modified;
+            db.SaveChanges();
+            return true;
+
+
+            //db.PerfilRoles.RemoveRange(perfilRoles);
+            //db.PerfilUsuarios.RemoveRange(perfilUsuarios);
+            //db.Perfiles.Remove(perfil);
+
+        }
+
+        public static void DeleteProfileFromDb(int pId)
+        {
+            var perfil = db.Perfiles.Find(pId);
+
+            var perfilUsuarios = perfil.PerfilUsuarios.ToList();
+            var perfilRoles = perfil.PerfilRoles.ToList();
+            db.PerfilRoles.RemoveRange(perfilRoles);
+            db.PerfilUsuarios.RemoveRange(perfilUsuarios);
+            db.Perfiles.Remove(perfil);
+            db.SaveChanges();
+        }
+
         public static string[] ArregloDeStringDeRoles(FormCollection c, int skip)
         {
             if (skip > 3) skip = 3;
@@ -151,7 +196,6 @@ namespace MVCSuscriptionSystem.MethodManagers
             if (c["Admin"] != null)
             {
                 var roles = roleManager.Roles.Select(x => x.Name).ToList();
-                roles.Add("Admin");
                 return roles.ToArray();
             }
             else

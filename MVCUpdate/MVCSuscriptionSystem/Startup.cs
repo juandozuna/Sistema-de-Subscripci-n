@@ -4,6 +4,7 @@ using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
+using MVCSuscriptionSystem.MethodManagers;
 using MVCSuscriptionSystem.Models;
 using Owin;
 
@@ -26,7 +27,9 @@ namespace MVCSuscriptionSystem
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
+            //await userManager.DeleteAsync(userManager.FindById("9d7c4abb-e180-423a-9ec2-9c91f8e6ec90"));
             // In Startup iam creating first Admin Role and creating a default Admin User    
+            //PerfilManager.DeleteProfileFromDb(5);
             if (!roleManager.RoleExists("Admin"))
             {
 

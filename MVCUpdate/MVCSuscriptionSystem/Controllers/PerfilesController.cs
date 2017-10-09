@@ -17,7 +17,13 @@ namespace MVCSuscriptionSystem.Controllers
     {
         public override ActionResult Borrar(int id)
         {
-            throw new NotImplementedException();
+            var perfil = db.Perfiles.Find(id);
+            if (perfil != null)
+            {
+                PerfilManager.BorrarPerfil(perfil.PerfilID);
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
         }
 
         public override ActionResult Crear()
@@ -89,6 +95,12 @@ namespace MVCSuscriptionSystem.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Este metodo retorna JSON para ser utilizado en una de las ventanas
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult GetPerfilDetalles(int id)
         {
             var perfil = PerfilManager.GetPerfile(id);

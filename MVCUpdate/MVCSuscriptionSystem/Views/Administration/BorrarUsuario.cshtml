@@ -1,0 +1,56 @@
+﻿@model MVCSuscriptionSystem.Models.ViewModel.UsuarioListado
+
+@{
+    ViewBag.Title = "BorrarUsuario";
+}
+
+<h1 class="display-4">Borrar Usuario <span class="text-muted">@Model.NombreDeUsuario</span></h1>
+
+<h3>Esta seguro de que quiere borrar a este usuario</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreDeUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreDeUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.perfile.nombrePerfil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.perfile.nombrePerfil)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary btn-block" /> |
+            @Html.ActionLink("Voler atras", "Listado")
+        </div>
+    }
+</div>
