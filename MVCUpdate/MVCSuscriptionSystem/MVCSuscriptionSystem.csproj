@@ -61,6 +61,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
@@ -212,6 +213,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Connected Services\ServicioPedro\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
@@ -225,6 +231,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpClients\HttpMethods\AHttpClient.cs" />
+    <Compile Include="HttpClients\HttpMethods\TasaClient.cs" />
+    <Compile Include="HttpClients\TasasDeIntercambio.cs" />
     <Compile Include="MethodManagers\AdminManager.cs" />
     <Compile Include="MethodManagers\ClienteManager.cs" />
     <Compile Include="MethodManagers\ImagenManager.cs" />
@@ -287,6 +296,136 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\ServicioPedro\ManejadorServicios.disco" />
+    <None Include="Connected Services\ServicioPedro\configuration91.svcinfo" />
+    <None Include="Connected Services\ServicioPedro\configuration.svcinfo" />
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.ActivarSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BorrarClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BorrarServicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BorrarSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BorrarSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarApellidoSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarIDClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarIDServicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarIDSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarIDSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarNombreClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarNombreServicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarNombreSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarServicioSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.BuscarTelefonoSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.ClientesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.CrearClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.CrearServicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.CrearSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.CrearSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.DesactivarSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarApellidoSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarClienteSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarDescripcionServicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarNombreClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarNombreServicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarNombreSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarPrecioServicioResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarServicioSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarSuscriptorSuscripcionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.EditarTelefonoSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.ServiciosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SOAPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscripcionesActivasPorClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscripcionesActivasPorSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscripcionesActivasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscripcionesNoActivasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscripcionesPorClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscripcionesPorSuscriptorResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscripcionesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServicioPedro\MVCSuscriptionSystem.ServicioPedro.SuscriptoresResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServicioPedro\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\AdminStyle.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -314,6 +453,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\angular-mocks.js" />
+    <None Include="Connected Services\ServicioPedro\ManejadorServicios.wsdl" />
     <None Include="Scripts\angular.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -433,6 +573,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioPedro\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

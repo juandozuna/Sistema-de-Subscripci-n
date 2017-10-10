@@ -164,7 +164,7 @@ namespace MVCSuscriptionSystem.MethodManagers
             //var perfilUsuarios = perfil.PerfilUsuarios.ToList();
 
            var test = RemoverRolesDePerfil(pId);
-            perfil.nombrePerfil = "   ";
+            perfil.nombrePerfil = "BORRADO";
             db.Entry(perfil).State = EntityState.Modified;
             db.SaveChanges();
             return true;

@@ -7,7 +7,14 @@
 <h2>Listado de PLanes</h2>
 
 <p>
-    @Html.ActionLink("Crear Nuevo", "Crear", new {@class="btn btn-success"})
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Crear Nuevo", "Crear", new { @class = "btn btn-success" })
+        }
+    }
+    
 </p>
 <table class="table">
     <tr>

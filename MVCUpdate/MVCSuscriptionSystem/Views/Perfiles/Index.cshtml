@@ -29,15 +29,15 @@
     <tbody>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.PerfilID</td>
-            <td>@item.nombrePerfil</td>
-            <td>@item.PerfilRoles.Count</td>
-            <td>@item.PerfilUsuarios.Count</td>
-            <td class="text-center"><a href="@Url.Action("VerDetalles", new {id = item.PerfilID})" class="btn btn-secondary">Ver</a></td>
-            <td class="text-center"><a href="@Url.Action("Modificar",new{id = item.PerfilID})" class="btn btn-secondary">Modificar</a></td>
-            <td class="text-center"><a href="@Url.Action("Borrar", new {id = item.PerfilID})" class="btn btn-secondary">Borrar</a></td>
-        </tr>
+       <tr>
+        <td>@item.PerfilID</td>
+        <td>@item.nombrePerfil</td>
+        <td>@item.PerfilRoles.Count</td>
+        <td>@item.PerfilUsuarios.Count</td>
+        <td class="text-center"><a href="@Url.Action("VerDetalles", new {id = item.PerfilID})" class="btn btn-secondary">Ver</a></td>
+        <td class="text-center"><a href="@Url.Action("Modificar", new {id = item.PerfilID})" class="btn btn-secondary">Modificar</a></td>
+        <td class="text-center"><a href="@Url.Action("Borrar", new {id = item.PerfilID})" class="btn btn-secondary">Borrar</a></td>
+    </tr>
     }
     </tbody>
 </table>

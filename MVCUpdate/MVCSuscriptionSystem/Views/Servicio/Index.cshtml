@@ -7,7 +7,16 @@
 <h2>Servicios</h2>
 
 <p>
-    @Html.ActionLink("Hacer uno Nuevo", "Crear")
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Crear Nuevo", "Crear")
+        }
+    }
+
+
+    
 </p>
 <table class="table">
     <tr>

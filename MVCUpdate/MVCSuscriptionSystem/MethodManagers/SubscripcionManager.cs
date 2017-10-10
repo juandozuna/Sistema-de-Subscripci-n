@@ -42,5 +42,10 @@ namespace MVCSuscriptionSystem.MethodManagers
                 db.SaveChanges();
             }
         }
+
+        private static void pruebas()
+        {
+            
+        }
     }
 }

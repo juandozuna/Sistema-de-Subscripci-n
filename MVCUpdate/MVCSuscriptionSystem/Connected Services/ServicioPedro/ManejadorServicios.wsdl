@@ -1,0 +1,1753 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CrearServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="precio" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrearServicioResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SOAPResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="errMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerializedSuscripcion">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="suscriptor" type="tns:SerializedSuscriptor" />
+          <s:element minOccurs="0" maxOccurs="1" name="cliente" type="tns:SerializedCliente" />
+          <s:element minOccurs="0" maxOccurs="1" name="servicio" type="tns:SerializedServicio" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerializedSuscriptor">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="telefono" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerializedCliente">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerializedServicio">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="precio" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSerializedCliente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerializedCliente" nillable="true" type="tns:SerializedCliente" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSerializedSuscripcion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerializedSuscripcion" nillable="true" type="tns:SerializedSuscripcion" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSerializedSuscriptor">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerializedSuscriptor" nillable="true" type="tns:SerializedSuscriptor" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSerializedServicio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerializedServicio" nillable="true" type="tns:SerializedServicio" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CrearCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrearClienteResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Clientes">
+        <s:complexType />
+      </s:element>
+      <s:element name="ClientesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ClientesResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Suscripciones">
+        <s:complexType />
+      </s:element>
+      <s:element name="SuscripcionesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscripcionesResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Suscriptores">
+        <s:complexType />
+      </s:element>
+      <s:element name="SuscriptoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscriptoresResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Servicios">
+        <s:complexType />
+      </s:element>
+      <s:element name="ServiciosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ServiciosResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="telefono" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrearSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="suscriptor" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="cliente" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="servicio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="activado" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrearSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarNombreSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="editar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarNombreSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarNombreSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarApellidoSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="editar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarApellidoSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarApellidoSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarTelefonoSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="editar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarTelefonoSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarTelefonoSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarIDSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarNombreSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="buscar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarNombreSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarNombreSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarApellidoSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="buscar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarApellidoSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarApellidoSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarTelefonoSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="buscar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarTelefonoSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarTelefonoSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarNombreCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="buscar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarNombreClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarNombreClienteResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarIDClienteResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarNombreCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="editar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarNombreClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarNombreClienteResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarNombreServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="editar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarNombreServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarNombreServicioResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarDescripcionServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="editar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarDescripcionServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarDescripcionServicioResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarPrecioServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="editar" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarPrecioServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarPrecioServicioResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarNombreServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="buscar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarNombreServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarNombreServicioResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarIDServicioResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarSuscriptorSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="editar" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarSuscriptorSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarSuscriptorSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarClienteSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="editar" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarClienteSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarClienteSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarServicioSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="editar" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditarServicioSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditarServicioSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="buscar" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarIDSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarIDSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarServicioSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="buscar" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarServicioSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarServicioSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesActivas">
+        <s:complexType />
+      </s:element>
+      <s:element name="SuscripcionesActivasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscripcionesActivasResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesActivasPorCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesActivasPorClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscripcionesActivasPorClienteResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesActivasPorSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesActivasPorSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscripcionesActivasPorSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesNoActivas">
+        <s:complexType />
+      </s:element>
+      <s:element name="SuscripcionesNoActivasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscripcionesNoActivasResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesPorCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesPorClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscripcionesPorClienteResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesPorSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SuscripcionesPorSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SuscripcionesPorSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BorrarServicioResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BorrarClienteResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarSuscriptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarSuscriptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BorrarSuscriptorResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BorrarSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivarSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivarSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ActivarSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DesactivarSuscripcion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DesactivarSuscripcionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DesactivarSuscripcionResult" type="tns:SOAPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CrearServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearServicio" />
+  </wsdl:message>
+  <wsdl:message name="CrearServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrearClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearCliente" />
+  </wsdl:message>
+  <wsdl:message name="CrearClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ClientesSoapIn">
+    <wsdl:part name="parameters" element="tns:Clientes" />
+  </wsdl:message>
+  <wsdl:message name="ClientesSoapOut">
+    <wsdl:part name="parameters" element="tns:ClientesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesSoapIn">
+    <wsdl:part name="parameters" element="tns:Suscripciones" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscripcionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresSoapIn">
+    <wsdl:part name="parameters" element="tns:Suscriptores" />
+  </wsdl:message>
+  <wsdl:message name="SuscriptoresSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscriptoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiciosSoapIn">
+    <wsdl:part name="parameters" element="tns:Servicios" />
+  </wsdl:message>
+  <wsdl:message name="ServiciosSoapOut">
+    <wsdl:part name="parameters" element="tns:ServiciosResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrearSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="CrearSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrearSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="CrearSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarNombreSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarNombreSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="EditarNombreSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarNombreSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarApellidoSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarApellidoSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="EditarApellidoSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarApellidoSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarTelefonoSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarTelefonoSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="EditarTelefonoSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarTelefonoSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarIDSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarIDSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarNombreSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarNombreSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="BuscarNombreSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarNombreSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarApellidoSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarApellidoSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="BuscarApellidoSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarApellidoSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarTelefonoSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarTelefonoSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="BuscarTelefonoSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarTelefonoSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarNombreClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarNombreCliente" />
+  </wsdl:message>
+  <wsdl:message name="BuscarNombreClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarNombreClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarIDCliente" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarIDClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarNombreClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarNombreCliente" />
+  </wsdl:message>
+  <wsdl:message name="EditarNombreClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarNombreClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarNombreServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarNombreServicio" />
+  </wsdl:message>
+  <wsdl:message name="EditarNombreServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarNombreServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarDescripcionServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarDescripcionServicio" />
+  </wsdl:message>
+  <wsdl:message name="EditarDescripcionServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarDescripcionServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarPrecioServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarPrecioServicio" />
+  </wsdl:message>
+  <wsdl:message name="EditarPrecioServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarPrecioServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarNombreServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarNombreServicio" />
+  </wsdl:message>
+  <wsdl:message name="BuscarNombreServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarNombreServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarIDServicio" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarIDServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarSuscriptorSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarSuscriptorSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="EditarSuscriptorSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarSuscriptorSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarClienteSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarClienteSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="EditarClienteSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarClienteSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditarServicioSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:EditarServicioSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="EditarServicioSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:EditarServicioSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarIDSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="BuscarIDSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarIDSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscarServicioSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarServicioSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="BuscarServicioSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarServicioSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesActivasSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscripcionesActivas" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesActivasSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscripcionesActivasResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesActivasPorClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscripcionesActivasPorCliente" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesActivasPorClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscripcionesActivasPorClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesActivasPorSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscripcionesActivasPorSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesActivasPorSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscripcionesActivasPorSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesNoActivasSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscripcionesNoActivas" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesNoActivasSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscripcionesNoActivasResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesPorClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscripcionesPorCliente" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesPorClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscripcionesPorClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesPorSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:SuscripcionesPorSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="SuscripcionesPorSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:SuscripcionesPorSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="BorrarServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:BorrarServicio" />
+  </wsdl:message>
+  <wsdl:message name="BorrarServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:BorrarServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="BorrarClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:BorrarCliente" />
+  </wsdl:message>
+  <wsdl:message name="BorrarClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:BorrarClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="BorrarSuscriptorSoapIn">
+    <wsdl:part name="parameters" element="tns:BorrarSuscriptor" />
+  </wsdl:message>
+  <wsdl:message name="BorrarSuscriptorSoapOut">
+    <wsdl:part name="parameters" element="tns:BorrarSuscriptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="BorrarSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:BorrarSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="BorrarSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:BorrarSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActivarSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:ActivarSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="ActivarSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:ActivarSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="DesactivarSuscripcionSoapIn">
+    <wsdl:part name="parameters" element="tns:DesactivarSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="DesactivarSuscripcionSoapOut">
+    <wsdl:part name="parameters" element="tns:DesactivarSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ManejadorServiciosSoap">
+    <wsdl:operation name="CrearServicio">
+      <wsdl:input message="tns:CrearServicioSoapIn" />
+      <wsdl:output message="tns:CrearServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearCliente">
+      <wsdl:input message="tns:CrearClienteSoapIn" />
+      <wsdl:output message="tns:CrearClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Clientes">
+      <wsdl:input message="tns:ClientesSoapIn" />
+      <wsdl:output message="tns:ClientesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Suscripciones">
+      <wsdl:input message="tns:SuscripcionesSoapIn" />
+      <wsdl:output message="tns:SuscripcionesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Suscriptores">
+      <wsdl:input message="tns:SuscriptoresSoapIn" />
+      <wsdl:output message="tns:SuscriptoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Servicios">
+      <wsdl:input message="tns:ServiciosSoapIn" />
+      <wsdl:output message="tns:ServiciosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearSuscriptor">
+      <wsdl:input message="tns:CrearSuscriptorSoapIn" />
+      <wsdl:output message="tns:CrearSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearSuscripcion">
+      <wsdl:input message="tns:CrearSuscripcionSoapIn" />
+      <wsdl:output message="tns:CrearSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreSuscriptor">
+      <wsdl:input message="tns:EditarNombreSuscriptorSoapIn" />
+      <wsdl:output message="tns:EditarNombreSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarApellidoSuscriptor">
+      <wsdl:input message="tns:EditarApellidoSuscriptorSoapIn" />
+      <wsdl:output message="tns:EditarApellidoSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarTelefonoSuscriptor">
+      <wsdl:input message="tns:EditarTelefonoSuscriptorSoapIn" />
+      <wsdl:output message="tns:EditarTelefonoSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDSuscriptor">
+      <wsdl:input message="tns:BuscarIDSuscriptorSoapIn" />
+      <wsdl:output message="tns:BuscarIDSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreSuscriptor">
+      <wsdl:input message="tns:BuscarNombreSuscriptorSoapIn" />
+      <wsdl:output message="tns:BuscarNombreSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarApellidoSuscriptor">
+      <wsdl:input message="tns:BuscarApellidoSuscriptorSoapIn" />
+      <wsdl:output message="tns:BuscarApellidoSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarTelefonoSuscriptor">
+      <wsdl:input message="tns:BuscarTelefonoSuscriptorSoapIn" />
+      <wsdl:output message="tns:BuscarTelefonoSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreCliente">
+      <wsdl:input message="tns:BuscarNombreClienteSoapIn" />
+      <wsdl:output message="tns:BuscarNombreClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDCliente">
+      <wsdl:input message="tns:BuscarIDClienteSoapIn" />
+      <wsdl:output message="tns:BuscarIDClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreCliente">
+      <wsdl:input message="tns:EditarNombreClienteSoapIn" />
+      <wsdl:output message="tns:EditarNombreClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreServicio">
+      <wsdl:input message="tns:EditarNombreServicioSoapIn" />
+      <wsdl:output message="tns:EditarNombreServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarDescripcionServicio">
+      <wsdl:input message="tns:EditarDescripcionServicioSoapIn" />
+      <wsdl:output message="tns:EditarDescripcionServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarPrecioServicio">
+      <wsdl:input message="tns:EditarPrecioServicioSoapIn" />
+      <wsdl:output message="tns:EditarPrecioServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreServicio">
+      <wsdl:input message="tns:BuscarNombreServicioSoapIn" />
+      <wsdl:output message="tns:BuscarNombreServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDServicio">
+      <wsdl:input message="tns:BuscarIDServicioSoapIn" />
+      <wsdl:output message="tns:BuscarIDServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarSuscriptorSuscripcion">
+      <wsdl:input message="tns:EditarSuscriptorSuscripcionSoapIn" />
+      <wsdl:output message="tns:EditarSuscriptorSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarClienteSuscripcion">
+      <wsdl:input message="tns:EditarClienteSuscripcionSoapIn" />
+      <wsdl:output message="tns:EditarClienteSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarServicioSuscripcion">
+      <wsdl:input message="tns:EditarServicioSuscripcionSoapIn" />
+      <wsdl:output message="tns:EditarServicioSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDSuscripcion">
+      <wsdl:input message="tns:BuscarIDSuscripcionSoapIn" />
+      <wsdl:output message="tns:BuscarIDSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarServicioSuscripcion">
+      <wsdl:input message="tns:BuscarServicioSuscripcionSoapIn" />
+      <wsdl:output message="tns:BuscarServicioSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivas">
+      <wsdl:input message="tns:SuscripcionesActivasSoapIn" />
+      <wsdl:output message="tns:SuscripcionesActivasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivasPorCliente">
+      <wsdl:input message="tns:SuscripcionesActivasPorClienteSoapIn" />
+      <wsdl:output message="tns:SuscripcionesActivasPorClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivasPorSuscriptor">
+      <wsdl:input message="tns:SuscripcionesActivasPorSuscriptorSoapIn" />
+      <wsdl:output message="tns:SuscripcionesActivasPorSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesNoActivas">
+      <wsdl:input message="tns:SuscripcionesNoActivasSoapIn" />
+      <wsdl:output message="tns:SuscripcionesNoActivasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesPorCliente">
+      <wsdl:input message="tns:SuscripcionesPorClienteSoapIn" />
+      <wsdl:output message="tns:SuscripcionesPorClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesPorSuscriptor">
+      <wsdl:input message="tns:SuscripcionesPorSuscriptorSoapIn" />
+      <wsdl:output message="tns:SuscripcionesPorSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarServicio">
+      <wsdl:input message="tns:BorrarServicioSoapIn" />
+      <wsdl:output message="tns:BorrarServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarCliente">
+      <wsdl:input message="tns:BorrarClienteSoapIn" />
+      <wsdl:output message="tns:BorrarClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarSuscriptor">
+      <wsdl:input message="tns:BorrarSuscriptorSoapIn" />
+      <wsdl:output message="tns:BorrarSuscriptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarSuscripcion">
+      <wsdl:input message="tns:BorrarSuscripcionSoapIn" />
+      <wsdl:output message="tns:BorrarSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivarSuscripcion">
+      <wsdl:input message="tns:ActivarSuscripcionSoapIn" />
+      <wsdl:output message="tns:ActivarSuscripcionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DesactivarSuscripcion">
+      <wsdl:input message="tns:DesactivarSuscripcionSoapIn" />
+      <wsdl:output message="tns:DesactivarSuscripcionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ManejadorServiciosSoap" type="tns:ManejadorServiciosSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CrearServicio">
+      <soap:operation soapAction="http://tempuri.org/CrearServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearCliente">
+      <soap:operation soapAction="http://tempuri.org/CrearCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Clientes">
+      <soap:operation soapAction="http://tempuri.org/Clientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Suscripciones">
+      <soap:operation soapAction="http://tempuri.org/Suscripciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Suscriptores">
+      <soap:operation soapAction="http://tempuri.org/Suscriptores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Servicios">
+      <soap:operation soapAction="http://tempuri.org/Servicios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/CrearSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/CrearSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/EditarNombreSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarApellidoSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/EditarApellidoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarTelefonoSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/EditarTelefonoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/BuscarIDSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/BuscarNombreSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarApellidoSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/BuscarApellidoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarTelefonoSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/BuscarTelefonoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreCliente">
+      <soap:operation soapAction="http://tempuri.org/BuscarNombreCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDCliente">
+      <soap:operation soapAction="http://tempuri.org/BuscarIDCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreCliente">
+      <soap:operation soapAction="http://tempuri.org/EditarNombreCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreServicio">
+      <soap:operation soapAction="http://tempuri.org/EditarNombreServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarDescripcionServicio">
+      <soap:operation soapAction="http://tempuri.org/EditarDescripcionServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarPrecioServicio">
+      <soap:operation soapAction="http://tempuri.org/EditarPrecioServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreServicio">
+      <soap:operation soapAction="http://tempuri.org/BuscarNombreServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDServicio">
+      <soap:operation soapAction="http://tempuri.org/BuscarIDServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarSuscriptorSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/EditarSuscriptorSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarClienteSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/EditarClienteSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarServicioSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/EditarServicioSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/BuscarIDSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarServicioSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/BuscarServicioSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivas">
+      <soap:operation soapAction="http://tempuri.org/SuscripcionesActivas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivasPorCliente">
+      <soap:operation soapAction="http://tempuri.org/SuscripcionesActivasPorCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivasPorSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/SuscripcionesActivasPorSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesNoActivas">
+      <soap:operation soapAction="http://tempuri.org/SuscripcionesNoActivas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesPorCliente">
+      <soap:operation soapAction="http://tempuri.org/SuscripcionesPorCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesPorSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/SuscripcionesPorSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarServicio">
+      <soap:operation soapAction="http://tempuri.org/BorrarServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarCliente">
+      <soap:operation soapAction="http://tempuri.org/BorrarCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarSuscriptor">
+      <soap:operation soapAction="http://tempuri.org/BorrarSuscriptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/BorrarSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivarSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/ActivarSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DesactivarSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/DesactivarSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ManejadorServiciosSoap12" type="tns:ManejadorServiciosSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CrearServicio">
+      <soap12:operation soapAction="http://tempuri.org/CrearServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearCliente">
+      <soap12:operation soapAction="http://tempuri.org/CrearCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Clientes">
+      <soap12:operation soapAction="http://tempuri.org/Clientes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Suscripciones">
+      <soap12:operation soapAction="http://tempuri.org/Suscripciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Suscriptores">
+      <soap12:operation soapAction="http://tempuri.org/Suscriptores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Servicios">
+      <soap12:operation soapAction="http://tempuri.org/Servicios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/CrearSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/CrearSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/EditarNombreSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarApellidoSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/EditarApellidoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarTelefonoSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/EditarTelefonoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/BuscarIDSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/BuscarNombreSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarApellidoSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/BuscarApellidoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarTelefonoSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/BuscarTelefonoSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreCliente">
+      <soap12:operation soapAction="http://tempuri.org/BuscarNombreCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDCliente">
+      <soap12:operation soapAction="http://tempuri.org/BuscarIDCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreCliente">
+      <soap12:operation soapAction="http://tempuri.org/EditarNombreCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreServicio">
+      <soap12:operation soapAction="http://tempuri.org/EditarNombreServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarDescripcionServicio">
+      <soap12:operation soapAction="http://tempuri.org/EditarDescripcionServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarPrecioServicio">
+      <soap12:operation soapAction="http://tempuri.org/EditarPrecioServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarNombreServicio">
+      <soap12:operation soapAction="http://tempuri.org/BuscarNombreServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDServicio">
+      <soap12:operation soapAction="http://tempuri.org/BuscarIDServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarSuscriptorSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/EditarSuscriptorSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarClienteSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/EditarClienteSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarServicioSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/EditarServicioSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarIDSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/BuscarIDSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarServicioSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/BuscarServicioSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivas">
+      <soap12:operation soapAction="http://tempuri.org/SuscripcionesActivas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivasPorCliente">
+      <soap12:operation soapAction="http://tempuri.org/SuscripcionesActivasPorCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesActivasPorSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/SuscripcionesActivasPorSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesNoActivas">
+      <soap12:operation soapAction="http://tempuri.org/SuscripcionesNoActivas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesPorCliente">
+      <soap12:operation soapAction="http://tempuri.org/SuscripcionesPorCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SuscripcionesPorSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/SuscripcionesPorSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarServicio">
+      <soap12:operation soapAction="http://tempuri.org/BorrarServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarCliente">
+      <soap12:operation soapAction="http://tempuri.org/BorrarCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarSuscriptor">
+      <soap12:operation soapAction="http://tempuri.org/BorrarSuscriptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/BorrarSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivarSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/ActivarSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DesactivarSuscripcion">
+      <soap12:operation soapAction="http://tempuri.org/DesactivarSuscripcion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ManejadorServicios">
+    <wsdl:port name="ManejadorServiciosSoap" binding="tns:ManejadorServiciosSoap">
+      <soap:address location="http://99.92.201.237/servicio3/ManejadorServicios.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ManejadorServiciosSoap12" binding="tns:ManejadorServiciosSoap12">
+      <soap12:address location="http://99.92.201.237/servicio3/ManejadorServicios.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
