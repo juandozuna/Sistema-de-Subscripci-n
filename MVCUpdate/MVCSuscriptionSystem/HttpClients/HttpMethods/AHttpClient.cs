@@ -11,9 +11,8 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods
     {
         protected static HttpClient Client = new HttpClient();
 
-        
-            
-        
+
+
 
     }
 }
