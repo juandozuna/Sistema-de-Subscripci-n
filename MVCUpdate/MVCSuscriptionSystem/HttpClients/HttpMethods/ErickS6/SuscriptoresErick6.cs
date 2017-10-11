@@ -39,6 +39,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
                 Email = c.e_mail,
                 Apellido = c.Primer_Apellido,
                 Cedula = cedula
+
             };
             var content = new StringContent(JsonConvert.SerializeObject(sus), Encoding.UTF8, "application/json");
             var result = Client.PostAsync("api/Suscriptores", content);

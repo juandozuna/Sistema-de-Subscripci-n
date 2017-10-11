@@ -12,7 +12,7 @@ namespace MVCSuscriptionSystem.HttpClients
        
         public int TasaID { get; set; }
         public string ClientKey { get; set; }
-        public decimal ValorIntercambio { get; set; }
+        public double ValorIntercambio { get; set; }
         public DateTime Fecha { get; set; }
 
     }

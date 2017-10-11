@@ -8,6 +8,7 @@ using MVCSuscriptionSystem.HttpClients.HttpMethods;
 using MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6;
 using MVCSuscriptionSystem.HttpClients.Servicio6Erick;
 using MVCSuscriptionSystem.Models;
+using MVCSuscriptionSystem.WebServices;
 using Newtonsoft.Json;
 
 namespace MVCSuscriptionSystemTests
@@ -58,12 +59,12 @@ namespace MVCSuscriptionSystemTests
         {
             TasaClient tasa = new TasaClient();
             var TasaDeIntercambio = new TasasDeIntercambio();
-            TasaDeIntercambio.ClientKey = "10";
-            TasaDeIntercambio.ValorIntercambio = 45.34M;
+            TasaDeIntercambio.ClientKey = "dddd";
+            TasaDeIntercambio.ValorIntercambio = 45.34;
             TasaDeIntercambio.Fecha = DateTime.Today;
             TestContext.WriteLine(JsonConvert.SerializeObject(TasaDeIntercambio));
 
-            var ts = tasa.PostTasaDeIntercambio("10", TasaDeIntercambio);
+            var ts = tasa.PostTasaDeIntercambio("dddd", TasaDeIntercambio);
             TestContext.WriteLine("Client: {0}, Valor: {1}, Fecha: {2}, ID: {3}",ts.ClientKey,ts.ValorIntercambio, ts.Fecha, ts.TasaID);
 
             Assert.IsNotNull(ts);
@@ -160,5 +161,26 @@ namespace MVCSuscriptionSystemTests
             Assert.IsNotNull(r);
             Assert.AreEqual("grupo2",r.Empresa);
         }
+
+        [TestMethod]
+        public void GetRNCTest()
+        {
+            RNCClient c = new RNCClient();
+            var s = c.GetRnc1(101807695);
+            string se = "101807695";
+            Assert.AreEqual(se, s.RNC);
+
+        }
+
+        [TestMethod]
+        public void PedroServiceTest()
+        {
+            var t = PedroWebServiceMethods.GetServicios();
+            TestContext.WriteLine(t.data.ToString());
+
+
+        }
+
+
     }
 }

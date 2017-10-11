@@ -237,6 +237,7 @@
     <Compile Include="HttpClients\HttpMethods\ErickS6\ServiciosErick6.cs" />
     <Compile Include="HttpClients\HttpMethods\ErickS6\SuscripcionesErick6.cs" />
     <Compile Include="HttpClients\HttpMethods\ErickS6\SuscriptoresErick6.cs" />
+    <Compile Include="HttpClients\HttpMethods\RNCClient.cs" />
     <Compile Include="HttpClients\HttpMethods\TasaClient.cs" />
     <Compile Include="HttpClients\RNC.cs" />
     <Compile Include="HttpClients\Servicio6Erick\Cliente6.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="Models\ViewModel\UsuarioListado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebServices\PedroWebServiceMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServicioPedro\ManejadorServicios.disco" />

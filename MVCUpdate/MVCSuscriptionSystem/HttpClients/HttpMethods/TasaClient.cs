@@ -52,7 +52,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods
         public TasasDeIntercambio PostTasaDeIntercambio(string userKey, TasasDeIntercambio tasa)
         {
 
-            
+            tasa.ClientKey = userKey;
             var content = new StringContent(JsonConvert.SerializeObject(tasa), Encoding.UTF8, "application/json");
             var url = "api/TasaDeIntercambios?userKey=" + userKey;
             var result = Client.PostAsync(url, content);
