@@ -12,7 +12,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
 {
     public class ServiciosErick6 : AErickConnection
     {
-        public List<Servicios6> Get()
+        public List<Servicios> Get()
         {
             var response = Client.GetAsync("api/Servicios");
             var json = response.Result.Content.ReadAsStringAsync().Result;
@@ -29,7 +29,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
             //    db.SaveChanges();
             //}
 
-            return s.ToList();
+            return serv.ToList();
         }
 
 
