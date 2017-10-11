@@ -22,6 +22,7 @@ namespace MVCSuscriptionSystem.Properties {
                 return defaultInstance;
             }
         }
+<<<<<<< HEAD
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -32,5 +33,7 @@ namespace MVCSuscriptionSystem.Properties {
                 return ((string)(this["MVCSuscriptionSystem_ServicioPedro_ManejadorServicios"]));
             }
         }
+=======
+>>>>>>> af12be88b1f8fb7fd6312ff558b5a4c8dce9d6e1
     }
 }

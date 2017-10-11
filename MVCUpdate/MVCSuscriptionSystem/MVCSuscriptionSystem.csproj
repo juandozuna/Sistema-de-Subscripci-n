@@ -474,7 +474,11 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\angular-mocks.js" />
+<<<<<<< HEAD
     <None Include="Connected Services\ServiceReference\ManejadorServicios.wsdl" />
+=======
+    <None Include="Connected Services\ServicioPedro\ManejadorServicios.wsdl" />
+>>>>>>> af12be88b1f8fb7fd6312ff558b5a4c8dce9d6e1
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
