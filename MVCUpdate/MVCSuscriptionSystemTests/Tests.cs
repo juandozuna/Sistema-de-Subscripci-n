@@ -8,8 +8,11 @@ using MVCSuscriptionSystem.HttpClients.HttpMethods;
 using MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6;
 using MVCSuscriptionSystem.HttpClients.Servicio6Erick;
 using MVCSuscriptionSystem.Models;
+using MVCSuscriptionSystem;
+using MVCSuscriptionSystem.ServiceReference;
 using MVCSuscriptionSystem.WebServices;
 using Newtonsoft.Json;
+using SerializedServicio = MVCSuscriptionSystem.ServicioPedro.SerializedServicio;
 
 namespace MVCSuscriptionSystemTests
 {
@@ -175,8 +178,13 @@ namespace MVCSuscriptionSystemTests
         [TestMethod]
         public void PedroServiceTest()
         {
-            var t = PedroWebServiceMethods.GetServicios();
-            TestContext.WriteLine(t.data.ToString());
+            var o = PedroWebServiceMethods.GetServiciosPedro();
+            foreach (var servicio in o)
+            {
+                TestContext.WriteLine(servicio.Nombre);
+                TestContext.WriteLine("_______________");
+            }
+
 
 
         }
