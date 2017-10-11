@@ -232,7 +232,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HttpClients\HttpMethods\AHttpClient.cs" />
+    <Compile Include="HttpClients\HttpMethods\ErickS6\ClientesErick6.cs" />
+    <Compile Include="HttpClients\HttpMethods\ErickS6\AErickConnection.cs" />
+    <Compile Include="HttpClients\HttpMethods\ErickS6\ServiciosErick6.cs" />
+    <Compile Include="HttpClients\HttpMethods\ErickS6\SuscripcionesErick6.cs" />
+    <Compile Include="HttpClients\HttpMethods\ErickS6\SuscriptoresErick6.cs" />
+    <Compile Include="HttpClients\HttpMethods\RNCClient.cs" />
     <Compile Include="HttpClients\HttpMethods\TasaClient.cs" />
+    <Compile Include="HttpClients\RNC.cs" />
+    <Compile Include="HttpClients\Servicio6Erick\Cliente6.cs" />
+    <Compile Include="HttpClients\Servicio6Erick\Servicios6.cs" />
+    <Compile Include="HttpClients\Servicio6Erick\Suscripciones6.cs" />
+    <Compile Include="HttpClients\Servicio6Erick\Suscriptores6.cs" />
     <Compile Include="HttpClients\TasasDeIntercambio.cs" />
     <Compile Include="MethodManagers\AdminManager.cs" />
     <Compile Include="MethodManagers\ClienteManager.cs" />
@@ -299,6 +310,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="WebServices\PedroWebServiceMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServicioPedro\ManejadorServicios.disco" />
