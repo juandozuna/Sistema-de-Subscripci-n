@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="TasaIntercambioTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiciosPedroTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
