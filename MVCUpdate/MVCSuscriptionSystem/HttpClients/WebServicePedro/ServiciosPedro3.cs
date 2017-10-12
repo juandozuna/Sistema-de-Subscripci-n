@@ -10,7 +10,12 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
     public class ServiciosPedro3
     {
         
-        private ManejadorServicios manager = new ManejadorServicios();
+        private ManejadorServicios manager;
+
+        public ServiciosPedro3()
+        {
+            manager = new ManejadorServicios();
+        }
 
         public List<Servicio> GetServicios()
         {
@@ -19,7 +24,7 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
             if (result.success)
             {
                 var serializedServicios = (SerializedServicio[])result.data;
-                servicios = serializedServicios.Select(d => new Servicio(){Nombre = d.nombre, Precio = d.precio}).ToList();
+                servicios = serializedServicios.Select(d => new Servicio(){Nombre = d.nombre, Precio = d.precio, IDPedro = d.id}).ToList();
 
             }
 
@@ -34,7 +39,7 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
             if (result.success)
             {
                 var r = (SerializedServicio) result.data;
-                servicio = new Servicio(){Nombre = r.nombre, Precio = r.precio};
+                servicio = new Servicio(){Nombre = r.nombre, Precio = r.precio, IDPedro = r.id};
 
             }
             return servicio;
