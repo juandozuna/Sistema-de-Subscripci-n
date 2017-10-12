@@ -22,6 +22,14 @@ namespace MVCSuscriptionSystem.MethodManagers
             db.SaveChanges();
         }
 
+        public static void ModificarListadoDeServicios(IEnumerable<Servicio> servicios)
+        {
+            foreach (var  i in COLLECTION)
+            {
+                
+            }
+        }
+
 
         public static void AgregarServicioDB(Servicio s)
         {

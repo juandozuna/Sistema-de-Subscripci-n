@@ -250,6 +250,7 @@
     <Compile Include="MethodManagers\ImagenManager.cs" />
     <Compile Include="MethodManagers\PerfilManager.cs" />
     <Compile Include="MethodManagers\PlanManager.cs" />
+    <Compile Include="MethodManagers\ServiciosManager.cs" />
     <Compile Include="MethodManagers\SubscripcionManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cliente.cs">

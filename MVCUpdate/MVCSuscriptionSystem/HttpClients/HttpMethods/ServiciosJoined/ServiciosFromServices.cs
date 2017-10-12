@@ -5,6 +5,7 @@ using System.Web;
 using MVCSuscriptionSystem.Models;
 using MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6;
 using MVCSuscriptionSystem.HttpClients.WebServicePedro;
+using MVCSuscriptionSystem.MethodManagers;
 
 namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
 {
@@ -27,10 +28,11 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
             using (MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities())
             {
                 var sdb = db.Servicios.ToList();
-                var nuevos = servicios.Where(p => !sdb.Any(o =>(o.IDErick == p.IDErick || o.IDPedro == p.IDPedro))).ToList();
+                var nuevos = servicios.Where(p => !sdb.Any(o => (o.IDErick == p.IDErick || o.IDPedro == p.IDPedro)));
                 var modificados = servicios.Where(p => sdb.All(r=> (r.IDErick ==p.IDErick||r.IDPedro == p.IDPedro) )).ToList();
                 var borrados = sdb.Where(p=>!servicios.Any(t=> (t.IDPedro == p.IDPedro ||t.IDErick == p.IDErick) )).ToList();
 
+                ServiciosManager.AgregarListadoDeServicios(nuevos);
                 
             }
 
