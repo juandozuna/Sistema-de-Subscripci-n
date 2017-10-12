@@ -241,6 +241,7 @@
     <Compile Include="HttpClients\Servicio6Erick\Suscripciones6.cs" />
     <Compile Include="HttpClients\Servicio6Erick\Suscriptores6.cs" />
     <Compile Include="HttpClients\TasasDeIntercambio.cs" />
+    <Compile Include="HttpClients\WebServicePedro\ClientePedro.cs" />
     <Compile Include="HttpClients\WebServicePedro\ServiciosPedro3.cs" />
     <Compile Include="MethodManagers\AdminManager.cs" />
     <Compile Include="MethodManagers\ClienteManager.cs" />

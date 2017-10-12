@@ -18,8 +18,8 @@ namespace MVCSuscriptionSystem.Models
     public partial class MVCSuscriptionDatabseEntities : DbContext
     {
         public MVCSuscriptionDatabseEntities()
-            : base("name=MVCSuscriptionDatabseEntities")
-            //:base ("name=Proyecto")
+            //: base("name=MVCSuscriptionDatabseEntities")
+            :base ("name=Proyecto")
         {
         }
     
