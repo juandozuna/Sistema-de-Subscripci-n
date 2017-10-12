@@ -14,8 +14,18 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
         public void test(int id, bool estado)
         {
 
-            v
-
+            var p = s.BuscarIDSuscripcion(id);
+            if (p.success)
+            {
+                if (estado)
+                {
+                    s.ActivarSuscripcion(id);
+                }
+                else
+                {
+                    s.DesactivarSuscripcion(id);
+                }
+            }
         }
     }
 }

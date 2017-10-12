@@ -24,7 +24,10 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         public static void ModificarListadoDeServicios(IEnumerable<Servicio> servicios)
         {
-          
+            foreach (var s in servicios)
+            {
+                ServicioModificado(s.ServicioID, s);
+            }
         }
 
 
@@ -39,6 +42,12 @@ namespace MVCSuscriptionSystem.MethodManagers
         public static void AgregarListadoDeServicios(IEnumerable<Servicio> s)
         {
             db.Servicios.AddRange(s);
+            db.SaveChanges();
+        }
+
+        public static void BorrarListadoDeServicios(IEnumerable<Servicio> s)
+        {
+            db.Servicios.RemoveRange(s);
             db.SaveChanges();
         }
 

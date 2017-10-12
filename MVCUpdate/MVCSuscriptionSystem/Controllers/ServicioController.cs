@@ -64,6 +64,7 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "VerServicio, ListarServicio")]
         public override ActionResult Index()
         {
+
             var servicios = db.Servicios;
             return View(servicios.ToList());
         }
