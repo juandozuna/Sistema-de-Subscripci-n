@@ -22,5 +22,15 @@ namespace MVCSuscriptionSystem.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://99.92.201.237/servicio3/ManejadorServicios.asmx")]
+        public string MVCSuscriptionSystem_WebReferencePedro_ManejadorServicios {
+            get {
+                return ((string)(this["MVCSuscriptionSystem_WebReferencePedro_ManejadorServicios"]));
+            }
+        }
     }
 }

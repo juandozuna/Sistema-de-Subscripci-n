@@ -6,9 +6,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using MVCSuscriptionSystem.HttpClients;
 using MVCSuscriptionSystem.HttpClients.HttpMethods;
 using MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6;
+using MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined;
 using MVCSuscriptionSystem.HttpClients.Servicio6Erick;
 using MVCSuscriptionSystem.Models;
-using MVCSuscriptionSystem.WebServices;
 using Newtonsoft.Json;
 
 namespace MVCSuscriptionSystemTests
@@ -79,7 +79,6 @@ namespace MVCSuscriptionSystemTests
             var servicios = client.Get();
             foreach (var item in servicios)
             {
-                TestContext.WriteLine(item.IDServicio.ToString());
                 TestContext.WriteLine(item.Nombre);
                 TestContext.WriteLine(item.Precio.ToString());
                 TestContext.WriteLine("#####");
@@ -173,10 +172,19 @@ namespace MVCSuscriptionSystemTests
         }
 
         [TestMethod]
-        public void PedroServiceTest()
+        public void GetServiciosTest()
         {
-            var t = PedroWebServiceMethods.GetServicios();
-            TestContext.WriteLine(t.data.ToString());
+          ServiciosFromServices servicios = new ServiciosFromServices();
+            var s = servicios.GetServicios();
+
+            foreach (var i in s)
+            {
+                TestContext.WriteLine(i.Nombre);
+                TestContext.WriteLine(i.Precio.ToString());
+                TestContext.WriteLine("_______________");
+            }
+
+            Assert.IsTrue(s.Count > 0);
 
 
         }

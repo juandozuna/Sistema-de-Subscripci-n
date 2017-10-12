@@ -44,10 +44,10 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
                 Precio = s.Precio
             };
             response.Wait();
-            return s;
+            return servicio;
         }
 
-        public Servicios6 Post(Servicio servicio)
+        public Servicio Post(Servicio servicio)
         {
             Servicios6 s = new Servicios6() {Nombre = servicio.Nombre, Precio = servicio.Precio};
             var content = new StringContent(JsonConvert.SerializeObject(s), Encoding.UTF8, "application/json");
@@ -55,16 +55,17 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
             var response = result.Result.Content.ReadAsAsync<Servicios6>().Result;
             var serv = new Servicio() {Nombre = response.Nombre, Precio = response.Precio};
             result.Wait();
-            return response;
+            return serv;
 
         }
 
-        public Servicios6 Delete(int id)
+        public Servicio Delete(int id)
         {
             var result = Client.DeleteAsync("api/Servicios/" + id);
             var response = result.Result.Content.ReadAsAsync<Servicios6>().Result;
             result.Wait();
-            return response;
+            Servicio d = new Servicio(){Nombre = response.Nombre, Precio = response.Precio};
+            return d;
         }
 
 
