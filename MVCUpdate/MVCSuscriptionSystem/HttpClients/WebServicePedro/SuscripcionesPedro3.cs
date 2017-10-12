@@ -13,8 +13,8 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
 
         public void test(int id, bool estado)
         {
-            
-            var p = s.BuscarIDServicio()
+
+            v
 
         }
     }

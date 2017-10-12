@@ -24,10 +24,7 @@ namespace MVCSuscriptionSystem.MethodManagers
 
         public static void ModificarListadoDeServicios(IEnumerable<Servicio> servicios)
         {
-            foreach (var  i in COLLECTION)
-            {
-                
-            }
+          
         }
 
 
