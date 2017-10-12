@@ -21,6 +21,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
             {
                 Nombre = p.Nombre,
                 Precio = p.Precio,
+                IDErick = p.IDServicio
             });
             //using (MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities())
             //{
@@ -41,7 +42,8 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
             var servicio = new Servicio()
             {
                 Nombre = s.Nombre,
-                Precio = s.Precio
+                Precio = s.Precio,
+                IDErick = s.IDServicio
             };
             response.Wait();
             return servicio;

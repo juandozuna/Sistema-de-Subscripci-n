@@ -5,6 +5,7 @@ using System.Web;
 using MVCSuscriptionSystem.Models;
 using MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6;
 using MVCSuscriptionSystem.HttpClients.WebServicePedro;
+using MVCSuscriptionSystem.MethodManagers;
 
 namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
 {
@@ -24,7 +25,21 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
             var lista1 = Erick6S.Get();
             var lista2 = Pedro3S.GetServicios();
             var servicios = lista1.Union(lista2).ToList();
+            using (MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities())
+            {
+                var sdb = db.Servicios.ToList();
+                var nuevos = servicios.Where(p => !sdb.Any(o => (o.IDErick == p.IDErick || o.IDPedro == p.IDPedro)));
+                var modificados = servicios.Where(p => sdb.All(r=> (r.IDErick ==p.IDErick||r.IDPedro == p.IDPedro) )).ToList();
+                var borrados = sdb.Where(p=>!servicios.Any(t=> (t.IDPedro == p.IDPedro ||t.IDErick == p.IDErick) )).ToList();
+
+                ServiciosManager.AgregarListadoDeServicios(nuevos);
+                
+            }
+
             return servicios;
         }
     }
+
+
+
 }
