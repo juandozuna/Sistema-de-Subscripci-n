@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "Ver Detalles";
+    var suscripcionActivas = Model.ClienteSuscripcions.Where(o => o.Subscripcion.Active != false).ToList();
 }
 
 <h2 class="display-4 text-center">Ver Detalles</h2>
@@ -91,16 +92,20 @@
                 <th># de Servicios</th>
                 <th>Precio</th>
                 <th>Fecha Creacion</th>
+                <th>Estado</th>
+                <th></th>
             </tr>
             </thead>
-            @foreach (var m in Model.ClienteSuscripcions)
+            @foreach (var m in suscripcionActivas)
             {
                 <tr>
                     <th scope="row">@m.Subscripcion.SubscripcionID</th>
                     <td>@m.Subscripcion.Plan.Nombre</td>
                     <td class="text-center">@m.Subscripcion.Plan.ServicioEnPlans.Count</td>
-                    <td class="text-center">@string.Format("US${0:0.00}",m.Subscripcion.Plan.Precio)</td>
+                    <td class="text-center">@string.Format("RD${0:0.00}",m.Subscripcion.Plan.Precio)</td>
                     <td class="text-center">@m.Subscripcion.Fecha_creacion</td>
+                    <td class="text-center">@m.Subscripcion.Active</td>
+                    <td><a href="@Url.Action("EstadoSuscripcion",new{id= m.Subscripcion.SubscripcionID})" class="btn btn-outline-dark">DESACTIVAR</a></td>
                 </tr>
             }
 
@@ -109,7 +114,13 @@
     
     <h2>No hay subscripciones</h2>
     }
-    <a href="@Url.Action("NuevaSuscripcion","Cliente", new {ClientId=Model.ClientID})" class="btn btn-outline-info">Crear una nueva suscripcion</a>
+    
+    @if (Request.IsAuthenticated)
+    {
+        if(User.IsInRole(""))
+        <a href="@Url.Action("NuevaSuscripcion", "Cliente", new {ClientId = Model.ClientID})" class="btn btn-outline-info">Crear una nueva suscripcion</a>
+
+    }
 </div>
 <p>
 @if (Request.IsAuthenticated)

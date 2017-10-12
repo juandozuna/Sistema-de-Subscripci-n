@@ -171,6 +171,7 @@ namespace MVCSuscriptionSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "CrearSuscripcion")]
         public ActionResult NuevaSuscripcion(int ClientId)
         {
             var cliente = db.Clientes.Find(ClientId);
@@ -180,6 +181,19 @@ namespace MVCSuscriptionSystem.Controllers
                 return RedirectToAction("SeleccionarPlan", new {clienteid = cliente.ClientID});
             }
             return HttpNotFound();
+        }
+
+        [Authorize(Roles = "CrearSuscripcion")]
+        public ActionResult EstadoSuscripcion(int suscripcionID)
+        {
+            var suscripcion = db.Subscripcions.Find(suscripcionID);
+            if (suscripcion != null)
+            {
+                if (suscripcion.Active)
+                    suscripcion.Active = false;
+                else suscripcion.Active = true;
+                return RedirectToAction("VerDetalles", new {id = suscripcion.ClienteSuscripcions.First().ClienteId});
+            }
         }
 
     }

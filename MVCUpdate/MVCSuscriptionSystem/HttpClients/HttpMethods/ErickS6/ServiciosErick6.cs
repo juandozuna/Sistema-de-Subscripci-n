@@ -69,14 +69,15 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
         }
 
 
-        public string Modificar(int id, Servicio servicio)
+        public bool Modificar(int id, Servicio servicio)
         {
             var s = new Servicios6() {Nombre = servicio.Nombre, Precio = servicio.Precio};
             var content = new StringContent(JsonConvert.SerializeObject(s), Encoding.UTF8, "application/json");
             string url = "api/Servicios/" + id;
             var result = Client.PutAsync(url, content);
             var response = result.Result.Content.ReadAsStringAsync().Result;
-            return response;
+            if (response.Contains("404")) return false;
+            return true;
 
         }
     }
