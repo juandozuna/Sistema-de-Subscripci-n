@@ -83,7 +83,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
                 return true;
             }else if(s.IDPedro != 0 && s.IDErick == 0)
             {
-                Pedro3S.BorrarServicio(s);
+                Pedro3S.BorrarServicio(s.IDPedro);
                 return true;
             }
             return false;

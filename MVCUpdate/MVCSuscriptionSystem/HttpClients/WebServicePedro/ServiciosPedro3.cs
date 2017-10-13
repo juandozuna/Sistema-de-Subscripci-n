@@ -10,7 +10,9 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
 {
     public class ServiciosPedro3
     {
-        
+        /// <summary>
+        /// IDCliente es 47
+        /// </summary>
         private ManejadorServicios manager;
         private TasaClient tasa;
 
@@ -37,7 +39,12 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
                 }).ToList();
 
             }
-            var t = (int)manager.CrearCliente("GRUPO2").data;
+            var t = manager.CrearCliente("GRUPO2");
+            if (t.success)
+            {
+                var o = (int) t.data;
+
+            }
 
             return servicios;
 
