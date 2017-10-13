@@ -21,7 +21,8 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "BorrarServicio")]
         public override ActionResult Borrar(int id)
         {
-            return View();
+            var servi = db.Servicios.Find(id);
+            return View(servi);
         }
 
         [HttpPost, ActionName("Borrar")]
@@ -39,6 +40,7 @@ namespace MVCSuscriptionSystem.Controllers
                         db.ServicioEnPlans.Remove(servicioEnPlan);
                     }
                 }
+                manager.BorrarServicio(id);
                 db.Servicios.Remove(servicio);
                 db.SaveChanges();
                 return RedirectToAction("Index");

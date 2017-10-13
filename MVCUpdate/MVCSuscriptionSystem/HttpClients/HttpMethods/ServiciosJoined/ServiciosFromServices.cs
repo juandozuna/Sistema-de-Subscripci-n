@@ -47,22 +47,29 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
             var servicio = db.Servicios.Find(id);
             if (servicio != null)
             {
-                var idErick = servicio.IDErick.ToString();
-                var idPedro = servicio.IDPedro.ToString();
-                if (Erick6S.GetSingle(Int32.Parse(idErick)) != null)
+                int idErick = servicio.IDErick;
+                int idPedro = servicio.IDPedro;
+                if (idErick != 0)
                 {
-                    Erick6S.Delete(Int32.Parse(idErick));
-                    return true;
+                    if (Erick6S.GetSingle(idErick) != null)
+                    {
+                        Erick6S.Delete(idErick);
+                        return true;
 
-                }else if(Pedro3S.GetSingleServicio(Int32.Parse(idPedro)) != null)
-                {
-                    Pedro3S.BorrarServicio(Int32.Parse(idPedro));
-                    return true;
+                    }
                 }
-                return false;
+                else
+                {
+                    if (Pedro3S.GetSingleServicio(idPedro) != null)
+                    {
+                        Pedro3S.BorrarServicio(idPedro);
+                        return true;
+                    }
+                }
+
             }
 
-
+            return false;
         }
     }
 

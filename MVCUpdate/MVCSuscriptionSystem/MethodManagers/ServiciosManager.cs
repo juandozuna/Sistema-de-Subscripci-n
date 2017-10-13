@@ -19,6 +19,8 @@ namespace MVCSuscriptionSystem.MethodManagers
             if(servicio != null) { 
             servicio.Nombre = s.Nombre;
             servicio.Precio = s.Precio;
+                servicio.IDErick = s.IDErick;
+                servicio.IDPedro = s.IDPedro;
             db.Entry(servicio).State = EntityState.Modified;
             db.SaveChanges();
             }

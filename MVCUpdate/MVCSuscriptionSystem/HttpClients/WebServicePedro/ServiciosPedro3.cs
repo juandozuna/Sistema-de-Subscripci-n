@@ -24,7 +24,14 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
             if (result.success)
             {
                 var serializedServicios = (SerializedServicio[])result.data;
-                servicios = serializedServicios.Select(d => new Servicio(){Nombre = d.nombre, Precio = d.precio, IDPedro = d.id}).ToList();
+                servicios = serializedServicios.Select(d => new Servicio()
+                {
+                    Nombre = d.nombre,
+                    Precio = d.precio,
+                    IDPedro = d.id,
+                    IDErick = 0
+                    
+                }).ToList();
 
             }
 
@@ -39,7 +46,12 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
             if (result.success)
             {
                 var r = (SerializedServicio) result.data;
-                servicio = new Servicio(){Nombre = r.nombre, Precio = r.precio, IDPedro = r.id};
+                servicio = new Servicio(){
+                    Nombre = r.nombre,
+                    Precio = r.precio,
+                    IDPedro = r.id,
+                    IDErick = 0
+                };
 
             }
             return servicio;
