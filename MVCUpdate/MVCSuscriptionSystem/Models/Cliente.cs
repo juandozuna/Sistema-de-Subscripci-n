@@ -18,6 +18,8 @@ namespace MVCSuscriptionSystem.Models
         public Cliente()
         {
             this.ClienteSuscripcions = new HashSet<ClienteSuscripcion>();
+            IDErick = 0;
+            IDPedro = 0;
         }
     
         public int ClientID { get; set; }
@@ -32,8 +34,8 @@ namespace MVCSuscriptionSystem.Models
         public Nullable<int> CVC_o_CVV { get; set; }
         public Nullable<System.DateTime> Fecha_de_expiracion { get; set; }
         public Nullable<int> ImagenID { get; set; }
-        public Nullable<int> IDPedro { get; set; }
-        public Nullable<int> IDErick { get; set; }
+        public int IDPedro { get; set; }
+        public int IDErick { get; set; }
     
         public virtual Image Image { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

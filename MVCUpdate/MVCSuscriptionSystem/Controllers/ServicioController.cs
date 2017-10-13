@@ -55,7 +55,7 @@ namespace MVCSuscriptionSystem.Controllers
             if (servicio != null)
             {
                 db.Servicios.Add(servicio);
-                manager.CrearServicioPedro(servicio);
+                manager.CrearServicioErick(servicio);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

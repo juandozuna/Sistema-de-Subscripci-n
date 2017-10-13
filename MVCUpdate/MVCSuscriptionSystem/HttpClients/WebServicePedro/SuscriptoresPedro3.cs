@@ -87,6 +87,23 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
             return null;
         }
 
+        public Cliente PostSuscriptor(Cliente cliente)
+        {
+            var result = manager.CrearSuscriptor(cliente.Primer_Nombre, cliente.Primer_Apellido, cliente.Numero_Telefonico);
+            if (result.success)
+            {
+                var re = (int) result.data;
+                var p = manager.BuscarIDSuscriptor(re);
+                if (p.success)
+                {
+                    var o = (SerializedSuscriptor) p.data;
+                    cliente.IDPedro = o.id;
+                    return cliente;
+                }
+            }
+            return null;
+        }
+
 
 
     }

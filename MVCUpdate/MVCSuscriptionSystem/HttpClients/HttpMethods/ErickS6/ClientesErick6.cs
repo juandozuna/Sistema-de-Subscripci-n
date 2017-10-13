@@ -12,7 +12,10 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
 {
     public class ClientesErick6 : AErickConnection
     {
-
+        /// <summary>
+        /// ID de clientes
+        /// </summary>
+        /// <returns></returns>
         public List<Cliente6> Get()
         {
             var response = Client.GetAsync("api/Clientes");
