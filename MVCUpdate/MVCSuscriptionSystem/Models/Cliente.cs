@@ -11,7 +11,8 @@ namespace MVCSuscriptionSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,15 +22,25 @@ namespace MVCSuscriptionSystem.Models
         }
     
         public int ClientID { get; set; }
+        [DisplayName("Primer Nombre:")]
         public string Primer_Nombre { get; set; }
+        [DisplayName("Segundo Nombre:")]
         public string Segundo_Nombre { get; set; }
+        [DisplayName("Primer Apellido:")]
         public string Primer_Apellido { get; set; }
+        [DisplayName("Fecha de Nacimiento:")]
         public System.DateTime Fecha_de_nacimiento { get; set; }
+        [DisplayName("Número Telefónico:")]
         public string Numero_Telefonico { get; set; }
+        [DisplayName("e-mail:")]
         public string e_mail { get; set; }
+        [DisplayName("Método de Pago:")]
         public string Metodo_de_Pago { get; set; }
+        [DisplayName("Número de Tarjeta:")]
         public Nullable<int> NumeroTarjeta { get; set; }
+        [DisplayName("CVC o CVV:")]
         public Nullable<int> CVC_o_CVV { get; set; }
+        [DisplayName("Fecha de Expiración:")]
         public Nullable<System.DateTime> Fecha_de_expiracion { get; set; }
         public Nullable<int> ImagenID { get; set; }
         public Nullable<int> IDPedro { get; set; }
