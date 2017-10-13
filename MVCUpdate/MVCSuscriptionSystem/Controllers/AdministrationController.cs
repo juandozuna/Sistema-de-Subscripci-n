@@ -16,7 +16,7 @@ namespace MVCSuscriptionSystem.Controllers
     public class AdministrationController : Controller
     {
        private ApplicationDbContext adb = new ApplicationDbContext();
-       private MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
+       private MVCSuscriptionDatabseEntities1 db = new MVCSuscriptionDatabseEntities1();
 
         public ActionResult Index()
         {

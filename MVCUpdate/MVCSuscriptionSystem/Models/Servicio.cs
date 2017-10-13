@@ -11,8 +11,7 @@ namespace MVCSuscriptionSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    using MVCSuscriptionSystem.HttpClients.Servicio6Erick;
-
+    
     public partial class Servicio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,21 +21,14 @@ namespace MVCSuscriptionSystem.Models
         }
     
         public int ServicioID { get; set; }
-        
         public string Nombre { get; set; }
         public double Precio { get; set; }
         public Nullable<int> ImagenID { get; set; }
-    
         public Nullable<int> IDPedro { get; set; }
         public Nullable<int> IDErick { get; set; }
-
+    
         public virtual Image Image { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServicioEnPlan> ServicioEnPlans { get; set; }
-
-        public static explicit operator Servicio(Servicios6 v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -31,6 +31,8 @@
           <Property Name="CVC_o_CVV" Type="int" />
           <Property Name="Fecha_de_expiracion" Type="date" />
           <Property Name="ImagenID" Type="int" />
+          <Property Name="IDPedro" Type="int" />
+          <Property Name="IDErick" Type="int" />
         </EntityType>
         <EntityType Name="ClienteSuscripcion">
           <Key>
@@ -89,6 +91,8 @@
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Precio" Type="float" Nullable="false" />
           <Property Name="ImagenID" Type="int" />
+          <Property Name="IDPedro" Type="int" />
+          <Property Name="IDErick" Type="int" />
         </EntityType>
         <EntityType Name="ServicioEnPlan">
           <Key>
@@ -330,6 +334,8 @@
           <Property Name="CVC_o_CVV" Type="Int32" />
           <Property Name="Fecha_de_expiracion" Type="DateTime" Precision="0" />
           <Property Name="ImagenID" Type="Int32" />
+          <Property Name="IDPedro" Type="Int32" />
+          <Property Name="IDErick" Type="Int32" />
           <NavigationProperty Name="Image" Relationship="Self.FK_dbo_Clientes_dbo_Images_ImagenID" FromRole="Clientes" ToRole="Images" />
           <NavigationProperty Name="ClienteSuscripcions" Relationship="Self.FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID" FromRole="Clientes" ToRole="ClienteSuscripcion" />
         </EntityType>
@@ -403,6 +409,8 @@
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Precio" Type="Double" Nullable="false" />
           <Property Name="ImagenID" Type="Int32" />
+          <Property Name="IDPedro" Type="Int32" />
+          <Property Name="IDErick" Type="Int32" />
           <NavigationProperty Name="Image" Relationship="Self.FK_dbo_Servicio_dbo_Images_ImagenID" FromRole="Servicio" ToRole="Images" />
           <NavigationProperty Name="ServicioEnPlans" Relationship="Self.FK_dbo_ServicioEnPlan_dbo_Servicio_ServicioID" FromRole="Servicio" ToRole="ServicioEnPlan" />
         </EntityType>
@@ -651,6 +659,8 @@
                 <ScalarProperty Name="CVC_o_CVV" ColumnName="CVC_o_CVV" />
                 <ScalarProperty Name="Fecha_de_expiracion" ColumnName="Fecha_de_expiracion" />
                 <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+                <ScalarProperty Name="IDPedro" ColumnName="IDPedro" />
+                <ScalarProperty Name="IDErick" ColumnName="IDErick" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -716,6 +726,8 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+                <ScalarProperty Name="IDPedro" ColumnName="IDPedro" />
+                <ScalarProperty Name="IDErick" ColumnName="IDErick" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

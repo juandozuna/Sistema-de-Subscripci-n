@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Configuration;
-
 namespace MVCSuscriptionSystem.Models
 {
     using System;
@@ -18,8 +16,7 @@ namespace MVCSuscriptionSystem.Models
     public partial class MVCSuscriptionDatabseEntities : DbContext
     {
         public MVCSuscriptionDatabseEntities()
-           //: base("name=MVCSuscriptionDatabseEntities")
-            :base ("name=Proyecto")
+            : base("name=MVCSuscriptionDatabseEntities")
         {
         }
     

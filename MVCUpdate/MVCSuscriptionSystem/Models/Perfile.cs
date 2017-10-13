@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace MVCSuscriptionSystem.Models
 {
     using System;
@@ -23,14 +21,10 @@ namespace MVCSuscriptionSystem.Models
             this.PerfilUsuarios = new HashSet<PerfilUsuario>();
         }
     
-        [Display(Name = "ID")]
         public int PerfilID { get; set; }
-
-        [Display(Name = "Nombre Perfil")]
         public string nombrePerfil { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
         public virtual ICollection<PerfilRole> PerfilRoles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PerfilUsuario> PerfilUsuarios { get; set; }

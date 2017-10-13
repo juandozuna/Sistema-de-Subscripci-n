@@ -7,12 +7,17 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Security;
+using MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined;
 
 namespace MVCSuscriptionSystem.Controllers
 {
     [Authorize]
     public class ServicioController : ProgramManager
     {
+
+        private ServiciosFromServices manager = new ServiciosFromServices();
+
         [Authorize(Roles = "BorrarServicio")]
         public override ActionResult Borrar(int id)
         {
@@ -64,7 +69,7 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "VerServicio, ListarServicio")]
         public override ActionResult Index()
         {
-
+            //manager.GetServicios();
             var servicios = db.Servicios;
             return View(servicios.ToList());
         }

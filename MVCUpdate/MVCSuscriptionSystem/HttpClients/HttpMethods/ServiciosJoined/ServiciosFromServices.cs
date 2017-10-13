@@ -14,10 +14,13 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
         private ServiciosErick6 Erick6S;
         private ServiciosPedro3 Pedro3S;
 
+        private MVCSuscriptionDatabseEntities db;
+
         public ServiciosFromServices()
         {
             Erick6S = new ServiciosErick6();
             Pedro3S = new ServiciosPedro3();
+            db = new MVCSuscriptionDatabseEntities();
         }
 
         public List<Servicio> GetServicios()
@@ -25,16 +28,15 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
             var lista1 = Erick6S.Get(); 
              var lista2 = Pedro3S.GetServicios();
             var servicios = lista1.Union(lista2).ToList();
-            using (MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities())
-            {
+            
                 var sdb = db.Servicios.ToList();
                 var nuevos = servicios.Where(p => !sdb.Any(o => (o.IDErick == p.IDErick || o.IDPedro == p.IDPedro)));
                 var modificados = servicios.Where(p => sdb.All(r=> (r.IDErick ==p.IDErick||r.IDPedro == p.IDPedro) ));
-                var borrados = sdb.Where(p => !servicios.Any(t => (t.IDPedro == p.IDPedro || t.IDErick == p.IDErick)));
+                //var borrados = sdb.Where(p => !servicios.Any(t => (t.IDPedro == p.IDPedro || t.IDErick == p.IDErick)));
 
                 ServiciosManager.AgregarListadoDeServicios(nuevos);
                 ServiciosManager.ModificarListadoDeServicios(modificados);
-            }
+            
 
             return servicios;
         }
