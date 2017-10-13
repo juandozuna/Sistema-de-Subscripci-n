@@ -40,6 +40,30 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
 
             return servicios;
         }
+
+
+        public bool BorrarServicio(int id)
+        {
+            var servicio = db.Servicios.Find(id);
+            if (servicio != null)
+            {
+                var idErick = servicio.IDErick.ToString();
+                var idPedro = servicio.IDPedro.ToString();
+                if (Erick6S.GetSingle(Int32.Parse(idErick)) != null)
+                {
+                    Erick6S.Delete(Int32.Parse(idErick));
+                    return true;
+
+                }else if(Pedro3S.GetSingleServicio(Int32.Parse(idPedro)) != null)
+                {
+                    Pedro3S.BorrarServicio(Int32.Parse(idPedro));
+                    return true;
+                }
+                return false;
+            }
+
+
+        }
     }
 
 
