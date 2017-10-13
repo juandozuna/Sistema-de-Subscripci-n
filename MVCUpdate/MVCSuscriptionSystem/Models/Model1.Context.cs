@@ -36,5 +36,7 @@ namespace MVCSuscriptionSystem.Models
         public virtual DbSet<Servicio> Servicios { get; set; }
         public virtual DbSet<ServicioEnPlan> ServicioEnPlans { get; set; }
         public virtual DbSet<Subscripcion> Subscripcions { get; set; }
+
+        public System.Data.Entity.DbSet<MVCSuscriptionSystem.HttpClients.TasasDeIntercambio> TasasDeIntercambios { get; set; }
     }
 }
