@@ -12,6 +12,7 @@ namespace MVCSuscriptionSystem.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Plan
     {
@@ -24,6 +25,7 @@ namespace MVCSuscriptionSystem.Models
     
         public int PlanID { get; set; }
         public string Nombre { get; set; }
+        [DataType(DataType.Currency)]
         public double Precio { get; set; }
         public Nullable<int> ImagenID { get; set; }
     

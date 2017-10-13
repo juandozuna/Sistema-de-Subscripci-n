@@ -28,7 +28,7 @@ namespace MVCSuscriptionSystem.Models
         public string Primer_Nombre { get; set; }
         [DisplayName("Segundo Nombre:")]
         public string Segundo_Nombre { get; set; }
-        [DisplayName("Primer Apellido:")]
+        [DisplayName("Apellido:")]
         public string Primer_Apellido { get; set; }
         [DisplayName("Fecha de Nacimiento:")]
         [DataType(DataType.Date)]
