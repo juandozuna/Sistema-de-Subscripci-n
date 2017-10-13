@@ -90,10 +90,12 @@ namespace MVCSuscriptionSystem.Controllers
             var suma = p.ServicioEnPlans.Sum(r => r.Servicio.Precio);
             if (suma > p.Precio)
             {
-                ViewBag.Error = "No puede crear un plan menor que el costo total de los servicios.<br>" +
+                ViewBag.Error = "No puede crear un plan menor que el costo total de los servicios." +
                                 "Hemos actualizado el precio del plan a " + suma +
                                 ". Puede modificar el valor si desea. ";
                 p.Precio = suma;
+                db.Entry(p).State = EntityState.Modified;
+                db.SaveChanges();
                 return View("Error");
             }
             else
@@ -130,7 +132,7 @@ namespace MVCSuscriptionSystem.Controllers
         public  ActionResult Modificar(FormCollection c)
         {
             var plan = db.Plans.Find(Int32.Parse(c["PlanID"]));
-            string[] servicios = c.GetValues("ServicioEnPlans").ToArray();
+            var servicios = c.GetValues("ServicioEnPlans").ToList();
             if (plan != null)
             {
                 foreach (var s in servicios)
@@ -148,7 +150,22 @@ namespace MVCSuscriptionSystem.Controllers
                 plan.Precio = Double.Parse(c["Precio"]);
                 db.Entry(plan).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                var suma = plan.ServicioEnPlans.Sum(r => r.Servicio.Precio);
+                if (suma > plan.Precio)
+                {
+                    ViewBag.Error = "No puede crear un plan menor que el costo total de los servicios." +
+                                    "Hemos actualizado el precio del plan a " + suma +
+                                    ". Puede modificar el valor si desea. ";
+                    plan.Precio = suma;
+                    db.Entry(plan).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return View("Error");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return HttpNotFound();
         }

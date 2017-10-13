@@ -33,7 +33,8 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Precio)
+            @Html.DisplayFor(modelItem => item.Precio).ToString($"F{2}")
+            
         </td>
         <td>
             @Html.ActionLink("Detalles", "VerDetalles", new { id = item.PlanID }) 

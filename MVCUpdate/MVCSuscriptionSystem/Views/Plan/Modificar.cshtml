@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Modificar";
     MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
-    ;
+    var Selectlist = new SelectList(db.Servicios, "ServicioID", "Nombre");
 }
 
 <h2>Modificar</h2>
@@ -35,10 +35,6 @@
                 @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
             </div>
         </div>
-        @{
-           
-            var Selectlist = new SelectList(db.Servicios, "ServicioID", "Nombre");
-        }
         <div class="form-group">
             @Html.DisplayFor(model => model.ServicioEnPlans, new { @class = "col-form-label" })
             @Html.DropDownListFor(model => model.ServicioEnPlans, Selectlist, "", new { multiple = "multiple" })
