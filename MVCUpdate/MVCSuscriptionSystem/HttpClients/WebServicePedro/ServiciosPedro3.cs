@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MVCSuscriptionSystem.HttpClients.HttpMethods;
 using MVCSuscriptionSystem.Models;
 using MVCSuscriptionSystem.WebReferencePedro;
 
@@ -11,10 +12,12 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
     {
         
         private ManejadorServicios manager;
+        private TasaClient tasa;
 
         public ServiciosPedro3()
         {
             manager = new ManejadorServicios();
+            tasa = new TasaClient();
         }
 
         public List<Servicio> GetServicios()
@@ -27,7 +30,7 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
                 servicios = serializedServicios.Select(d => new Servicio()
                 {
                     Nombre = d.nombre,
-                    Precio = d.precio,
+                    Precio = d.precio*tasa.GetTasasDeIntercambio("7").First().ValorIntercambio,
                     IDPedro = d.id,
                     IDErick = 0
                     
@@ -48,7 +51,7 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
                 var r = (SerializedServicio) result.data;
                 servicio = new Servicio(){
                     Nombre = r.nombre,
-                    Precio = r.precio,
+                    Precio = r.precio * tasa.GetTasasDeIntercambio("7").First().ValorIntercambio,
                     IDPedro = r.id,
                     IDErick = 0
                 };
