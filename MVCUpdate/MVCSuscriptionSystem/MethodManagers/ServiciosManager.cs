@@ -16,10 +16,12 @@ namespace MVCSuscriptionSystem.MethodManagers
         public static void ServicioModificado(int id, Servicio s)
         {
             var servicio = db.Servicios.Find(id);
+            if(servicio != null) { 
             servicio.Nombre = s.Nombre;
             servicio.Precio = s.Precio;
             db.Entry(servicio).State = EntityState.Modified;
             db.SaveChanges();
+            }
         }
 
         public static void ModificarListadoDeServicios(IEnumerable<Servicio> servicios)

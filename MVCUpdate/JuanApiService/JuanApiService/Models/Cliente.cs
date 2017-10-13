@@ -12,15 +12,8 @@ namespace JuanApiService.Models
     using System;
     using System.Collections.Generic;
     
-    /// <summary>
-    /// Esta es la clase Modelo de clientes
-    /// </summary>
     public partial class Cliente
     {
-
-        /// <summary>
-        /// Contiene los hashset del modelo de clientes
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
@@ -28,52 +21,16 @@ namespace JuanApiService.Models
             this.Suscriptors = new HashSet<Suscriptor>();
         }
     
-        /// <summary>
-        /// Campo asignado automaticamente
-        /// </summary>
         public int ClienteId { get; set; }
-
-        /// <summary>
-        /// Campo obligatorio
-        /// </summary>
         public string NombreCliente { get; set; }
-
-        /// <summary>
-        /// Campo obligatorio
-        /// </summary>
         public string Telefono { get; set; }
-
-        /// <summary>
-        /// Campo Obligatorio
-        /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// Este es un campo opcional
-        /// </summary>
         public string Pais { get; set; }
-
-        /// <summary>
-        /// Este campo no es obligatorio
-        /// </summary>
         public string Ciudad { get; set; }
-
-        /// <summary>
-        /// Este campo no es obligatorio
-        /// </summary>
         public string Sector { get; set; }
     
-
-        /// <summary>
-        /// Este un campo dinamico, el cual contienen una coleccion de suscripcions, pero este se llena de manera autoamtica
-        /// no es necesario enviarle esta informacion a la base de datos.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suscripcione> Suscripciones { get; set; }
-
-        /// <summary>
-        /// Este un campo dinamico que se asigna automaticamente, no es necesario llenarlo
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suscriptor> Suscriptors { get; set; }
     }

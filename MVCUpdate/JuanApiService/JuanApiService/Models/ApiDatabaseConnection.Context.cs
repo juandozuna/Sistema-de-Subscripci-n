@@ -13,9 +13,9 @@ namespace JuanApiService.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ApiDatabaseConnection : DbContext
+    public partial class ApiDatabaseEntities : DbContext
     {
-        public ApiDatabaseConnection()
+        public ApiDatabaseEntities()
             : base("name=ApiDatabaseEntities")
         {
         }

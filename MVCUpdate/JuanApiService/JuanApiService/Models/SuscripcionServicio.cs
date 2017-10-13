@@ -12,37 +12,13 @@ namespace JuanApiService.Models
     using System;
     using System.Collections.Generic;
     
-
-    /// <summary>
-    /// Esta clase maneja en enlace que dice que servicios del api
-    /// contiene una suscripcion en especifico
-    /// </summary>
     public partial class SuscripcionServicio
     {
-        /// <summary>
-        /// Valor asignado automaticamente
-        /// </summary>
         public int SuscServiciosId { get; set; }
-
-        /// <summary>
-        /// Valor se asigna por el metodo SerivceToSuscription
-        /// </summary>
         public int ServicioId { get; set; }
-
-        /// <summary>
-        /// Valor se asigna por el metodo serviceToSuscription
-        /// </summary>
         public int SuscripcionId { get; set; }
     
-
-        /// <summary>
-        /// Campo dinamico, no necesita ser asignado
-        /// </summary>
         public virtual Servicio Servicio { get; set; }
-
-        /// <summary>
-        /// campo dinamico, no necesita ser asignado
-        /// </summary>
         public virtual Suscripcione Suscripcione { get; set; }
     }
 }

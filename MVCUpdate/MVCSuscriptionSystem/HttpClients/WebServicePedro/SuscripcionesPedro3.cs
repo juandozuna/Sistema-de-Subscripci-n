@@ -15,20 +15,19 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
         public void ActivarDesactivarSuscripcion(int id, bool estado)
         {
 
-<<<<<<< HEAD
-            var p = s.BuscarIDSuscripcion(id);
+
+            var p = manejador.BuscarIDSuscripcion(id);
             if (p.success)
             {
                 if (estado)
                 {
-                    s.ActivarSuscripcion(id);
+                    manejador.ActivarSuscripcion(id);
                 }
                 else
                 {
-                    s.DesactivarSuscripcion(id);
+                    manejador.DesactivarSuscripcion(id);
                 }
             }
-=======
             var buscar = manejador.BuscarIDSuscripcion(id);
             if (buscar.success)
             {
@@ -42,8 +41,7 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
                     manejador.DesactivarSuscripcion(id);
                 }
             }
-
->>>>>>> 31bc8f1d5e707b5d6ee1ba616b9946d2522ca229
+            
         }
     }
 }

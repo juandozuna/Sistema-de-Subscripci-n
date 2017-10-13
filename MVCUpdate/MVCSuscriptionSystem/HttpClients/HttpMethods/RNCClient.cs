@@ -7,8 +7,8 @@ using System.Web;
 
 namespace MVCSuscriptionSystem.HttpClients.HttpMethods
 {
-    public class RNCClient : AHttpClient
-    {
+    public class RNCClient : AHttpClient { 
+
         public RNCClient()
         {
             Client.BaseAddress = new Uri("http://99.92.201.237/cedula1/");
@@ -22,7 +22,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods
             var result = Client.GetAsync("api/RNC/" + RNCoCedula);
             var response = result.Result.Content.ReadAsAsync<RNC1>().Result;
             return response;
-;
+
         }
 
     }

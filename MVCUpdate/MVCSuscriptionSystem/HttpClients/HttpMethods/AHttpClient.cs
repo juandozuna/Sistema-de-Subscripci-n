@@ -9,7 +9,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods
 {
      public abstract class AHttpClient
     {
-        protected static HttpClient Client = new HttpClient();
+        protected HttpClient Client = new HttpClient();
 
 
 

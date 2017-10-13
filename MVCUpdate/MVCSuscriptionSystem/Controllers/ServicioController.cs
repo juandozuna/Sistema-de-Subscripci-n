@@ -50,6 +50,7 @@ namespace MVCSuscriptionSystem.Controllers
         public override ActionResult Crear()
         {
             return View();
+            
         }
 
         [HttpPost]
@@ -69,7 +70,7 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "VerServicio, ListarServicio")]
         public override ActionResult Index()
         {
-            //manager.GetServicios();
+            manager.GetServicios();
             var servicios = db.Servicios;
             return View(servicios.ToList());
         }
