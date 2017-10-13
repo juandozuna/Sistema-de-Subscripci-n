@@ -18,8 +18,6 @@ namespace MVCSuscriptionSystem.Models
         public Cliente()
         {
             this.ClienteSuscripcions = new HashSet<ClienteSuscripcion>();
-            IDErick = 0;
-            IDPedro = 0;
         }
     
         public int ClientID { get; set; }

@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a60e7cfea78c4b34a5aea25ba9c41eca" Name="Diagram1">
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.C__MigrationHistory" Width="1.5" PointX="11.875" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Cliente" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.ClienteSuscripcion" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Image" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Perfile" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.PerfilRole" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.PerfilUsuario" Width="1.5" PointX="10" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Plan" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Servicio" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.ServicioEnPlan" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Subscripcion" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Image" Width="1.5" PointX="0.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Perfile" Width="1.5" PointX="8.875" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.PerfilRole" Width="1.5" PointX="10.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.PerfilUsuario" Width="1.5" PointX="7.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Plan" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Servicio" Width="1.5" PointX="1" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.ServicioEnPlan" Width="1.5" PointX="4.875" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVCSuscriptionDatabseModel.Subscripcion" Width="1.5" PointX="6.625" PointY="6.625" IsExpanded="true" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_Clientes_dbo_Images_ImagenID" ManuallyRouted="false" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_ClienteSuscripcion_dbo_Clientes_Cliente_ClientID" ManuallyRouted="false" />
         <AssociationConnector Association="MVCSuscriptionDatabseModel.FK_dbo_ClienteSuscripcion_dbo_Subscripcions_SubscripcionId" ManuallyRouted="false" />

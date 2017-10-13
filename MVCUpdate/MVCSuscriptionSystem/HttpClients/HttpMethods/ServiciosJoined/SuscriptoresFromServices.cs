@@ -14,6 +14,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
         private SuscriptoresErick6 suscriptoresErick6;
         private SuscripcionesPedro3 suscripcionesPedro3;
         private SuscriptoresPedro3 suscriptoresPedro3;
+        private ServiciosFromServices services;
         private MVCSuscriptionDatabseEntities db;
 
 
@@ -23,6 +24,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
             suscriptoresPedro3 = new SuscriptoresPedro3();
             suscriptoresErick6 = new SuscriptoresErick6();
             suscripcionesErick6 = new SuscripcionesErick6();
+            services = new ServiciosFromServices();
             db = new MVCSuscriptionDatabseEntities();
         }
 
@@ -33,6 +35,18 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
             cliente.IDErick = e.IDErick;
             cliente.IDPedro = p.IDPedro;
             return cliente;
+        }
+
+        public bool ActivarSuscripcionesExternasDeCliente(Subscripcion suscripcione)
+        {
+            
+            var servPedro = suscripcione.Plan.ServicioEnPlans.Where(d=>d.Servicio.IDPedro != 0 && d.Servicio.IDErick == 0);
+            foreach (var i in servPedro)
+            {
+                suscripcionesPedro3.CrearSuscripcionNueva(suscripcione.ClienteSuscripcions.First().Cliente.IDPedro, 2, i.Servicio.IDPedro, 1);
+            }
+            return false;
+
         }
 
 

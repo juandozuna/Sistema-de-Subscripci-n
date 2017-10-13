@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.ApplicationInsights.Web;
+using MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined;
 using MVCSuscriptionSystem.MethodManagers;
 using MVCSuscriptionSystem.Models;
 
@@ -13,7 +14,9 @@ namespace MVCSuscriptionSystem.Controllers
     [Authorize]
     public class ClienteController : ProgramManager
     {
-        
+        private SuscriptoresFromServices manager = new SuscriptoresFromServices();
+
+
         [Authorize(Roles = "BorrarCliente")]
         public override ActionResult Borrar(int id)
         {
@@ -69,11 +72,12 @@ namespace MVCSuscriptionSystem.Controllers
                 }
                 if (cli != null)
                 {
-                    db.Clientes.Add(cli);
+                    var cliente = manager.CrearSuscriptor(cli);
+                    db.Clientes.Add(cliente);
                     db.SaveChanges();
                     cli = db.Clientes.OrderByDescending(w => w.ClientID).First();
-                    SubscripcionManager.CrearSubscripcionNueva(cli);
-                    return RedirectToAction("SeleccionarPlan",new{clienteid = cli.ClientID});
+                    SubscripcionManager.CrearSubscripcionNueva(cliente);
+                    return RedirectToAction("SeleccionarPlan",new{clienteid = cliente.ClientID});
                 }
             }
             else

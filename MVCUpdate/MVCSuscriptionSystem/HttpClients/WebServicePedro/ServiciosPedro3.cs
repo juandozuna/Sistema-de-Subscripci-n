@@ -37,6 +37,7 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
                 }).ToList();
 
             }
+            var t = (int)manager.CrearCliente("GRUPO2").data;
 
             return servicios;
 

@@ -83,7 +83,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
                 return true;
             }else if(s.IDPedro != 0 && s.IDErick == 0)
             {
-                Pedro3S.BorrarServicio(s.IDPedro);
+                Pedro3S.BorrarServicio(s);
                 return true;
             }
             return false;
@@ -113,6 +113,8 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
         {
             Erick6S.Post(servicio);
         }
+
+
 
     }
 

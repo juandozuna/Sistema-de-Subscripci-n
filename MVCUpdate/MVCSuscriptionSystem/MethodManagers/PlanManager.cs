@@ -9,6 +9,7 @@ namespace MVCSuscriptionSystem.MethodManagers
     public class PlanManager
     {
         private static MVCSuscriptionDatabseEntities db = new MVCSuscriptionDatabseEntities();
+
         public static void AgregarServicios(string[] servicios, Plan pl)
         {
              

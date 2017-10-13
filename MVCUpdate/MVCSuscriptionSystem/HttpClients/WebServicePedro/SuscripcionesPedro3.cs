@@ -43,5 +43,22 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
             }
             
         }
+
+        public SerializedSuscripcion CrearSuscripcionNueva(int suscriptor, int cliente, int servicio, int activado )
+        {
+            var result = manejador.CrearSuscripcion(suscriptor, cliente, servicio, activado);
+            if (result.success)
+            {
+                var p = (int) result.data;
+                var i = manejador.BuscarIDSuscripcion(p);
+                if (i.success)
+                {
+                    var j = (SerializedSuscripcion) i.data;
+                    return j;
+                }
+            }
+            return null;
+
+        }
     }
 }
