@@ -44,8 +44,10 @@ namespace MVCSuscriptionSystem.HttpClients.WebServicePedro
             
         }
 
-        public SerializedSuscripcion CrearSuscripcionNueva(int suscriptor, int cliente, int servicio, int activado )
+        public SerializedSuscripcion CrearSuscripcionNueva(int suscriptor, int servicio, int activado )
         {
+            //El ID de CLIENTE DEL GRUPO 2 es 47 en el programa de Pedro;
+            int cliente = 47;
             var result = manejador.CrearSuscripcion(suscriptor, cliente, servicio, activado);
             if (result.success)
             {

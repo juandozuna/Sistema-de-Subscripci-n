@@ -31,8 +31,10 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
             return s;
         }
 
-        public Suscripciones6 Post(int iDCliente, int iDSuscriptor, int iDServicio, bool estado)
+        public Suscripciones6 Post(int iDSuscriptor, int iDServicio, bool estado)
         {
+
+            int iDCliente = 7;
             string activacion = "Desactivar";
             if (estado) activacion = "Activar";
             Suscripciones6 s = new Suscripciones6() { IDCliente = iDCliente,IDServicio = iDServicio, IDSuscriptor = iDSuscriptor, Activacion = activacion};

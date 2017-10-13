@@ -41,14 +41,20 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
         {
             
             var servPedro = suscripcione.Plan.ServicioEnPlans.Where(d=>d.Servicio.IDPedro != 0 && d.Servicio.IDErick == 0);
+            var servErick = suscripcione.Plan.ServicioEnPlans.Where(d=>d.Servicio.IDErick != 0 && d.Servicio.IDPedro  == 0);
             foreach (var i in servPedro)
             {
-                suscripcionesPedro3.CrearSuscripcionNueva(suscripcione.ClienteSuscripcions.First().Cliente.IDPedro, 2, i.Servicio.IDPedro, 1);
+                suscripcionesPedro3.CrearSuscripcionNueva(suscripcione.ClienteSuscripcions.First().Cliente.IDPedro,i.Servicio.IDPedro, 1);
+            }
+            foreach (var i in servErick)
+            {
+                suscripcionesErick6.Post(suscripcione.ClienteSuscripcions.First().Cliente.IDErick,i.Servicio.IDErick, true);
             }
             return false;
 
         }
 
+        
 
 
 

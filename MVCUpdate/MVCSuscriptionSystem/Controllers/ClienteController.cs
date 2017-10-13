@@ -167,6 +167,7 @@ namespace MVCSuscriptionSystem.Controllers
                     subs.PlanID = PlanId;
                     subs.Active = true;
                     var suscripcion = subs;
+                    if (manager.ActivarSuscripcionesExternasDeCliente(subs)) ;
                     db.Entry(subs).State = EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -183,6 +184,23 @@ namespace MVCSuscriptionSystem.Controllers
             {
                 SubscripcionManager.CrearSubscripcionNueva(cliente);
                 return RedirectToAction("SeleccionarPlan", new {clienteid = cliente.ClientID});
+            }
+            return HttpNotFound();
+        }
+
+        public ActionResult BorrarSuscripcion(int clienteId, int suscripcionId)
+        {
+            var cliente = db.Clientes.Find(clienteId);
+            if (cliente != null)
+            {
+                var suscripcion = db.Subscripcions.Find(suscripcionId);
+                if (suscripcion != null)
+                {
+                   
+                    db.Subscripcions.Remove(suscripcion);
+                    return RedirectToAction("Index");
+                }
+
             }
             return HttpNotFound();
         }
