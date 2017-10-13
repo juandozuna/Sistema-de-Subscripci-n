@@ -25,52 +25,95 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined
 
         public List<Servicio> GetServicios()
         {
-            var lista1 = Erick6S.Get(); 
-             var lista2 = Pedro3S.GetServicios();
-            var servicios = lista1.Union(lista2).ToList();
-            
-                var sdb = db.Servicios.ToList();
-                var nuevos = servicios.Where(p => !sdb.Any(o => (o.IDErick == p.IDErick || o.IDPedro == p.IDPedro)));
-                var modificados = servicios.Where(p => sdb.All(r=> (r.IDErick ==p.IDErick||r.IDPedro == p.IDPedro) ));
-                //var borrados = sdb.Where(p => !servicios.Any(t => (t.IDPedro == p.IDPedro || t.IDErick == p.IDErick)));
-                
-                ServiciosManager.AgregarListadoDeServicios(nuevos);
-                ServiciosManager.ModificarListadoDeServicios(modificados);
-            
+            var ErickList = Erick6S.Get(); 
+            var PedroList = Pedro3S.GetServicios();
 
-            return servicios;
-        }
+            var sdb = db.Servicios.ToList();
+            var listwhole = ErickList.Union(PedroList);
 
-
-        public bool BorrarServicio(int id)
-        {
-            var servicio = db.Servicios.Find(id);
-            if (servicio != null)
+            List<Servicio> nuevo = new List<Servicio>();
+            List<Servicio> modificado = new List<Servicio>();
+            List<Servicio> Borrado = new List<Servicio>();
+            foreach (var i in listwhole)
             {
-                int idErick = servicio.IDErick;
-                int idPedro = servicio.IDPedro;
-                if (idErick != 0)
+                if (sdb.Any(d => d.IDErick == i.IDErick))
                 {
-                    if (Erick6S.GetSingle(idErick) != null)
-                    {
-                        Erick6S.Delete(idErick);
-                        return true;
-
-                    }
+                    modificado.Add(i);
                 }
-                else
+                else if(i.IDPedro == 0)
                 {
-                    if (Pedro3S.GetSingleServicio(idPedro) != null)
-                    {
-                        Pedro3S.BorrarServicio(idPedro);
-                        return true;
-                    }
+                    nuevo.Add(i);
                 }
-
+                else if (sdb.Any(p => p.IDPedro == i.IDPedro))
+                {
+                    modificado.Add(i);
+                }
+                else if (i.IDErick == 0)
+                {
+                    nuevo.Add(i);
+                }
             }
 
+            var IDdbErick = sdb.Select(d => d.IDErick);
+            var IDdbPedro = sdb.Select(d => d.IDPedro);
+            var IDLErick = listwhole.Select(d => d.IDErick);
+            var IDLPedro = listwhole.Select(d => d.IDPedro);
+            var IDborradoPedro = IDdbPedro.Except(IDLPedro);
+            var IDborradoErick = IDdbErick.Except(IDLErick);
+            var borradoErick = sdb.Where(d => IDborradoErick.Any(p => p == d.IDErick));
+            var borradoPedro = sdb.Where(d => IDborradoPedro.Any(p => p == d.IDPedro));
+            Borrado = borradoPedro.Union(borradoErick).ToList();
+
+
+
+            ServiciosManager.AgregarListadoDeServicios(nuevo);
+            ServiciosManager.ModificarListadoDeServicios(modificado);
+            ServiciosManager.BorrarListadoDeServicios(Borrado);
+
+
+            return sdb;
+        }
+
+
+        public bool BorrarServicio(Servicio s)
+        {
+            if (s.IDErick != 0 && s.IDPedro == 0)
+            {
+                Erick6S.Delete(s.IDErick);
+                return true;
+            }else if(s.IDPedro != 0 && s.IDErick == 0)
+            {
+                Pedro3S.BorrarServicio(s.IDPedro);
+                return true;
+            }
             return false;
         }
+
+        public void ModificarServicio(Servicio s)
+        {
+            if (s.IDErick != 0 && s.IDPedro == 0)
+            {
+                Erick6S.Modificar(s.IDErick,s);
+            }else if (s.IDPedro != 0 && s.IDErick == 0)
+            {
+                Pedro3S.Modificar(s.IDPedro, s);
+            }
+        }
+
+
+        public void CrearServicioPedro(Servicio servicio)
+        {
+            TasaClient t = new TasaClient();
+            var tasa = t.GetTasasDeIntercambio("7").First();
+            servicio.Precio = (servicio.Precio/tasa.ValorIntercambio);
+            Pedro3S.PostServicio(servicio);
+        }
+
+        public void CrearServicioErick(Servicio servicio)
+        {
+            Erick6S.Post(servicio);
+        }
+
     }
 
 

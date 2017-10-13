@@ -46,16 +46,21 @@
         {
             if (User.IsInRole("ModificarServicio"))
             {
-                <span>|</span> @Html.ActionLink("Editar", "Modificar", new { id = item.ServicioID })
-
+                
+                    <span>|</span>
+                    @Html.ActionLink("Editar", "Modificar", new {id = item.ServicioID})
+                
 
             }
         }
         @if (Request.IsAuthenticated)
         {
             if (User.IsInRole("BorrarServicio"))
+
             {
-                <span>|</span> @Html.ActionLink("Borrar", "Borrar", new {id = item.ServicioID})
+                    <span>|</span>
+                    @Html.ActionLink("Borrar", "Borrar", new {id = item.ServicioID})
+               
 
 
             }

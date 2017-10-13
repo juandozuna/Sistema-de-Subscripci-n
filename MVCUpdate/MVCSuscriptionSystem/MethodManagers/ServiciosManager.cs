@@ -52,7 +52,22 @@ namespace MVCSuscriptionSystem.MethodManagers
         public static void BorrarListadoDeServicios(IEnumerable<Servicio> s)
         {
            
-            db.Servicios.RemoveRange(s);
+            foreach(var i in s)BorrarServicios(i);
+        }
+
+
+        public static void BorrarServicios(Servicio s)
+        {
+            var p = db.Servicios.Find(s.ServicioID);
+            if (p != null)
+            {
+                var servplan = db.ServicioEnPlans.Where(x => x.ServicioID == p.ServicioID).ToList();
+                if (servplan.Any())
+                {
+                    db.ServicioEnPlans.RemoveRange(servplan);   
+                }
+                db.Servicios.Remove(p);
+            }
             db.SaveChanges();
         }
 

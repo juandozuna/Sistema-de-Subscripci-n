@@ -13,6 +13,7 @@ namespace MVCSuscriptionSystem.Controllers
     [Authorize]
     public class ClienteController : ProgramManager
     {
+        
         [Authorize(Roles = "BorrarCliente")]
         public override ActionResult Borrar(int id)
         {

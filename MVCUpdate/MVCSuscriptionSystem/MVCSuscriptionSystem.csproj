@@ -234,6 +234,7 @@
     <Compile Include="HttpClients\HttpMethods\ErickS6\SuscriptoresErick6.cs" />
     <Compile Include="HttpClients\HttpMethods\RNCClient.cs" />
     <Compile Include="HttpClients\HttpMethods\ServiciosJoined\ServiciosFromServices.cs" />
+    <Compile Include="HttpClients\HttpMethods\ServiciosJoined\SuscriptoresFromServices.cs" />
     <Compile Include="HttpClients\HttpMethods\TasaClient.cs" />
     <Compile Include="HttpClients\RNC.cs" />
     <Compile Include="HttpClients\Servicio6Erick\Cliente6.cs" />

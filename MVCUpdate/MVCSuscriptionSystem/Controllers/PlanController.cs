@@ -31,6 +31,8 @@ namespace MVCSuscriptionSystem.Controllers
             if (plan != null)
             {
                 var servplan = db.ServicioEnPlans.Where(x => x.PlanID == plan.PlanID).ToList();
+                var suscripciones = db.Subscripcions.Where(s => s.PlanID == id);
+                if (suscripciones.Any()) db.Subscripcions.RemoveRange(suscripciones);
                 if (servplan.Any())
                 {
                     foreach (var servicioEnPlan in servplan)
@@ -48,6 +50,11 @@ namespace MVCSuscriptionSystem.Controllers
         [Authorize(Roles = "CrearPlan")]
         public override ActionResult Crear()
         {
+            if (db.Servicios.Count() <= 0)
+            {
+                ViewBag.Error = "No puede crear un plan si no hay servicios";
+                return View("Error");
+            }
             return View();
         }
 
@@ -78,10 +85,23 @@ namespace MVCSuscriptionSystem.Controllers
                     }
                 }
                 db.SaveChanges();
-                //PlanManager.AgregarServicios(servicios, pl);
+               
+            }
+            var suma = p.ServicioEnPlans.Sum(r => r.Servicio.Precio);
+            if (suma > p.Precio)
+            {
+                ViewBag.Error = "No puede crear un plan menor que el costo total de los servicios.<br>" +
+                                "Hemos actualizado el precio del plan a " + suma +
+                                ". Puede modificar el valor si desea. ";
+                p.Precio = suma;
+                return View("Error");
+            }
+            else
+            {
                 return RedirectToAction("Index");
             }
-            return HttpNotFound();
+
+           
         }
 
         [Authorize]

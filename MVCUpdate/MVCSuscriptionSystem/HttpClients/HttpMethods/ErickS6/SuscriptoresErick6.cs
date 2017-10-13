@@ -31,7 +31,7 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
             return data;
         }
 
-        public Suscriptores6 Post(Cliente c, string cedula)
+        public Cliente Post(Cliente c, string cedula)
         {
             var sus = new Suscriptores6()
             {
@@ -45,7 +45,8 @@ namespace MVCSuscriptionSystem.HttpClients.HttpMethods.ErickS6
             var result = Client.PostAsync("api/Suscriptores", content);
             result.Wait();
             var response = result.Result.Content.ReadAsAsync<Suscriptores6>().Result;
-            return response;
+            c.IDErick = response.IDSuscriptor;
+            return c;
         }
 
         public bool Modificar(int id, Suscriptores6 s)

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Security;
 using MVCSuscriptionSystem.HttpClients.HttpMethods.ServiciosJoined;
+using MVCSuscriptionSystem.MethodManagers;
 
 namespace MVCSuscriptionSystem.Controllers
 {
@@ -32,18 +33,9 @@ namespace MVCSuscriptionSystem.Controllers
             var servicio = db.Servicios.Find(id);
             if (servicio != null)
             {
-                var servplan = db.ServicioEnPlans.Where(x => x.ServicioID == servicio.ServicioID).ToList();
-                if (servplan.Any())
-                {
-                    foreach (var servicioEnPlan in servplan)
-                    {
-                        db.ServicioEnPlans.Remove(servicioEnPlan);
-                    }
-                }
-                manager.BorrarServicio(id);
-                db.Servicios.Remove(servicio);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+             ServiciosManager.BorrarServicios(servicio);
+             if(!manager.BorrarServicio(servicio)) return HttpNotFound();
+             return RedirectToAction("Index");
             }
             return HttpNotFound();
         }
@@ -63,6 +55,7 @@ namespace MVCSuscriptionSystem.Controllers
             if (servicio != null)
             {
                 db.Servicios.Add(servicio);
+                manager.CrearServicioErick(servicio);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -98,11 +91,9 @@ namespace MVCSuscriptionSystem.Controllers
             var s = db.Servicios.Find(servicio.ServicioID);
             if (s != null)
             {
-                s.Precio = servicio.Precio;
-                s.Nombre = servicio.Nombre;
-                s.ImagenID = servicio.ImagenID;
-                db.Entry(s).State = EntityState.Modified;
-                db.SaveChanges();
+                ServiciosManager.ServicioModificado(servicio.ServicioID, servicio);
+                manager.ModificarServicio(s);
+                
                 return RedirectToAction("Index");
             }
             return HttpNotFound();
